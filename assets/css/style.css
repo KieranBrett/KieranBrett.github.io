@@ -32,14 +32,10 @@ nav a{
 }
 
 aside{
-    flex: 30%;
+    /*flex: 30%;*/
+    flex-wrap: wrap;
     background-color: lightgrey; 
     padding: 20px;
-}
-
-textarea{
-    width: 800px;
-    height: 50px;
 }
 
 section{
@@ -75,7 +71,7 @@ color: red;
 
 @media screen and (max-width: 700px){
     .row,
-    nav{
+    nav, aside, body{
         flex-direction: column;
 
     }
