@@ -32,7 +32,7 @@ nav a{
 }
 
 aside{
-    /*flex: 30%;*/
+    flex: 30%;
     flex-wrap: wrap;
     background-color: lightgrey; 
     padding: 20px;
