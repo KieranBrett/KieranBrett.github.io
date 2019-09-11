@@ -23,7 +23,7 @@
 
     <div class ="row">
         <aside>
-            <h2>About Humans</h2> <!-- Aside Panel -->
+            <h2>About Humans</h2>
             <div class="placeholder main"></div>
             <p>Humans (stylised as HUM∀NS) is a science fiction television series that debuted on Channel 4. </p>
             <h3>Another bit about Humans</h3>
@@ -35,70 +35,64 @@
             <div class="placeholder sub"></div>
         </aside>
 
+
+
         <section>
-            <h2>Text Panel</h2>  <!-- Text Panel -->
-            <div class="placeholder main" id="comment-main">
-                <textarea name="comment" id="comment-input" cols="30" rows="10"></textarea>
-                <br/>
-                <input id="comment-data" type="button" value="Post">
-                <p id="comment-txt"></p>
-                <p id="comment-mod"></p>
-                <p id="postid"></p>
+            <h2>Json File</h2>  <!-- Get Json File -->
+            <div class="placeholder main" id="json-main">
+                <input id="get-json" type="button" value="Get Json File">
+                <ul id="json">
 
-            </div>
+                </ul>
 
-            <br>
-            <h2>Item List</h2>  <!-- Item List -->
-            <div class="placeholder main" id="item-main">
-                <form id="to-do-list">
-                    <input type="text" id="todoInput">
-                    <button id="todolistButton" type="button">Add Item</button>
-                    <ul id="todoList">
-                        
-                    </ul>
-                </form>
             </div>
             <br>
 
-            <h2>Table</h2>
-            <div class="placeholder main">
+
+
+            <h2>Txt File</h2>  <!-- Get Txt File -->
+            <div class="placeholder main" id="txt-main">
+                <input id="get-txt" type="button" value="Get Txt File">
+                <p id="txt"></p>
+              
+            </div>
+            <br>
+
+            <h2>PHP File</h2>  <!-- Send PHP -->
+            <div class="placeholder main" id="txt-main">
                 
-                <table>
-                    <tr>
-                      <th>Firstname</th>
-                      <th>Lastname</th>
-                      <th>Address</th>
-                    </tr>
-                    <tr>
-                      <td>Kieran</td>
-                      <td>Brett</td>
-                      <td>123 Exactly Ln.</td>
-                    </tr>
-                    <tr>
-                      <td>John</td>
-                      <td>Doe</td>
-                      <td>937 Cone St</td>
-                    </tr>
-                    <tr>
-                      <td>Jonathan</td>
-                      <td>Longhorn</td>
-                      <td>69 Ruehorn St</td>
-                    </tr>
-                    <tr>
-                      <td>Patrice</td>
-                      <td>Wilson</td>
-                      <td>123 Friday Ave</td>
-                    </tr>
-                  </table>
+                <form id="php-form">
+                    <fieldset>
+                            <legend>Send Data</legend>
+                        <label>First Name: <br/><input type="text" id="first-name"></label><br/><br/>
+                        <label>Last Name: <br/><input type="text" id="last-name"></label><br/><br/>
+                        <label>Email Address: <br/><input type="text" id="email-address"></label>
+                        <br><br>
+                        <button type="submit">Submit form</button>
+                                
+                    </fieldset>
+                </form>
+                <p id="php"></p>
+              
             </div>
             <br>
 
+            <h1>API</h1>
+            <div class="placeholder main">
+                <p id="time"></p>
+                <p id="longitude"></p>
+                <p id="latitude"></p>
+                
+                <input type="button" id="api-get" value="Get API Data">
+            </div>
         </section>
+
+
     </div>
 
     <footer>All Rights Reserved @ Waitaki Boys</footer>
 
-    <script src="./assets/js/page1.js"></script>
+    <script src="./assets/js/page3.js"></script>
 
 </body>
 </html>
