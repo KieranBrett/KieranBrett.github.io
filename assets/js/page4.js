@@ -30,12 +30,13 @@ $(_ =>{
     const textInput = document.getElementById('text-entry');
     const textOuput = document.getElementById('keypress-output');
 
-    $('input#text-entry').keypress(() => {
-        fetch('mynameis.txt')
-        .then(res => res.text())
-        .then(data => {
-            textOuput.textContent = data + textInput.value
+    $('input#text-entry').keyup(function(){
+        let txtVal = $(this).val()
+
+        $.get('mynameis.txt', data =>{
+            $('#keypress-output').text(data + txtVal);
         })
+        console.log(txtVal)
     })
 
     // JQUERY UI
