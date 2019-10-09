@@ -1,0 +1,32 @@
+[
+    {
+        "manufacturer": "Kawasaki",
+        "model": "Ninja 250",
+        "enginesize": 249,
+        "imgsrc": "https://ik.imagekit.io/hj8sm3kk7/medium/gallery/exterior/88/1897/kawasaki-ninja-250-70013.jpg"
+    },
+    {
+        "manufacturer": "Hyosung",
+        "model": "GT250R",
+        "enginesize": 249,
+        "imgsrc": "https://imgd.aeplcdn.com/476x268/bw/models/hyosung-gt250r-standard-192.jpg?20190103151915"
+    },
+    {
+        "manufacturer": "Suzuki",
+        "model": "CBR600RR",
+        "enginesize": 599,
+        "imgsrc": "https://images-na.ssl-images-amazon.com/images/I/515b6r5iM8L._SX425_.jpg"
+    },
+    {
+        "manufacturer": "Yamaha",
+        "model": "YZF-R1",
+        "enginesize": 998,
+        "imgsrc": "https://ic1.maxabout.us/autos/tw_india//Y/2017/3/yamaha-yzf-r1-2014-old.jpg"
+    },
+    {
+        "manufacturer": "Ducati",
+        "model": "Monster 821",
+        "enginesize": 821,
+        "imgsrc": "https://secure.i.telegraph.co.uk/multimedia/archive/02963/Monster-821-1_2963300b.jpg"
+    }
+]

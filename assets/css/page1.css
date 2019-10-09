@@ -93,3 +93,74 @@ table {
   #item-main {
       height:  75px;
   }
+
+  /* ----- NAV BAR W/ DROPDOWN, Credit: Conrad ----- */
+nav {
+    width: 100%;
+    /* background: #DB3A34; */
+    padding-top: 1%;
+    padding-bottom: 1%;
+    text-align: center;
+}
+
+nav a {
+    display: flex;
+    /* Top/ Right/ Bottom/ Left */
+    color: black;
+    padding: 20px 40px 20px 40px;
+    text-decoration: none;
+    font-weight: bold;
+    border-radius: 10px;
+    justify-content: center;
+}
+
+nav a:hover {
+    background-color: #232C33;
+    color:white;
+    transition: 0.5s;
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    /* text-align: center; */
+}
+
+nav ul li {
+    position: relative;
+}
+
+nav li:hover .dropdown-1 li {
+    top: 0;
+    display: block;
+    background-color: white;
+    border-radius: 10px;
+}
+
+nav ul li ul {
+    background-color: transparent;
+}
+
+nav ul li ul a:hover, .nav-active {
+    background-color: #232C33;
+    color: white;
+}
+
+.dropdown-1 {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.dropdown-1 li {
+    display: none;
+    position: relative;
+}
+
+.dropdown-1 ul li:hover {
+    display: block;
+}
+
+/* ---------------------- */
