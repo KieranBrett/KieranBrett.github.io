@@ -1,75 +1,74 @@
-const text = document.getElementById('get-txt');
-const json = document.getElementById('get-json');
-const php = document.getElementById('php-form');
-
-const api = document.getElementById('api-get');
+const items = document.getElementById('items');
 
 const xhr = new XMLHttpRequest();
 
 
-// TXT EVENT
-text.addEventListener('click', () => {
-    fetch('lorem.txt')              // File to fetch
-    .then(res => res.text())        // Type text
-    .then(data => {
-        document.getElementById('txt').innerHTML = `<p> ${data} </p>`
-    }) // Log data
-    .catch(err => console.log(err)); // if there is an error
+    xhr.open('GET', 'helmets.json', true);
+    xhr.onload = () => {
+        if (xhr.status === 200){
+            const per = JSON.parse(xhr.responseText);
+            //console.log(per);
+
+            per.forEach(p => {
+                // let list = document.getElementById('json');
+                // list.innerHTML = list.innerHTML + `<li>${p.lastName}, ${p.firstName} ID: ${p.id}`;
+
+                items.innerHTML = items.innerHTML + `<div class="frames">
+                                                    <div class="images"> 
+                                                        <img src="${p.imgsrc}" height="250"> </div> 
+
+                                                        <div class="text"> 
+                                                            <p class="manufacs">${p.manufacturer}</p>
+                                                            <p class="models">${p.model}</p>
+                                                            <p class="enginesizes">${p.enginesize} cc</p>
+                                                            <p class="descriptions">${p.description}</p>
+                                                            <p class="link"><a href="${p.website}">Click here for the manufacturers website</a></p>
+                                                        </div>
+
+                                                    </div></br>`
+            })
+        }
+        else if (xhr.status === 404){
+            console.log("File Not Found");
+        }
+    }
+
+    xhr.onerror = () =>{
+        console.log(`Current Load State ${xhr.readyState}`);
+    }
+
+    xhr.send();
+
+
+
+
+    const form = document.getElementById('comment-form');
+    const comments = document.getElementById('comment-area');
+
+    const sendPhp = (e) => {
+        
+        e.preventDefault();
+        const name = document.getElementById('name').value;
+        const comment = document.getElementById('comment').value;
+        const time = document.lastModified;
+        console.log(name)
+
+        if (name.length <= 0){
+            alert("Please enter a name");
+        }
+        else if (comment.length <= 0){
+            alert("Please enter a comment");
+        }
+        else{
+        comments.innerHTML = `<div class="comment">
+                                    <p class="name">${name}</p> 
+                                    <p class="time">${time}</p>    <br>
+                                    <p class="comment-text">${comment}</p>
+                                    <br>
+                                </div> <br>
+                            ` + comments.innerHTML;
+        }
+        
+    };
     
-});
-
-// JSON EVENT
-json.addEventListener('click', () => {
-    fetch('people.json') // Fetches this file
-    .then(res => res.json()) // Specifies file type
-    .then(data => {
-        data.forEach(p => { // For each bit of data
-            const { id, firstName, lastName} = p; // Parse the data
-            console.log(`ID: ${id}`);                   // Logs fields recieved
-            console.log(`First Name: ${firstName}`)
-            console.log(`Last Name: ${lastName}`)
-            const jason = document.getElementById('json');
-            jason.innerHTML = jason.innerHTML + `<li> ID: ${id}, ${firstName} ${lastName}`
-        })
-    })
-});
-
-// PHP CODE
-php.addEventListener('submit', e => {
-    e.preventDefault();
-    const firstName = document.getElementById('first-name').value;
-    const lastName = document.getElementById('last-name').value;;
-    const email = document.getElementById('email-address').value;
-
-    fetch('http://kate.ict.op.ac.nz/~orrgl1/server.php', {
-        method: 'POST',
-        headers: { 'content-type': 'application/x-www-form-urlencoded'}, 
-        body: `firstName=${firstName}&lastName=${lastName}&emailAddress=${email}`
-    }) // ^^^ What method, something, and how to send the data to the server
-    .then(res => res.text())
-    .then(data => {
-        document.getElementById('php').innerHTML = `<p>${data}</p>`
-    })
-    .catch(err => console.log(err));
-});
-
-// API CODE
-api.addEventListener('click', () => {
-    fetch('http://api.open-notify.org/iss-now.json')
-    .then(res => res.json())
-    .then(data => {
-            const { timestamp, message, iss_position} = data;
-
-            var time = new Date();
-            time.setSeconds(timestamp);
-
-            console.log(timestamp);
-            document.getElementById('time').innerHTML = `<p>The Time Is: ${time.toTimeString()}</p>`
-            console.log(message);
-            console.log(iss_position.longitude);
-            document.getElementById('longitude').innerHTML = `<p>Longitude: ${iss_position.longitude}</p>`
-            console.log(iss_position.latitude);
-            document.getElementById('latitude').innerHTML = `<p>Latitude: ${iss_position.latitude}</p>`
-
-    })
-})
+    form.addEventListener('submit', sendPhp);

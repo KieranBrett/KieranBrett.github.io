@@ -3,30 +3,40 @@
         "manufacturer": "Kawasaki",
         "model": "Ninja 250",
         "enginesize": 249,
-        "imgsrc": "https://ik.imagekit.io/hj8sm3kk7/medium/gallery/exterior/88/1897/kawasaki-ninja-250-70013.jpg"
+        "imgsrc": "https://ik.imagekit.io/hj8sm3kk7/medium/gallery/exterior/88/1897/kawasaki-ninja-250-70013.jpg",
+        "description": "2018 Kawasaki Ninja 250 was recently revealed internationally at Tokyo Motor Show. The updated motorcycle is exactly based on Ninja 400 and just uses a smaller power-plant under its fairing. The 249cc, twin cylinder engine on Ninja 250 is good for 39 HP at 12,500 rpm and 23.5 Nm at 10,000 rpm. The values make it almost similar in power when compared to Honda CBR250RR.",
+        "website": "https://kawasaki.co.nz/"
     },
     {
         "manufacturer": "Hyosung",
         "model": "GT250R",
         "enginesize": 249,
-        "imgsrc": "https://imgd.aeplcdn.com/476x268/bw/models/hyosung-gt250r-standard-192.jpg?20190103151915"
+        "imgsrc": "https://files.prokerala.com/bikes/images/photo/full/dsk-hyosung-gt250r-438/dsk-hyosung-gt250r-front-side-view.jpg",
+         "description": "Looking for that real sportbike feel in a first-time bike? Look no further than the GT250R. The aerodynamically stunning, race-inspired GT250R features an air/oil cooled V-twin high output DOHC 8 valve engine, race tuned suspension, inverted forks and a gas charged shock absorber that make riding a blast.",
+         "website": "https://hyosung.co.nz/"
     },
     {
         "manufacturer": "Suzuki",
         "model": "CBR600RR",
         "enginesize": 599,
-        "imgsrc": "https://images-na.ssl-images-amazon.com/images/I/515b6r5iM8L._SX425_.jpg"
+        "imgsrc": "https://images-na.ssl-images-amazon.com/images/I/515b6r5iM8L._SX425_.jpg",
+        "description": "The Honda CBR600RR enjoyed many race victories and championship wins, yet it has always offered a rider-friendly jump-on-and-go demeanor with excellent engine performance and stable, predictable handling that instills instant confidence. That was true when the CBR600RR debuted in 2003 and it remains true today.",
+        "website": "https://www.suzuki.co.nz"
     },
     {
         "manufacturer": "Yamaha",
         "model": "YZF-R1",
         "enginesize": 998,
-        "imgsrc": "https://ic1.maxabout.us/autos/tw_india//Y/2017/3/yamaha-yzf-r1-2014-old.jpg"
+        "imgsrc": "https://ic1.maxabout.us/autos/tw_india//Y/2017/3/yamaha-yzf-r1-2014-old.jpg",
+        "description": "The YZF-R1® features a lightweight and compact crossplane crankshaft, inline-four-cylinder, 998cc high output engine. Featuring titanium fracture-split connecting rods, an offset cylinder block and magnesium covers, the motor delivers extremely high horsepower and a strong pulse of linear torque for outstanding performance, all wrapped in aerodynamic MotoGP®-style bodywork.",
+        "website": "https://www.yamaha-motor.co.nz/"
     },
     {
         "manufacturer": "Ducati",
         "model": "Monster 821",
         "enginesize": 821,
-        "imgsrc": "https://secure.i.telegraph.co.uk/multimedia/archive/02963/Monster-821-1_2963300b.jpg"
+        "imgsrc": "https://secure.i.telegraph.co.uk/multimedia/archive/02963/Monster-821-1_2963300b.jpg",
+        "description": "The Monster 821 pays homage to the legacy of the Monster 900, which over 25 years ago revolutionised the motorcycle world. Agile and featuring sporty performance, it was designed for maximum riding enjoyment, at all times and in all conditions.",
+        "website": "https://www.ducati.com"
     }
 ]

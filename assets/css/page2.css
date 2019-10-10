@@ -3,28 +3,28 @@
     font-family: sans-serif;
 }
 
+
 body{
     margin: 0px;
     flex-wrap: wrap;
 }
 
 header{
-    background-color: black;
-    color: red;
+    background-color: rgb(0, 0, 0);
+    color: rgb(14, 98, 177);
     text-align: 20px;
     padding: 20px;
 }
 
 nav{
-    display: flex;
-    background-color: darkgray;
+    /* display: flex; */
+    background-color: rgb(14, 98, 177);
+    border: 3px solid white;
+
 }
 
-nav a{
-    color: black;
-    text-decoration: none;
-    text-align: center;
-    padding: 20px;
+nav li a{
+    color: white;
 }
 
 .row{
@@ -32,16 +32,29 @@ nav a{
     flex-wrap: wrap;
 }
 
+#page-header{
+    color: white;
+    border: 5px solid white;
+}
+
 aside{
-    flex: 30%;
+    flex: 20%;
     flex-wrap: wrap;
-    background-color: lightgrey; 
-    padding: 20px;
+    background-color: black; 
+    padding: 10px;
+    padding-top: 20px;
+    color: white;
+    border: 5px solid rgb(14, 98, 177);
+    border-radius: 15px;
+}
+
+aside p{
+    color: black;
 }
 
 section{
     flex: 70%;
-    background-color: azure;
+    background-color: black;
     padding: 20px;
 }
 
@@ -58,8 +71,9 @@ section{
 footer{
 text-align: center;
 padding: 20px;
-background-color: darkgray;
-color: red;
+background-color: black;
+color: rgb(14, 98, 177);
+border: 3px solid white;
 }
 
 /* .main{
@@ -78,21 +92,125 @@ color: red;
     }
 }
 
-/* TABLE */
-table {
-    width: 100%;
-    border: 2px solid darkgray;
-    border-collapse: collapse;
-    text-align: center;
-  }
-   
-   th, td {
-    border: 2px dotted black;
-  }
+/* .items{
+    display: flex;
+} */
 
-  #item-main {
-      height:  75px;
-  }
+.images{
+    /* display:inline; */
+    /* vertical-align:top; */
+    flex: 5%;
+}
+
+.text{
+    display:inline;
+    text-align: left;
+    flex: 40%;
+}
+
+.frames{
+    background-color: #ffffff;
+    border: 10px solid rgb(14, 98, 177);
+    border-radius: 20px;
+    display: flex;
+}
+
+.manufacs{
+    padding-top: 20px;
+    font-size: 55px;
+    font-weight: bold;
+}
+
+.models{
+ font-size: 25px;
+ font-style: italic;
+ color: red;
+
+}
+
+.enginesizes{
+padding-top: 10px;
+font-size: 18px;
+}
+
+.descriptions{
+    padding-top: 10px;
+    font-size: 15px;
+}
+
+.link{
+    padding-top: 10px;
+    font-size: 12px;
+}
+
+p {
+    margin: 0px;
+    padding: 0px;
+ }
+
+#header{
+    font-size: 30px;
+}
+
+.time {
+    font-style: italic;
+    font-size: 12px;
+    padding-left: 5px;
+}
+
+.name{
+    padding-top: 5px;
+    font-weight: bold;
+    font-size: 18px;
+    padding-left: 5px;
+}
+
+.comment-text{
+    margin: 0px;
+    font-size: 15px;
+    padding-left: 5px;
+}
+
+.comment{
+    background-color: white;
+    border: 8px solid rgb(14, 98, 177);
+    border-radius: 20px;
+}
+
+#fieldset{
+    border: 5px solid rgb(14, 98, 177);
+    border-radius: 20px;
+    resize: none;
+}
+
+#comment-header{
+    padding: 10px;
+    border: 5px solid rgb(14, 98, 177);
+    border-radius: 20px;
+}
+
+#title{
+    text-align: center;
+    font-size: 35px;
+    text-shadow: -2px -2px 0 white, 2px -2px 0 white, -2px 2px 0 white, 2px 2px 0 white;
+}
+
+#page-title{
+    margin: 0px;
+    text-align: center;
+    font-size: 35px;
+    text-shadow: -2px -2px 0 white, 2px -2px 0 white, -2px 2px 0 white, 2px 2px 0 white;
+    padding-bottom: 15px;
+}
+
+
+
+
+
+
+
+
+
 
   /* ----- NAV BAR W/ DROPDOWN, Credit: Conrad ----- */
 nav {
@@ -110,21 +228,21 @@ nav a {
     padding: 20px 40px 20px 40px;
     text-decoration: none;
     font-weight: bold;
-    border-radius: 10px;
+    border-radius: 5px;
     justify-content: center;
 }
 
 nav a:hover {
-    background-color: #232C33;
-    color:white;
-    transition: 0.5s;
+    background-color: rgb(0, 0, 0);
+    color:rgb(14, 98, 177);
+    transition: .2s;
 }
 
 nav ul {
     list-style: none;
     display: flex;
     justify-content: center;
-    /* text-align: center; */
+    text-align: center;
 }
 
 nav ul li {
@@ -134,8 +252,8 @@ nav ul li {
 nav li:hover .dropdown-1 li {
     top: 0;
     display: block;
-    background-color: white;
-    border-radius: 10px;
+    background-color: rgb(0, 0, 0);
+    border-radius: 5px;
 }
 
 nav ul li ul {
@@ -143,7 +261,7 @@ nav ul li ul {
 }
 
 nav ul li ul a:hover, .nav-active {
-    background-color: #232C33;
+    background-color: rgb(0, 145, 255);
     color: white;
 }
 
@@ -151,7 +269,7 @@ nav ul li ul a:hover, .nav-active {
     position: absolute;
     display: flex;
     flex-direction: column;
-    width: 100%;
+    width: 200px;
 }
 
 .dropdown-1 li {
