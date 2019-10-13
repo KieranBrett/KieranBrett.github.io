@@ -20,7 +20,7 @@ const xhr = new XMLHttpRequest();
                                                         <div class="text"> 
                                                             <p class="manufacs">${p.manufacturer}</p>
                                                             <p class="models">${p.model}</p>
-                                                            <p class="enginesizes">${p.enginesize} cc</p>
+                                                            <p class="sizes">${p.size}</p>
                                                             <p class="descriptions">${p.description}</p>
                                                             <p class="link"><a href="${p.website}">Click here for the manufacturers website</a></p>
                                                         </div>
@@ -45,7 +45,7 @@ const xhr = new XMLHttpRequest();
     const form = document.getElementById('comment-form');
     const comments = document.getElementById('comment-area');
 
-    const sendPhp = (e) => {
+    const addComment = (e) => {
         
         e.preventDefault();
         const name = document.getElementById('name').value;
@@ -71,4 +71,4 @@ const xhr = new XMLHttpRequest();
         
     };
     
-    form.addEventListener('submit', sendPhp);
+    form.addEventListener('submit', addComment);

@@ -56,6 +56,8 @@ section{
     flex: 70%;
     background-color: black;
     padding: 20px;
+    border: 5px solid rgb(14, 98, 177);
+    border-radius: 15px;
 }
 
 .placeholder {
@@ -96,10 +98,19 @@ border: 3px solid white;
     display: flex;
 } */
 
+#logo{
+    height: 90px;
+    vertical-align: middle;
+    margin-top: -20px;
+    margin-bottom: -20px;
+}
+
 .images{
     /* display:inline; */
     /* vertical-align:top; */
     flex: 5%;
+    padding: 10px;
+    
 }
 
 .text{
@@ -116,7 +127,7 @@ border: 3px solid white;
 }
 
 .manufacs{
-    padding-top: 20px;
+    padding-top: 5px;
     font-size: 55px;
     font-weight: bold;
 }

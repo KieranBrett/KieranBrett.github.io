@@ -1,6 +1,7 @@
 *{
     box-sizing: border-box;
     font-family: sans-serif;
+    /* I wish comic sans was allowed :( */
 }
 
 body{
@@ -9,22 +10,20 @@ body{
 }
 
 header{
-    background-color: black;
-    color: red;
-    text-align: 20px;
+    background-color: rgb(0, 0, 0);
+    color: rgb(14, 98, 177);
     padding: 20px;
 }
 
 nav{
-    display: flex;
-    background-color: darkgray;
+    /* display: flex; */
+    background-color: rgb(14, 98, 177);
+    border: 3px solid white;
+
 }
 
-nav a{
-    color: black;
-    text-decoration: none;
-    text-align: center;
-    padding: 20px;
+nav li a{
+    color: white;
 }
 
 .row{
@@ -33,33 +32,36 @@ nav a{
 }
 
 aside{
-    flex: 30%;
+    flex: 20%;
     flex-wrap: wrap;
-    background-color: lightgrey; 
-    padding: 20px;
+    background-color: black; 
+    padding: 10px;
+    padding-top: 20px;
+    color: white;
+    border: 5px solid rgb(14, 98, 177);
+    border-radius: 15px;
+}
+
+
+#aside-img{
+    height: 100%;
+    width: 100%;
 }
 
 section{
     flex: 70%;
-    background-color: azure;
+    background-color: black;
     padding: 20px;
-}
-
-.placeholder {
-    background-color: darkgray;
-    width: 100%;
-    padding: 20px;
-}
-
-#comment-main{
-    height: 370px;
+    border: 5px solid rgb(14, 98, 177);
+    border-radius: 15px;
 }
 
 footer{
 text-align: center;
 padding: 20px;
-background-color: darkgray;
-color: red;
+background-color: black;
+color: rgb(14, 98, 177);
+border: 3px solid white;
 }
 
 /* .main{
@@ -78,21 +80,43 @@ color: red;
     }
 }
 
-/* TABLE */
-table {
-    width: 100%;
-    border: 2px solid darkgray;
-    border-collapse: collapse;
-    text-align: center;
-  }
-   
-   th, td {
-    border: 2px dotted black;
-  }
+#logo{
+    height: 90px;
+    vertical-align: middle;
+    margin-top: -20px;
+    margin-bottom: -20px;
+}
 
-  #item-main {
-      height:  75px;
-  }
+#banner{
+    width: 100%;
+    margin-top: -80px;
+    margin-bottom: -80px;
+}
+
+
+
+p {
+    margin: 0px;
+    padding: 8px;
+    font-size: 20px;
+    color: white;
+ }
+
+#title{
+    text-align: center;
+    font-size: 35px;
+    text-shadow: -2px -2px 0 white, 2px -2px 0 white, -2px 2px 0 white, 2px 2px 0 white;
+}
+
+
+
+
+
+
+
+
+
+
 
   /* ----- NAV BAR W/ DROPDOWN, Credit: Conrad ----- */
 nav {
@@ -110,21 +134,21 @@ nav a {
     padding: 20px 40px 20px 40px;
     text-decoration: none;
     font-weight: bold;
-    border-radius: 10px;
+    border-radius: 5px;
     justify-content: center;
 }
 
 nav a:hover {
-    background-color: #232C33;
-    color:white;
-    transition: 0.5s;
+    background-color: rgb(0, 0, 0);
+    color:rgb(14, 98, 177);
+    transition: .2s;
 }
 
 nav ul {
     list-style: none;
     display: flex;
     justify-content: center;
-    /* text-align: center; */
+    text-align: center;
 }
 
 nav ul li {
@@ -134,8 +158,8 @@ nav ul li {
 nav li:hover .dropdown-1 li {
     top: 0;
     display: block;
-    background-color: white;
-    border-radius: 10px;
+    background-color: rgb(0, 0, 0);
+    border-radius: 5px;
 }
 
 nav ul li ul {
@@ -143,7 +167,7 @@ nav ul li ul {
 }
 
 nav ul li ul a:hover, .nav-active {
-    background-color: #232C33;
+    background-color: rgb(0, 145, 255);
     color: white;
 }
 
@@ -151,7 +175,7 @@ nav ul li ul a:hover, .nav-active {
     position: absolute;
     display: flex;
     flex-direction: column;
-    width: 100%;
+    width: 200px;
 }
 
 .dropdown-1 li {

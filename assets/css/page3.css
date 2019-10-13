@@ -38,7 +38,8 @@ aside{
     padding: 10px;
     padding-top: 20px;
     color: white;
-    border: 3px solid white;
+    border: 5px solid rgb(14, 98, 177);
+    border-radius: 15px;
 }
 
 aside p{
@@ -49,6 +50,8 @@ section{
     flex: 70%;
     background-color: black;
     padding: 20px;
+    border: 5px solid rgb(14, 98, 177);
+    border-radius: 15px;
 }
 
 .placeholder {
@@ -85,6 +88,13 @@ border: 3px solid white;
     }
 }
 
+#logo{
+    height: 90px;
+    vertical-align: middle;
+    margin-top: -20px;
+    margin-bottom: -20px;
+}
+
 /* .items{
     display: flex;
 } */
@@ -92,13 +102,15 @@ border: 3px solid white;
 .images{
     /* display:inline; */
     /* vertical-align:top; */
-    flex: 5%;
+    flex: 0%;
+    padding: 10px;
+    transform: scaleX(-1)
 }
 
 .text{
     display:inline;
     text-align: left;
-    flex: 40%;
+    flex: 60%;
 }
 
 .frames{
@@ -109,7 +121,7 @@ border: 3px solid white;
 }
 
 .manufacs{
-    padding-top: 20px;
+    padding-top: 5px;
     font-size: 55px;
     font-weight: bold;
 }
@@ -121,7 +133,7 @@ border: 3px solid white;
 
 }
 
-.enginesizes{
+.sizes{
 padding-top: 10px;
 font-size: 18px;
 }
