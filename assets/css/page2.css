@@ -113,6 +113,14 @@ border: 3px solid white;
     
 }
 
+.stars1,
+.stars2,
+.stars3,
+.stars4,
+.stars5{
+    width: 30px;
+}
+
 .text{
     display:inline;
     text-align: left;
