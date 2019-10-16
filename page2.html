@@ -1,76 +1,84 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-        <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">    
-    <link href="https://fonts.googleapis.com/css?family=Lacquer&display=swap" rel="stylesheet">
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="assets/css/page2.css">
-    <link rel="icon" href="./assets/img/kbm_logoX256.png">
+  <head>
+    <link
+      href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+      rel="stylesheet"
+      integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN"
+      crossorigin="anonymous"
+    />
+    <link
+      href="https://fonts.googleapis.com/css?family=Lacquer&display=swap"
+      rel="stylesheet"
+    />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link rel="stylesheet" href="assets/css/page2.css" />
+    <link rel="icon" href="./assets/img/kbm_logoX256.png" />
     <title>KBM</title>
     <script src="./assets/js/rating.js"></script>
-</head>
-<body>
+  </head>
+  <body>
     <header>
-        <h1 id="title"><img id="logo" src="./assets/img/kbm_logoX256.png" alt="" srcset=""> Kieran Brett Motorcycles</h1>
+      <h1 id="title">
+        <img id="logo" src="./assets/img/kbm_logoX256.png" alt="logo" /> Kieran
+        Brett Motorcycles
+      </h1>
     </header>
 
     <nav>
-            <ul>
-              <li>
-                <a href="index.html">Home</a>
-              </li>
-              <li>
-                <a href="index.html">Store</a>
-                <ul class="dropdown-1">
-                  <li><a class="nav-active" href="./page2.html">Motorcycles</a></li>
-                  <li><a href="./page3.html">Helmets</a></li>
-                </ul>
-              </li>
-              <li><a href="./page4.html">Contact</a></li>
-            </ul>
-          </nav>
+      <ul>
+        <li>
+          <a href="index.html">Home</a>
+        </li>
+        <li>
+          <a href="index.html">Store</a>
+          <ul class="dropdown-1">
+            <li><a class="nav-active" href="./page2.html">Motorcycles</a></li>
+            <li><a href="./page3.html">Helmets</a></li>
+          </ul>
+        </li>
+        <li><a href="./page4.html">Contact</a></li>
+      </ul>
+    </nav>
 
-    <div class ="row">
-        <aside>
-          
-            <form id="comment-form">
-                <fieldset id="fieldset">
-                        <legend id="comment-header">Add a Comment!</legend>
-                    <label>Name:   <input required="true"type="text" id="name-input"></label><br/><br/>
-                    <label>Comment:</label><br/>
-                    <textarea required="true" name="comment" id="comment" cols="50" rows="10" placeholder="Write comment here..."></textarea>
-                    <br><br>
-                    <button id="comment-button" type="submit">Post Comment</button>
-                            
-                </fieldset>
-            </form>
-            <br>
+    <div class="row">
+      <aside>
+        <form id="comment-form">
+          <fieldset id="fieldset">
+            <legend id="comment-header">Add a Comment!</legend>
+            <label
+              >Name: <input required="text" type="text" id="name-input"/></label
+            ><br /><br />
+            <label>Comment:</label><br />
+            <textarea
+              required="text"
+              name="comment"
+              id="comment"
+              cols="50"
+              rows="10"
+              placeholder="Write comment here..."
+            ></textarea>
+            <br /><br />
+            <button id="comment-button" type="submit">Post Comment</button>
+          </fieldset>
+        </form>
+        <br />
 
-            <div id="comment-area">
+        <div id="comment-area"></div>
 
-            </div>
+        <div class="ratingArea"></div>
+      </aside>
 
-            <div class="ratingArea"></div>
-        </aside>
-
-
-
-        <section>
-          <h1 id="page-title">Motorcycles</h1>
-            <div id="items">
-
-            </div>
-        </section>
-
-
+      <section>
+        <h1 id="page-title">Motorcycles</h1>
+        <div id="items"></div>
+      </section>
     </div>
 
     <footer>All Rights Reserved @ Kieran Brett</footer>
 
     <script src="./assets/js/page2.js"></script>
-
-
-</body>
+  </body>
 </html>
