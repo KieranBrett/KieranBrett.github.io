@@ -7,7 +7,7 @@ window.onload = function() {
         for (let i = 0; i < ratingArea.length; i++){
 
             
-            ratingArea[i].innerHTML += `<div id="rating">
+            ratingArea[i].innerHTML += `<div class="rating">
                                         <img id="star1" class="stars1" src="${unselected}" alt="stars"></img>
                                         <img id="star2" class="stars2" src="${unselected}" alt="stars"></img>
                                         <img id="star3" class="stars3" src="${unselected}" alt="stars"></img>

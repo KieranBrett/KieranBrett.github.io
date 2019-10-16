@@ -60,6 +60,9 @@ section{
     border-radius: 15px;
 }
 
+#items{
+    width: 100%;
+}
 .placeholder {
     background-color: darkgray;
     width: 100%;
@@ -86,7 +89,7 @@ border: 3px solid white;
     height: 75px;
 }
 
-@media screen and (max-width: 700px){
+@media screen and (max-width: 0px){
     .row,
     nav, aside, body{
         flex-direction: column;
@@ -106,13 +109,20 @@ border: 3px solid white;
 }
 
 .images{
-    /* display:inline; */
-    /* vertical-align:top; */
-    flex: 5%;
+    display:inline;
     padding: 10px;
     
 }
 
+.image{
+    width: 400px;
+    max-width: 100%;
+    height: auto;
+}
+
+.rating{
+    padding-top: 10px;
+}
 .stars1,
 .stars2,
 .stars3,
@@ -124,7 +134,9 @@ border: 3px solid white;
 .text{
     display:inline;
     text-align: left;
-    flex: 40%;
+    flex: 10%;
+    overflow: visible;
+    padding: 5px;
 }
 
 .frames{
@@ -132,6 +144,8 @@ border: 3px solid white;
     border: 10px solid rgb(14, 98, 177);
     border-radius: 20px;
     display: flex;
+    flex-wrap: wrap;
+    width: 100%;
 }
 
 .manufacs{
@@ -184,6 +198,13 @@ p {
     padding-left: 5px;
 }
 
+#name-input{
+    width: 100%;
+    border: 12px solid rgb(14, 98, 177);
+    border-radius: 20px;
+    padding: 5px;
+}
+
 .comment-text{
     margin: 0px;
     font-size: 15px;
@@ -191,20 +212,31 @@ p {
 }
 
 .comment{
+    padding: 5px;
     background-color: white;
-    border: 8px solid rgb(14, 98, 177);
+    border: 12px solid rgb(14, 98, 177);
     border-radius: 20px;
+    width: 100%;
+}
+
+#comment{
+    padding: 5px;
+    background-color: white;
+    border: 12px solid rgb(14, 98, 177);
+    border-radius: 20px;
+    width: 100%;
 }
 
 #fieldset{
-    border: 5px solid rgb(14, 98, 177);
+    border: 12px solid rgb(14, 98, 177);
     border-radius: 20px;
     resize: none;
 }
 
 #comment-header{
     padding: 10px;
-    border: 5px solid rgb(14, 98, 177);
+    font-weight: bold;
+    border: 8px solid rgb(14, 98, 177);
     border-radius: 20px;
 }
 
@@ -231,8 +263,8 @@ p {
 
 
 
-  /* ----- NAV BAR W/ DROPDOWN, Credit: Conrad ----- */
-nav {
+ /* ----- NAV BAR W/ DROPDOWN, Credit: Conrad ----- */
+ nav {
     width: 100%;
     /* background: #DB3A34; */
     padding-top: 1%;
@@ -244,7 +276,7 @@ nav a {
     display: flex;
     /* Top/ Right/ Bottom/ Left */
     color: black;
-    padding: 20px 40px 20px 40px;
+    padding: 20px 40% 20px 40px;
     text-decoration: none;
     font-weight: bold;
     border-radius: 5px;

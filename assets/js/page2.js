@@ -15,7 +15,7 @@ const xhr = new XMLHttpRequest();
 
                 items.innerHTML = items.innerHTML + `<div class="frames">
                                                     <div class="images"> 
-                                                        <img src="${p.imgsrc}" height="250"> 
+                                                        <img class="image" src="${p.imgsrc}" height="250"> 
                                                     </div> 
 
                                                         <div class="text"> 
@@ -49,7 +49,7 @@ const xhr = new XMLHttpRequest();
     const sendPhp = (e) => {
         
         e.preventDefault();
-        const name = document.getElementById('name').value;
+        const name = document.getElementById('name-input').value;
         const comment = document.getElementById('comment').value;
         const time = document.lastModified;
         console.log(name)

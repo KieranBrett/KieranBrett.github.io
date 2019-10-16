@@ -42,7 +42,7 @@ aside{
 
 
 #aside-img{
-    height: 100%;
+    height: auto;
     width: 100%;
 }
 
@@ -87,8 +87,8 @@ border: 3px solid white;
 
 #banner{
     width: 100%;
-    margin-top: -80px;
-    margin-bottom: -80px;
+    /* margin-top: -80px; */
+    /* margin-bottom: -80px; */
 }
 
 
@@ -129,7 +129,7 @@ nav a {
     display: flex;
     /* Top/ Right/ Bottom/ Left */
     color: black;
-    padding: 20px 40px 20px 40px;
+    padding: 20px 40% 20px 40px;
     text-decoration: none;
     font-weight: bold;
     border-radius: 5px;
