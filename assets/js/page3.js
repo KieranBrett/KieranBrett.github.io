@@ -48,26 +48,18 @@ const xhr = new XMLHttpRequest();
     const addComment = (e) => {
         
         e.preventDefault();
-        const name = document.getElementById('name').value;
+        const name = document.getElementById('name-input').value;
         const comment = document.getElementById('comment').value;
-        const time = document.lastModified;
-        console.log(name)
+        let time = new Date();
+        let timeString = `${time.getFullYear()}/${time.getMonth()}/${time.getDate()} - ${time.getHours()}:${time.getMinutes()}`
 
-        if (name.length <= 0){
-            alert("Please enter a name");
-        }
-        else if (comment.length <= 0){
-            alert("Please enter a comment");
-        }
-        else{
         comments.innerHTML = `<div class="comment">
                                     <p class="name">${name}</p> 
-                                    <p class="time">${time}</p>    <br>
+                                    <p class="time">${timeString}</p>    <br>
                                     <p class="comment-text">${comment}</p>
                                     <br>
                                 </div> <br>
                             ` + comments.innerHTML;
-        }
         
     };
     

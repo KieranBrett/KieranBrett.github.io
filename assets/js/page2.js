@@ -1,4 +1,7 @@
 const items = document.getElementById('items');
+const form = document.getElementById('comment-form');
+const comments = document.getElementById('comment-area');
+let savedComments = {};
 
 const xhr = new XMLHttpRequest();
 
@@ -40,36 +43,42 @@ const xhr = new XMLHttpRequest();
 
     xhr.send();
 
+    fetch("motorbikeComments.json")
+    .then(response => response.json())
+    .then(data => {
+        savedComments = data;
+
+        savedComments.forEach(c =>{
+            console.log(c.name);
+            comments.innerHTML = `<div class="comment">
+                                    <p class="name">${c.name}</p> 
+                                    <p class="time">${c.time}</p>    <br>
+                                    <p class="comment-text">${c.comment}</p>
+                                    <br>
+                                </div> <br>
+                            ` + comments.innerHTML;
+        })
+    })
 
 
 
-    const form = document.getElementById('comment-form');
-    const comments = document.getElementById('comment-area');
+    
 
-    const sendPhp = (e) => {
+    const addComment = (e) => {
         
         e.preventDefault();
         const name = document.getElementById('name-input').value;
         const comment = document.getElementById('comment').value;
-        const time = document.lastModified;
-        console.log(name)
-
-        if (name.length <= 0){
-            alert("Please enter a name");
-        }
-        else if (comment.length <= 0){
-            alert("Please enter a comment");
-        }
-        else{
+        let time = new Date();
+        let timeString = `${time.getFullYear()}/${time.getMonth()}/${time.getDate()} - ${time.getHours()}:${time.getMinutes()}`
+        
         comments.innerHTML = `<div class="comment">
                                     <p class="name">${name}</p> 
-                                    <p class="time">${time}</p>    <br>
+                                    <p class="time">${timeString}</p>    <br>
                                     <p class="comment-text">${comment}</p>
                                     <br>
                                 </div> <br>
                             ` + comments.innerHTML;
-        }
-        
-    };
+};
     
-    form.addEventListener('submit', sendPhp);
+    form.addEventListener('submit', addComment);

@@ -75,8 +75,9 @@ window.onload = function() {
                 }
             })
             stars[i].addEventListener("click", () => {
-                clicked = true;
-                stars[i].src = selected
+                if(!clicked){
+                    clicked = true;
+                    stars[i].src = selected
                 let id = ids[i]
 
                 for (let i = 0; i < stars.length; i++){
@@ -85,11 +86,18 @@ window.onload = function() {
                         i = stars.length;
                     }
                 }
+                }
+                else{
+                    clicked = false;
+                    for (let i = 0; i < stars.length; i++){
+                        stars[i].src = unselected;
+                }
+            }
             })
         }
     }
 
-        }, 50); 
+        }, 150); 
 
         
 }
