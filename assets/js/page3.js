@@ -15,8 +15,8 @@ xhr.onload = () => {
       items.innerHTML =
         items.innerHTML +
         `<div class="frames">
-                                                    <div class="images"> 
-                                                        <img src="${p.imgsrc}" height="250"> </div> 
+                                                    <div> 
+                                                        <img class="images" src="${p.imgsrc}" height="250"> </div> 
 
                                                         <div class="text"> 
                                                             <p class="manufacs">${p.manufacturer}</p>

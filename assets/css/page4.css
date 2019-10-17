@@ -25,33 +25,45 @@ nav li a {
   color: white;
 }
 
-.row {
-  display: flex;
-  flex-wrap: wrap;
-}
 
-aside {
-  flex: 20%;
-  flex-wrap: wrap;
-  background-color: black;
+
+#contact-header{
+  font-size: 25px;
+  font-weight: bolder;
   padding: 10px;
-  padding-top: 20px;
-  color: white;
-  border: 5px solid rgb(14, 98, 177);
-  border-radius: 15px;
 }
 
-#aside-img {
-  height: 100%;
+.inputs{
   width: 100%;
+  text-align: center;
+  border: 5px solid black;
+  border-radius: 15px;
+  padding: 5px;
 }
 
-section {
+#form{
+width: auto;
+height: auto;
+margin: 0 auto;
+max-width: 500px;
+position: relative;
+background-color: rgb(14, 98, 177);
+border: 4px solid white;
+border-radius: 25px;
+padding: 20px;
+}
+
+#mainSection {
   flex: 70%;
   background-color: black;
   padding: 20px;
   border: 5px solid rgb(14, 98, 177);
   border-radius: 15px;
+  color: white;
+  text-align: center;
+  align-content: center;
+  font-size: 17px;
+  font-weight: bolder;
 }
 
 footer {
@@ -62,9 +74,6 @@ footer {
   border: 3px solid white;
 }
 
-/* .main{
-    height: 200px;
-} */
 
 .sub {
   height: 75px;
@@ -86,19 +95,6 @@ footer {
   margin-bottom: -20px;
 }
 
-#banner {
-  width: 100%;
-  margin-top: -80px;
-  margin-bottom: -80px;
-}
-
-p {
-  margin: 0px;
-  padding: 8px;
-  font-size: 20px;
-  color: white;
-}
-
 #title {
   text-align: center;
   font-size: 35px;
@@ -106,12 +102,21 @@ p {
     2px 2px 0 white;
 }
 
-/* ----- NAV BAR W/ DROPDOWN, Credit: Conrad ----- */
+#thankYou{
+  padding: 50px;
+}
+
+#mainSetion{
+  color: white;
+
+}
+
 nav {
   width: 100%;
   /* background: #DB3A34; */
-  padding-top: 5px;
-  padding-bottom: 5px;
+  padding-top: 0px;
+  padding-bottom: 0px;
+  padding-right: 20px;
   text-align: center;
 }
 
@@ -119,11 +124,14 @@ nav a {
   display: flex;
   /* Top/ Right/ Bottom/ Left */
   color: black;
-  padding: 20px 35px 20px 35px;
+  padding: 10px 0px 10px 0px;
   text-decoration: none;
-  font-weight: bold;
+  font-weight: bolder;
+  font-size: 14px;
   border-radius: 5px;
   justify-content: center;
+  text-align: center;
+  width: 88px;
 }
 
 nav a:hover {
@@ -167,7 +175,6 @@ nav ul li ul a:hover,
   flex-direction: column;
   width: 100%;
   text-align: center;
-  font-size: 17px;
 }
 
 .dropdown-1 li {
@@ -178,5 +185,3 @@ nav ul li ul a:hover,
 .dropdown-1 ul li:hover {
   display: block;
 }
-
-/* ---------------------- */

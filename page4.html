@@ -2,12 +2,6 @@
 <html lang="en">
   <head>
     <link
-      href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
-      rel="stylesheet"
-      integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN"
-      crossorigin="anonymous"
-    />
-    <link
       href="https://fonts.googleapis.com/css?family=Lacquer&display=swap"
       rel="stylesheet"
     />
@@ -41,13 +35,30 @@
         <li><a class="nav-active" href="./page4.html">Contact</a></li>
       </ul>
     </nav>
+        <div id="mainSection">
+          <div id="form">
+          <form id="contact-form">
+              <legend id="contact-header">Contact Us</legend>
+              <label>Name: <br><input required type="text" class="inputs" id="name-input"/></label><br><br>
+              <label>Email: <br><input required type="text" class="inputs" id="email-input"/></label><br><br>
+              <label>Phone Number: <br><input required type="number" class="inputs" id="number-input"/></label><br><br>
+              <label>Comment:</label><br />
+              <textarea
+                required
+                name="comment"
+                id="comment-input"
+                class="inputs"
+                cols="50"
+                rows="10"
+                placeholder="Write comment here..."
+              ></textarea>
+              <br /><br />
+              <button id="button" class="inputs" type="submit">Submit Form</button>
+            </form>
+        </div>
+        </div>
+        <footer>All Rights Reserved @ Kieran Brett</footer>
 
-    <div class="row">
-      <aside>
-        <h2>Contact Us Page</h2>
-      </aside>
-
-      <section></section>
-    </div>
+        <script src="./assets/js/page4.js"></script>
   </body>
 </html>

@@ -106,16 +106,19 @@ p {
 #title {
   text-align: center;
   font-size: 35px;
-  text-shadow: -2px -2px 0 white, 2px -2px 0 white, -2px 2px 0 white,
-    2px 2px 0 white;
+  text-shadow: -2px -2px 0 white, 2px -2px 0 white, -2px 2px 0 white, 2px 2px 0 white;
+  color: rgb(14, 98, 177);
+  text-align: 20px;
+  padding: 20px;
 }
 
-/* ----- NAV BAR W/ DROPDOWN, Credit: Conrad ----- */
+
 nav {
   width: 100%;
   /* background: #DB3A34; */
-  padding-top: 5px;
-  padding-bottom: 5px;
+  padding-top: 0px;
+  padding-bottom: 0px;
+  padding-right: 20px;
   text-align: center;
 }
 
@@ -123,11 +126,14 @@ nav a {
   display: flex;
   /* Top/ Right/ Bottom/ Left */
   color: black;
-  padding: 20px 35px 20px 35px;
+  padding: 10px 0px 10px 0px;
   text-decoration: none;
-  font-weight: bold;
+  font-weight: bolder;
+  font-size: 14px;
   border-radius: 5px;
   justify-content: center;
+  text-align: center;
+  width: 88px;
 }
 
 nav a:hover {
@@ -171,7 +177,6 @@ nav ul li ul a:hover,
   flex-direction: column;
   width: 100%;
   text-align: center;
-  font-size: 17px;
 }
 
 .dropdown-1 li {
@@ -182,5 +187,3 @@ nav ul li ul a:hover,
 .dropdown-1 ul li:hover {
   display: block;
 }
-
-/* ---------------------- */
