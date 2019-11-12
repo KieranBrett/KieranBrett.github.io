@@ -3,11 +3,12 @@
 const GRASSPOS = 520;
 
 // PLAYER CONSTANTS
-const STEPSIZE = 10;
+const STEPSIZE = 20;
 const JUMPFORCE = 50;
 const GRAVITYFORCE = -6;
 const PLAYERHEIGHT = 200;
 const PLAYERWIDTH = 100;
+
 
 // Images
 const BACKMULTI = .85;
@@ -22,9 +23,11 @@ const FOREMULTI = .05;
 let foregroundGrass;
 let foregroundGrassx;
 
+const GUNPOS = 50;
+
 // BULLET CONSTS
-const BULLETWIDTH = 20;
-const BULLETHEIGHT = 10;
+const BULLETWIDTH = 10;
+const BULLETHEIGHT = 5;
 const BULLETVELOCITY = 60;
 
 // Player fields
@@ -54,7 +57,7 @@ function setup() {
   jumping = true;
   shooting = false;
   yVelocity = 0;
-  direction = -1;
+  direction = 1;
   gun = new Gun();
 
   frameRate(30);
@@ -77,10 +80,10 @@ function drawBackground() { // Background that will scroll foreverrrrrrrrr
   image(backgroundPic, backgroundx, 0)
   
   if (backgroundx <= 0){
-    image(backgroundPic, backgroundx + 1200, 0) // Image width is 1200
+    image(backgroundPic, backgroundx + 1199, 0) // Image width is 1200
   }
   else{
-    image(backgroundPic, backgroundx - 1200, 0)
+    image(backgroundPic, backgroundx - 1199, 0)
   }
 
   if (backgroundx >= 1200){
@@ -170,7 +173,7 @@ function movePlayer() {
 
   if (direction === 0) { // If left
 
-    if (playerX <= 200){ // moves background if player is too far to left or right
+    if (playerX <= 300){ // moves background if player is too far to left or right
       backgroundx += STEPSIZE * BACKMULTI;
       backGrassx += STEPSIZE * MIDMULTI;
       foregroundGrassx -= STEPSIZE * FOREMULTI;
@@ -182,7 +185,7 @@ function movePlayer() {
   }
   else { // if right
 
-    if (playerX >= 1000 - PLAYERHEIGHT){
+    if (playerX >= 900 - PLAYERHEIGHT){
       backgroundx -= STEPSIZE * BACKMULTI;
       backGrassx -= STEPSIZE * MIDMULTI;
       foregroundGrassx += STEPSIZE * FOREMULTI;
@@ -213,13 +216,26 @@ function movementUpdate() {
 class Gun {
   constructor() {
     this.bullets = [];
+    this.gunRight = loadImage('assets/images/gun-rifle-right.png')
+    this.gunRightFlash = loadImage('assets/images/gun-rifle-right-flash.png')
+
+    this.gunLeft = loadImage('assets/images/gun-rifle-left.png')
+    this.gunLeftFlash = loadImage('assets/images/gun-rifle-left-flash.png')
+
   }
 
   shoot(){
-    this.bullets.push(new Bullet(playerX + (PLAYERWIDTH / 2), playerY + 20, direction));
+    if (direction == 1){
+      this.bullets.push(new Bullet(playerX + (PLAYERWIDTH / 2) + this.gunRight.width, playerY + (GUNPOS + 13), direction));
+    }
+    else{
+      this.bullets.push(new Bullet(playerX + (PLAYERWIDTH / 2) - this.gunLeft.width, playerY + (GUNPOS + 13), direction));
+    }
+    
   }
 
   update(){
+
     for (var i = 0; i < this.bullets.length; i++){
       this.bullets[i].update();
 
@@ -228,6 +244,19 @@ class Gun {
       }
     }
 
+    if (direction == 1){
+      image(this.gunRight, playerX + (PLAYERWIDTH / 2), playerY + GUNPOS)
+      if (shooting){
+        image(this.gunRightFlash, playerX + ((PLAYERWIDTH / 2) + this.gunRight.width), playerY + (GUNPOS + 5))
+      }
+    }
+    else{
+      image(this.gunLeft, playerX + (PLAYERWIDTH / 2) - this.gunLeft.width, playerY + GUNPOS)
+      if (shooting){
+        image(this.gunLeftFlash, playerX + ((PLAYERWIDTH / 2) - this.gunLeft.width - this.gunLeftFlash.width), playerY + (GUNPOS + 5))
+      }
+    }
+    
     
   }
 
@@ -241,7 +270,7 @@ class Bullet {
 
   update() {
     fill(230, 190, 20); // Drawing before updating so we can see the bullet before it is moved
-    rect(this.posX, this.posY, BULLETWIDTH, BULLETHEIGHT)
+    rect(this.posX - (BULLETWIDTH / 2), this.posY, BULLETWIDTH, BULLETHEIGHT)
 
     if (this.direction == 1){
       this.posX += BULLETVELOCITY;
