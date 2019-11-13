@@ -9,8 +9,8 @@ const SHADOWOFFSET = 190;
 
 // PLAYER CONSTANTS
 const STEPSIZE = 10;
-const JUMPFORCE = 50;
-const GRAVITYFORCE = -6;
+const JUMPFORCE = 40;
+const GRAVITYFORCE = -4;
 const PLAYERHEIGHT = 200;
 const PLAYERWIDTH = 100;
 const FRAMEMOVESIZE = 550;
@@ -32,7 +32,7 @@ let foregroundGrassx;
 let foregroundHud;
 const foreGroundHudY = 800;
 
-const GUNPOS = 50;
+const GUNPOS = 100;
 
 // BULLET CONSTS
 const BULLETWIDTH = 10;
@@ -52,6 +52,7 @@ let shooting;
 let yVelocity;
 let direction; // 0 = left, 1 = right;
 let gun;
+let playerPic;
 
 // Level Objects
 let squares = [];
@@ -79,6 +80,8 @@ fetch("assets/level1.json")
 function setup() {
   canvas = createCanvas(WIDTH, HEIGHT);
 
+
+  playerPic = loadImage('assets/images/player-image.png')
   backgroundPic = loadImage('assets/images/background-stars.png')
   backgroundx = 0;
   backGrass = loadImage('assets/images/background-grass.png')
@@ -88,8 +91,8 @@ function setup() {
   foregroundHud = loadImage('assets/images/hud.png')
   
 
-  playerX = 600;
-  playerY = 300;
+  playerX = 700;
+  playerY = 700;
   moving = false;
   jumping = true;
   shooting = false;
@@ -192,7 +195,6 @@ function drawForeground(){
   if (frameRateCount > 2000){
     frameRateCount = 0;
     frameRateTotal = 0;
-    console.log("refresh")
   }
 
   image(foregroundHud, 0, foreGroundHudY);
@@ -250,7 +252,7 @@ function updatePlayer() {
   }
   // Draw Player
   fill(200, 20, 20);
-  rect(playerX, playerY, PLAYERWIDTH, PLAYERHEIGHT);
+  image(playerPic, playerX, playerY);
 }
 
 function movePlayer() {
@@ -309,9 +311,23 @@ function movementUpdate() {
     movePlayer();
   }
 
-  if (jumping) {
-    playerY -= yVelocity;
-    yVelocity += GRAVITYFORCE;
+  squares.forEach(s => {
+    if (playerY + PLAYERHEIGHT >= s.y && playerX + playerPic.width >= s.relX && playerX <= s.relX + s.picture.width){
+      playerY = s.y - PLAYERHEIGHT;
+    }
+  });
+
+ 
+  playerY -= yVelocity;
+  yVelocity += GRAVITYFORCE;
+
+  for (var i = 0; i < squares.length; i++){
+    if (playerY + PLAYERHEIGHT >= squares[i].y && playerX + PLAYERWIDTH >= squares[i].relX && playerX <= squares[i].relX + squares[i].picture.width){
+      playerY = squares[i].y - PLAYERHEIGHT;
+      jumping = false;
+      doubleJumped = false;
+
+    }
   }
   
   if (playerY + PLAYERHEIGHT >= GRASSPOS) { // 500 is position of grass
