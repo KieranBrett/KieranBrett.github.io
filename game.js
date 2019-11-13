@@ -1,6 +1,6 @@
 const DOUBLEJUMP = true;
 const WIDTH = 1600;
-const HEIGHT = 1000;
+const HEIGHT = 800;
 
 // SCENERY CONSTANT
 const GRASSPOS = 720;
@@ -108,6 +108,7 @@ function setup() {
 
   frameRate(75);
   textSize(30)
+  noStroke();
 }
 
 // Main method
@@ -197,10 +198,9 @@ function drawForeground(){
     frameRateTotal = 0;
   }
 
-  image(foregroundHud, 0, foreGroundHudY);
   fill(color("white"))
-  text(`World X : ${worldX}`, 1250, 910)
-  text(`FPS : ${(frameRateTotal / frameRateCount).toFixed(2)}`, 1000, 910)
+  text(`World X : ${worldX}`, 50, 50)
+  text(`Average FPS : ${(frameRateTotal / frameRateCount).toFixed(2)}`, 50, 100)
 }
 
 // Event Methods
