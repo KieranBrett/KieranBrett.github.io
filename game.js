@@ -1,47 +1,83 @@
+const DOUBLEJUMP = true;
+const WIDTH = 1600;
+const HEIGHT = 1000;
 
 // SCENERY CONSTANT
-const GRASSPOS = 520;
+const GRASSPOS = 720;
+const GRASSOFFSET = 80;
+const SHADOWOFFSET = 190;
 
 // PLAYER CONSTANTS
-const STEPSIZE = 20;
+const STEPSIZE = 10;
 const JUMPFORCE = 50;
 const GRAVITYFORCE = -6;
 const PLAYERHEIGHT = 200;
 const PLAYERWIDTH = 100;
+const FRAMEMOVESIZE = 550;
 
 
 // Images
-const BACKMULTI = .85;
+const BACKMULTI = .75;
 let backgroundPic;
 let backgroundx;
 
-const MIDMULTI = .8;
+const MIDMULTI = .85;
 let backGrass;
 let backGrassx;
 
-const FOREMULTI = .05;
+const FOREMULTI = .4;
 let foregroundGrass;
 let foregroundGrassx;
+
+let foregroundHud;
+const foreGroundHudY = 800;
 
 const GUNPOS = 50;
 
 // BULLET CONSTS
 const BULLETWIDTH = 10;
 const BULLETHEIGHT = 5;
-const BULLETVELOCITY = 60;
+const BULLETVELOCITY = 15;
+const FIRERATE = 1;
+const BULLETSPREAD = 10;
+let gunTickCount;
 
 // Player fields
 let playerX;
 let playerY;
 let moving;
 let jumping;
+let doubleJumped;
 let shooting;
 let yVelocity;
 let direction; // 0 = left, 1 = right;
 let gun;
 
+// Level Objects
+let squares = [];
+let worldX;
+
+let frameRateTotal;
+let frameRateCount;
+
+// LOADING OBJECTS
+
+fetch("assets/level1.json")
+.then(response => response.json())
+.then(data => {
+  let objects = data;
+
+  for (var i = 0; i < objects.boxes.length; i++){
+    squares.push(new Square(objects.boxes[i].positionX, objects.boxes[i].positionY, objects.boxes[i].imageurl, false))
+  }
+
+  console.log(squares)
+})
+
+
+
 function setup() {
-  canvas = createCanvas(1200, 600);
+  canvas = createCanvas(WIDTH, HEIGHT);
 
   backgroundPic = loadImage('assets/images/background-stars.png')
   backgroundx = 0;
@@ -49,6 +85,7 @@ function setup() {
   backGrassx = 0;
   foregroundGrass = loadImage('assets/images/foreground-grass-blurred.png')
   foregroundGrassx = 0;
+  foregroundHud = loadImage('assets/images/hud.png')
   
 
   playerX = 600;
@@ -56,58 +93,76 @@ function setup() {
   moving = false;
   jumping = true;
   shooting = false;
+  doubleJumped = false;
   yVelocity = 0;
   direction = 1;
   gun = new Gun();
 
-  frameRate(30);
+  gunTickCount = 0;
+  worldX = 0;
+  frameRateTotal = 0;
+  frameRateCount = 0;
+
+  frameRate(75);
+  textSize(30)
 }
 
+// Main method
 function draw() {
   clear();
   background(200);
 
   drawBackground();
   updatePlayer();
-  drawForeground();
 
   gun.update();
+  
+  drawObjects();
+  drawForeground();
+
+  if (gunTickCount >= FIRERATE){
+    gunTickCount = 0;
+  }
+  else {
+    gunTickCount++;
+  }
 }
 
+// Scenery Methods
 function drawBackground() { // Background that will scroll foreverrrrrrrrr
 
   // BACKGROUND
   image(backgroundPic, backgroundx, 0)
   
   if (backgroundx <= 0){
-    image(backgroundPic, backgroundx + 1199, 0) // Image width is 1200
+    image(backgroundPic, backgroundx + (backgroundPic.width), 0) // Image width is 1200
   }
   else{
-    image(backgroundPic, backgroundx - 1199, 0)
+    image(backgroundPic, backgroundx - (backgroundPic.width), 0)
   }
 
-  if (backgroundx >= 1200){
+  if (backgroundx >= backgroundPic.width){
     backgroundx = 0;
   }
-  else if (backgroundx <= -1200){
+  else if (backgroundx <= -backgroundPic.width){
     backgroundx = 0;
   }
 
 
   // MIDGROUND
-  image(backGrass, backGrassx, 400);
+  image(backGrass, backGrassx, GRASSPOS - SHADOWOFFSET);
 
   if (backGrassx <= 0){
-    image(backGrass, backGrassx + 1200, 400)
+    image(backGrass, backGrassx + backGrass.width, GRASSPOS - SHADOWOFFSET)
   }
   else{
-    image(backGrass, backGrassx - 1200, 400)
+    image(backGrass, backGrassx - backGrass.width, GRASSPOS - SHADOWOFFSET)
   }
 
-  if (backGrassx >= 1200){
+  if (backGrassx >= backGrass.width){
     backGrassx = 0;
   }
-  else if (backGrassx <= -1200){
+  else if (backGrassx <= -backGrass.width){
     backGrassx = 0;
   }
 }
@@ -115,54 +170,83 @@ function drawForeground(){
   fill(30, 129, 30);
   rect(0, GRASSPOS, 1200, 100);
 
-  image(foregroundGrass, foregroundGrassx, 455);
+  image(foregroundGrass, foregroundGrassx, GRASSPOS - GRASSOFFSET);
 
   if (foregroundGrassx <= 0){
-    image(foregroundGrass, foregroundGrassx + 1200, 460)
+    image(foregroundGrass, foregroundGrassx + foregroundGrass.width, GRASSPOS - GRASSOFFSET)
   }
   else{
-    image(foregroundGrass, foregroundGrassx - 1200, 460)
+    image(foregroundGrass, foregroundGrassx - foregroundGrass.width, GRASSPOS - GRASSOFFSET)
   }
 
-  if (backGrassx >= 1200){
-    backGrassx = 0;
+  if (foregroundGrassx >= foregroundGrass.width){
+    foregroundGrassx = 0;
   }
-  else if (backGrassx <= -1200){
-    backGrassx = 0;
+  else if (foregroundGrassx <= -foregroundGrass.width){
+    foregroundGrassx = 0;
   }
+
+  frameRateTotal += frameRate();
+  frameRateCount++;
+
+  if (frameRateCount > 2000){
+    frameRateCount = 0;
+    frameRateTotal = 0;
+    console.log("refresh")
+  }
+
+  image(foregroundHud, 0, foreGroundHudY);
+  fill(color("white"))
+  text(`World X : ${worldX}`, 1250, 910)
+  text(`FPS : ${(frameRateTotal / frameRateCount).toFixed(2)}`, 1000, 910)
 }
 
+// Event Methods
 function keyPressed() {
 
   if (keyCode == LEFT_ARROW) {
     moving = true;
     direction = 0;
   }
-  else if (keyCode == RIGHT_ARROW) {
+  if (keyCode == RIGHT_ARROW) {
     moving = true;
     direction = 1;
   }
-  else if (keyCode == UP_ARROW) {
+  if (keyCode == UP_ARROW) {
+
+    if (!jumping){
+      yVelocity = JUMPFORCE;
+    }
+    else {
+      if (DOUBLEJUMP && !doubleJumped){
+        yVelocity = JUMPFORCE;
+        doubleJumped = true;
+      }
+    }
     jumping = true;
-    yVelocity = JUMPFORCE;
+    
   }
-  else if (keyCode == 32){
+  if (keyCode == 32){
     shooting = true;
   }
 }
+
 function keyReleased() {
     if (keyCode == LEFT_ARROW || keyCode == RIGHT_ARROW) 
-    moving = false;
+      moving = false;
     else if (keyCode == 32){ // Space bar
       shooting = false;
     }
 }
 
+// Player Methods
 function updatePlayer() {
   movementUpdate(); // Includes jumping and checking boundaries
 
   if (shooting){
-    gun.shoot();
+    if (gunTickCount >= FIRERATE){
+      gun.shoot();
+    }
   }
   // Draw Player
   fill(200, 20, 20);
@@ -171,24 +255,44 @@ function updatePlayer() {
 
 function movePlayer() {
 
+  let tempX;
+  let canMove = true;
+
+  if (direction === 0){
+    tempX = playerX - STEPSIZE;
+  }
+  else{
+    tempX = playerX + STEPSIZE;
+  }
+
+  squares.forEach(s => {
+    if (tempX + PLAYERWIDTH >= s.relX && tempX <= parseInt(s.relX) + s.picture.width && playerY + PLAYERHEIGHT > s.y){
+      canMove = false;
+    }
+  });
+
+  if (canMove){
   if (direction === 0) { // If left
 
-    if (playerX <= 300){ // moves background if player is too far to left or right
+    if (playerX <= FRAMEMOVESIZE){ // moves background if player is too far to left or right
       backgroundx += STEPSIZE * BACKMULTI;
       backGrassx += STEPSIZE * MIDMULTI;
-      foregroundGrassx -= STEPSIZE * FOREMULTI;
+      foregroundGrassx += STEPSIZE * FOREMULTI;
+      worldX -= STEPSIZE;
     }
     else{
       playerX -= STEPSIZE;
+      
     }
 
   }
   else { // if right
 
-    if (playerX >= 900 - PLAYERHEIGHT){
+    if (playerX >= WIDTH - FRAMEMOVESIZE - PLAYERHEIGHT){
       backgroundx -= STEPSIZE * BACKMULTI;
       backGrassx -= STEPSIZE * MIDMULTI;
-      foregroundGrassx += STEPSIZE * FOREMULTI;
+      foregroundGrassx -= STEPSIZE * FOREMULTI;
+      worldX += STEPSIZE;
     }
     else{
       playerX += STEPSIZE;
@@ -196,6 +300,10 @@ function movePlayer() {
 
   }
 }
+
+  
+}
+
 function movementUpdate() {
   if (moving) {
     movePlayer();
@@ -209,10 +317,26 @@ function movementUpdate() {
   if (playerY + PLAYERHEIGHT >= GRASSPOS) { // 500 is position of grass
     playerY = GRASSPOS - PLAYERHEIGHT;
     jumping = false;
+    doubleJumped = false;
   }
 }
 
+// Object Methods
+function drawObjects() {
 
+  fill(color(30, 90, 200))
+
+  squares.forEach(s => {
+    if (parseInt(s.x) + s.picture.width >= worldX && s.x <= worldX + WIDTH){
+      s.drawSquare();
+      s.drawn = true;
+      s.relX = parseInt(s.x) - worldX;
+    }
+  });
+
+}
+
+// Classes
 class Gun {
   constructor() {
     this.bullets = [];
@@ -226,10 +350,10 @@ class Gun {
 
   shoot(){
     if (direction == 1){
-      this.bullets.push(new Bullet(playerX + (PLAYERWIDTH / 2) + this.gunRight.width, playerY + (GUNPOS + 13), direction));
+      this.bullets.push(new Bullet(playerX + (PLAYERWIDTH / 2) + this.gunRight.width + 24, playerY + (GUNPOS + 13) + (random(-BULLETSPREAD, BULLETSPREAD)), direction));
     }
     else{
-      this.bullets.push(new Bullet(playerX + (PLAYERWIDTH / 2) - this.gunLeft.width, playerY + (GUNPOS + 13), direction));
+      this.bullets.push(new Bullet(playerX + (PLAYERWIDTH / 2) - this.gunLeft.width - 24, playerY + (GUNPOS + 13) + (random(-BULLETSPREAD, BULLETSPREAD)), direction));
     }
     
   }
@@ -239,7 +363,7 @@ class Gun {
     for (var i = 0; i < this.bullets.length; i++){
       this.bullets[i].update();
 
-      if (this.bullets[i].posX > 1200 || this.bullets[i].posX + BULLETWIDTH < 0){
+      if (this.bullets[i].posX > WIDTH || this.bullets[i].posX + BULLETWIDTH < 0){
         this.bullets.splice(i, 1);
       }
     }
@@ -261,6 +385,7 @@ class Gun {
   }
 
 }
+
 class Bullet {
   constructor(posX, posY, direction) {
     this.posX = posX;
@@ -282,3 +407,19 @@ class Bullet {
 
   
 }
+
+class Square {
+  constructor(x, y, imageURL, status) {
+    this.x = x;
+    this.y = y;
+    this.relX;
+    this.relY;
+    this.picture = loadImage(imageURL);
+    this.drawn = status;
+  }
+
+  drawSquare() {
+    image(this.picture, parseInt(this.relX), this.y);
+  }
+}
+

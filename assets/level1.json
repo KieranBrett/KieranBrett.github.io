@@ -1,0 +1,49 @@
+{
+    "boxes": [
+        {
+            "positionX": "1200",
+            "positionY": "450",
+            "imageurl": "assets/images/object-crate-large.png"
+        },
+        {
+            "positionX": "1050",
+            "positionY": "600",
+            "imageurl": "assets/images/object-crate-small-alt.png"
+        },
+        {
+            "positionX": "1500",
+            "positionY": "600",
+            "imageurl": "assets/images/object-crate-small-alt.png"
+        },
+        {
+            "positionX": "2800",
+            "positionY": "600",
+            "imageurl": "assets/images/object-crate-small-alt.png"
+        },
+        {
+            "positionX": "2950",
+            "positionY": "600",
+            "imageurl": "assets/images/object-crate-small.png"
+        },
+        {
+            "positionX": "2950",
+            "positionY": "450",
+            "imageurl": "assets/images/object-crate-small.png"
+        },
+        {
+            "positionX": "3100",
+            "positionY": "450",
+            "imageurl": "assets/images/object-crate-large-alt.png"
+        },
+        {
+            "positionX": "3400",
+            "positionY": "600",
+            "imageurl": "assets/images/object-crate-small-alt.png"
+        },
+        {
+            "positionX": "-100",
+            "positionY": "0",
+            "imageurl": "assets/images/object-wall-block.png"
+        }
+    ]
+}
