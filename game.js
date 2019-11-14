@@ -9,6 +9,9 @@ const SHADOWOFFSET = 190;
 
 // PLAYER CONSTANTS
 const STEPSIZE = 10;
+const SPRINTMULTIPLIER = 1.5;
+
+
 const JUMPFORCE = 40;
 const GRAVITYFORCE = -4;
 const PLAYERHEIGHT = 200;
@@ -53,6 +56,8 @@ let yVelocity;
 let direction; // 0 = left, 1 = right;
 let gun;
 let playerPic;
+let effectiveStep;
+let sprinting;
 
 // Level Objects
 let squares = [];
@@ -109,6 +114,7 @@ function setup() {
   yVelocity = 0;
   direction = 1;
   gun = new Gun();
+  sprinting = false;
 
   gunTickCount = 0;
   worldX = 0;
@@ -130,12 +136,6 @@ function draw() {
   drawForeground();
 
   gun.update();
-
-  if (gunTickCount >= FIRERATE) {
-    gunTickCount = 0;
-  } else {
-    gunTickCount++;
-  }
 }
 
 // Scenery Methods
@@ -221,12 +221,10 @@ function keyPressed() {
     moving = true;
     direction = 0;
   }
-
   if (keyCode == RIGHT_ARROW) {
     moving = true;
     direction = 1;
   }
-
   if (keyCode == UP_ARROW) {
     if (!jumping) {
       yVelocity = JUMPFORCE;
@@ -240,6 +238,10 @@ function keyPressed() {
   }
   if (keyCode == 32) {
     shooting = true;
+    gunTickCount = FIRERATE;
+  }
+  if (keyCode == 16){
+    sprinting = true;
   }
 }
 
@@ -248,6 +250,9 @@ function keyReleased() {
   else if (keyCode == 32) {
     // Space bar
     shooting = false;
+  }
+  else if (keyCode == 16){
+    sprinting = false;
   }
 }
 
@@ -258,8 +263,13 @@ function updatePlayer() {
   if (shooting) {
     if (gunTickCount >= FIRERATE) {
       gun.shoot();
+      gunTickCount = 0;
+    }
+    else{
+      gunTickCount++;
     }
   }
+
   // Draw Player
   fill(200, 20, 20);
   image(playerPic, playerX, playerY);
@@ -270,9 +280,9 @@ function movePlayer() {
   let canMove = true;
 
   if (direction === 0) {
-    tempX = playerX - STEPSIZE;
+    tempX = playerX - effectiveStep;
   } else {
-    tempX = playerX + STEPSIZE;
+    tempX = playerX + effectiveStep;
   }
 
   squares.forEach(s => {
@@ -294,29 +304,36 @@ function movePlayer() {
 
       if (playerX <= FRAMEMOVESIZE) {
         // moves background if player is too far to left or right
-        backgroundx += STEPSIZE * BACKMULTI;
-        backGrassx += STEPSIZE * MIDMULTI;
-        foregroundGrassx += STEPSIZE * FOREMULTI;
-        worldX -= STEPSIZE;
+        backgroundx += effectiveStep * BACKMULTI;
+        backGrassx += effectiveStep * MIDMULTI;
+        foregroundGrassx += effectiveStep * FOREMULTI;
+        worldX -= effectiveStep;
       } else {
-        playerX -= STEPSIZE;
+        playerX -= effectiveStep;
       }
     } else {
       // if right
 
       if (playerX >= WIDTH - FRAMEMOVESIZE - PLAYERHEIGHT) {
-        backgroundx -= STEPSIZE * BACKMULTI;
-        backGrassx -= STEPSIZE * MIDMULTI;
-        foregroundGrassx -= STEPSIZE * FOREMULTI;
-        worldX += STEPSIZE;
+        backgroundx -= effectiveStep * BACKMULTI;
+        backGrassx -= effectiveStep * MIDMULTI;
+        foregroundGrassx -= effectiveStep * FOREMULTI;
+        worldX += effectiveStep;
       } else {
-        playerX += STEPSIZE;
+        playerX += effectiveStep;
       }
     }
   }
 }
 
 function movementUpdate() {
+  if (sprinting === true){
+    effectiveStep = STEPSIZE * SPRINTMULTIPLIER;
+  }
+  else{
+    effectiveStep = STEPSIZE;
+  }
+
   if (moving) {
     movePlayer();
   }
