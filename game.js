@@ -38,8 +38,9 @@ const GUNPOS = 100;
 const BULLETWIDTH = 10;
 const BULLETHEIGHT = 5;
 const BULLETVELOCITY = 15;
-const FIRERATE = 1;
+const FIRERATE = 4;
 const BULLETSPREAD = 10;
+const BULLETDMG = 30;
 let gunTickCount;
 
 // Player fields
@@ -69,7 +70,7 @@ fetch("assets/level1.json")
   let objects = data;
 
   for (var i = 0; i < objects.boxes.length; i++){
-    squares.push(new Square(objects.boxes[i].positionX, objects.boxes[i].positionY, objects.boxes[i].imageurl, false))
+    squares.push(new Square(objects.boxes[i].positionX, objects.boxes[i].positionY, objects.boxes[i].imageurl, objects.boxes[i].drawn, objects.boxes[i].traversable, objects.boxes[i].breakable))
   }
 
   console.log(squares)
@@ -118,11 +119,13 @@ function draw() {
 
   drawBackground();
   updatePlayer();
+  drawObjects();
+  drawForeground();
 
   gun.update();
   
-  drawObjects();
-  drawForeground();
+  
+  
 
   if (gunTickCount >= FIRERATE){
     gunTickCount = 0;
@@ -210,10 +213,12 @@ function keyPressed() {
     moving = true;
     direction = 0;
   }
+
   if (keyCode == RIGHT_ARROW) {
     moving = true;
     direction = 1;
   }
+  
   if (keyCode == UP_ARROW) {
 
     if (!jumping){
@@ -268,7 +273,7 @@ function movePlayer() {
   }
 
   squares.forEach(s => {
-    if (tempX + PLAYERWIDTH >= s.relX && tempX <= parseInt(s.relX) + s.picture.width && playerY + PLAYERHEIGHT > s.y){
+    if (tempX + PLAYERWIDTH >= s.relX && tempX <= parseInt(s.relX) + s.picture.width && playerY + PLAYERHEIGHT > s.y && playerY <= parseInt(s.y) + s.picture.height && s.traversable == false && s.drawn == true){
       canMove = false;
     }
   });
@@ -310,23 +315,25 @@ function movementUpdate() {
   if (moving) {
     movePlayer();
   }
-
-  squares.forEach(s => {
-    if (playerY + PLAYERHEIGHT >= s.y && playerX + playerPic.width >= s.relX && playerX <= s.relX + s.picture.width){
-      playerY = s.y - PLAYERHEIGHT;
-    }
-  });
-
  
   playerY -= yVelocity;
   yVelocity += GRAVITYFORCE;
 
   for (var i = 0; i < squares.length; i++){
-    if (playerY + PLAYERHEIGHT >= squares[i].y && playerX + PLAYERWIDTH >= squares[i].relX && playerX <= squares[i].relX + squares[i].picture.width){
-      playerY = squares[i].y - PLAYERHEIGHT;
-      jumping = false;
-      doubleJumped = false;
+    if (playerY + PLAYERHEIGHT >= squares[i].y && playerX + PLAYERWIDTH >= squares[i].relX && playerX <= squares[i].relX + squares[i].picture.width && squares[i].traversable == false && playerY <= parseInt(squares[i].y) + squares[i].picture.height && squares[i].drawn == true){
+      
 
+      if (playerY + PLAYERHEIGHT >= parseInt(squares[i].y) + squares[i].picture.height && jumping == true){
+        console.log("under");
+        yVelocity = 0;
+        playerY = squares[i].y + squares[i].picture.height;
+      }
+      else{
+        playerY = squares[i].y - PLAYERHEIGHT;
+        jumping = false;
+        doubleJumped = false;
+        yVelocity = 0;
+      }
     }
   }
   
@@ -343,9 +350,8 @@ function drawObjects() {
   fill(color(30, 90, 200))
 
   squares.forEach(s => {
-    if (parseInt(s.x) + s.picture.width >= worldX && s.x <= worldX + WIDTH){
+    if (parseInt(s.x) + s.picture.width >= worldX && s.x <= worldX + WIDTH && s.drawn == true){
       s.drawSquare();
-      s.drawn = true;
       s.relX = parseInt(s.x) - worldX;
     }
   });
@@ -381,6 +387,24 @@ class Gun {
 
       if (this.bullets[i].posX > WIDTH || this.bullets[i].posX + BULLETWIDTH < 0){
         this.bullets.splice(i, 1);
+      }
+      else{
+        for (var s = 0; s < squares.length; s++){
+          if (this.bullets[i].posX + BULLETWIDTH >= squares[s].relX && this.bullets[i].posX <= squares[s].relX + squares[s].picture.width){
+            if (this.bullets[i].posY >= squares[s].y && this.bullets[i].posY <= parseInt(squares[s].y) + squares[s].picture.height && squares[s].drawn == true){
+              this.bullets.splice(i, 1);
+
+              if (squares[s].breakable){
+                squares[s].health -= BULLETDMG;
+
+                if (squares[s].health <= 0){
+                  squares[s].drawn = false;
+                }
+              }
+              break;
+            }
+          }
+        }
       }
     }
 
@@ -419,19 +443,25 @@ class Bullet {
     else{
       this.posX -= BULLETVELOCITY;
     }
+
+
+
   }
 
   
 }
 
 class Square {
-  constructor(x, y, imageURL, status) {
+  constructor(x, y, imageURL, status, traversable, breakable) {
     this.x = x;
     this.y = y;
     this.relX;
     this.relY;
     this.picture = loadImage(imageURL);
     this.drawn = status;
+    this.traversable = traversable;
+    this.breakable = breakable;
+    this.health = 100;
   }
 
   drawSquare() {
