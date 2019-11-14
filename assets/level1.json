@@ -2,7 +2,7 @@
     "boxes": [
         {
             "groupName": "Wall Block",
-            "breakable": true,
+            "breakable": false,
             "traversable": false,
             "drawn": true,
             "positionX": "-100",
@@ -52,6 +52,16 @@
         },
         {
             "groupName": "secondGroup",
+            "breakable": false,
+            "traversable": false,
+            "drawn": true,
+            "positionX": "3100",
+            "positionY": "300",
+            "imageurl": "assets/images/object-crate-small-alt.png",
+            "health": "100"
+        },
+        {
+            "groupName": "secondGroup",
             "breakable": true,
             "traversable": false,
             "drawn": true,
@@ -78,16 +88,6 @@
             "positionX": "3400",
             "positionY": "450",
             "imageurl": "assets/images/object-crate-small.png",
-            "health": "100"
-        },
-        {
-            "groupName": "secondGroup",
-            "breakable": false,
-            "traversable": false,
-            "drawn": true,
-            "positionX": "3100",
-            "positionY": "300",
-            "imageurl": "assets/images/object-crate-small-alt.png",
             "health": "100"
         },
         {

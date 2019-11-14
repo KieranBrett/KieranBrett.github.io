@@ -58,6 +58,9 @@ let playerPic;
 let squares = [];
 let worldX;
 
+const HEALTHBARHEIGHT = 10;
+const HEALTHBARTIME = 200;
+
 let frameRateTotal;
 let frameRateCount;
 
@@ -365,8 +368,8 @@ function drawObjects() {
       s.x <= worldX + WIDTH &&
       s.drawn == true
     ) {
-      s.drawSquare();
       s.relX = parseInt(s.x) - worldX;
+      s.Update();
     }
   });
 }
@@ -427,10 +430,13 @@ class Gun {
 
               if (squares[s].breakable) {
                 squares[s].health -= BULLETDMG;
-
+                
                 if (squares[s].health <= 0) {
                   squares[s].drawn = false;
                 }
+
+                squares[s].healthBarCount = 0;
+                squares[s].damaged = true;
               }
               break;
             }
@@ -495,10 +501,41 @@ class Square {
     this.drawn = status;
     this.traversable = traversable;
     this.breakable = breakable;
+    this.startHealth = health;
     this.health = health;
+
+    this.healthBarCount = 0;
+    this.damaged = false;
   }
 
   drawSquare() {
     image(this.picture, parseInt(this.relX), this.y);
+  }
+
+  Update(){
+    if (this.damaged){
+      this.drawHealth();
+
+      this.healthBarCount++;
+      if (this.healthBarCount > HEALTHBARTIME){
+        this.damaged = false;
+        this.healthBarCount = 0;
+      }
+    }
+    this.drawSquare();
+
+  }
+
+  drawHealth(){
+    fill(0)
+    rect((parseInt(this.relX) + (this.picture.width / 2) - (this.startHealth / 2) - 3),(this.y - 50) - 3, parseInt(this.startHealth) + 6, HEALTHBARHEIGHT + 6)
+
+    fill(200, 20, 20);
+    rect((parseInt(this.relX) + (this.picture.width / 2) - (this.startHealth / 2)),(this.y - 50), this.startHealth, HEALTHBARHEIGHT)
+
+    fill (20, 200, 200)
+    rect((parseInt(this.relX) + (this.picture.width / 2) - (this.startHealth / 2)),(this.y - 50), this.health, HEALTHBARHEIGHT)
+    
+    console.log("health");
   }
 }
