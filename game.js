@@ -131,8 +131,8 @@ function draw() {
   clear();
 
   drawBackground();
-  updatePlayer();
   drawObjects();
+  updatePlayer();
   drawForeground();
 
   gun.update();
@@ -357,7 +357,7 @@ function movementUpdate() {
       ) {
         console.log("under");
         yVelocity = 0;
-        playerY = squares[i].y + squares[i].picture.height;
+        playerY = parseInt(squares[i].y) + squares[i].picture.height + 1;
       } else {
         playerY = squares[i].y - PLAYERHEIGHT;
         jumping = false;
@@ -442,6 +442,7 @@ class Gun {
               this.bullets[i].posY <=
                 parseInt(squares[s].y) + squares[s].picture.height &&
               squares[s].drawn == true
+              && squares[s].traversable == false
             ) {
               this.bullets.splice(i, 1);
 
@@ -550,7 +551,7 @@ class Square {
     fill(200, 20, 20);
     rect((parseInt(this.relX) + (this.picture.width / 2) - (this.startHealth / 2)),(this.y - 50), this.startHealth, HEALTHBARHEIGHT)
 
-    fill (20, 200, 200)
+    fill (20, 200, 20)
     rect((parseInt(this.relX) + (this.picture.width / 2) - (this.startHealth / 2)),(this.y - 50), this.health, HEALTHBARHEIGHT)
     
     console.log("health");
