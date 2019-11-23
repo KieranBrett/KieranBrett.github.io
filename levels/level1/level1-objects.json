@@ -3,8 +3,6 @@
         {
             "groupName": "Wall Block",
             "breakable": false,
-            "traversable": false,
-            "drawn": true,
             "positionX": "-100",
             "positionY": "50",
             "imageurl": "assets/images/object-wall-block-alt.png",
@@ -13,92 +11,37 @@
         {
             "groupName": "Wall Block",
             "breakable": false,
-            "traversable": false,
-            "drawn": true,
             "positionX": "6700",
             "positionY": "0",
             "imageurl": "assets/images/object-wall-block.png",
             "health": "100"
         },
 
+        {
+            "groupName": "firstGroup",
+            "breakable": true,
+            "traversable": false,
+            "positionX": "600",
+            "positionY": "450",
+            "imageurl": "assets/images/object-crate-large-cracked.png",
+            "health": "500"
+        },
+        {
+            "groupName": "firstGroup",
+            "breakable": true,
+            "traversable": false,
+            "positionX": "450",
+            "positionY": "600",
+            "imageurl": "assets/images/object-crate-small-cracked-alt.png",
+            "health": "500"
+        },
 
-        {
-            "groupName": "House",
-            "breakable": false,
-            "traversable": true,
-            "drawn": true,
-            "positionX": "300",
-            "positionY": "120",
-            "imageurl": "assets/images/house-blue.png",
-            "health": "100"
-        },
-        {
-            "groupName": "House",
-            "breakable": false,
-            "traversable": true,
-            "drawn": true,
-            "positionX": "900",
-            "positionY": "120",
-            "imageurl": "assets/images/house-yellow.png",
-            "health": "100"
-        },
-        {
-            "groupName": "House",
-            "breakable": false,
-            "traversable": true,
-            "drawn": true,
-            "positionX": "1500",
-            "positionY": "50",
-            "imageurl": "assets/images/house-large-green.png",
-            "health": "2000"
-        },
-        {
-            "groupName": "House",
-            "breakable": false,
-            "traversable": true,
-            "drawn": true,
-            "positionX": "2730",
-            "positionY": "120",
-            "imageurl": "assets/images/house-yellow-alt.png",
-            "health": "100"
-        },
-        {
-            "groupName": "House",
-            "breakable": false,
-            "traversable": true,
-            "drawn": true,
-            "positionX": "3350",
-            "positionY": "50",
-            "imageurl": "assets/images/house-purple.png",
-            "health": "100"
-        },
-        {
-            "groupName": "House",
-            "breakable": false,
-            "traversable": true,
-            "drawn": true,
-            "positionX": "4200",
-            "positionY": "50",
-            "imageurl": "assets/images/house-large-red-alt.png",
-            "health": "100"
-        },
-        {
-            "groupName": "House",
-            "breakable": false,
-            "traversable": true,
-            "drawn": true,
-            "positionX": "5420",
-            "positionY": "60",
-            "imageurl": "assets/images/house-large-green.png",
-            "health": "100"
-        },
+
 
 
         {
             "groupName": "secondGroup",
             "breakable": false,
-            "traversable": false,
-            "drawn": true,
             "positionX": "3100",
             "positionY": "300",
             "imageurl": "assets/images/object-crate-small-alt.png",
@@ -108,7 +51,6 @@
             "groupName": "secondGroup",
             "breakable": true,
             "traversable": false,
-            "drawn": true,
             "positionX": "3100",
             "positionY": "450",
             "imageurl": "assets/images/object-crate-large-cracked-alt.png",
@@ -117,8 +59,6 @@
         {
             "groupName": "secondGroup",
             "breakable": false,
-            "traversable": false,
-            "drawn": true,
             "positionX": "3400",
             "positionY": "600",
             "imageurl": "assets/images/object-crate-small-alt.png",
@@ -127,8 +67,6 @@
         {
             "groupName": "secondGroup",
             "breakable": false,
-            "traversable": false,
-            "drawn": true,
             "positionX": "3400",
             "positionY": "450",
             "imageurl": "assets/images/object-crate-small.png",
@@ -137,8 +75,6 @@
         {
             "groupName": "endBlock",
             "breakable": false,
-            "traversable": false,
-            "drawn": true,
             "positionX": "4500",
             "positionY": "600",
             "imageurl": "assets/images/object-crate-small-alt.png",
@@ -147,8 +83,6 @@
         {
             "groupName": "endBlock",
             "breakable": false,
-            "traversable": false,
-            "drawn": true,
             "positionX": "4650",
             "positionY": "450",
             "imageurl": "assets/images/object-crate-large.png",
@@ -157,8 +91,6 @@
         {
             "groupName": "endBlock",
             "breakable": false,
-            "traversable": false,
-            "drawn": true,
             "positionX": "4800",
             "positionY": "300",
             "imageurl": "assets/images/object-crate-small-alt.png",
@@ -167,8 +99,6 @@
         {
             "groupName": "endBlock",
             "breakable": false,
-            "traversable": false,
-            "drawn": true,
             "positionX": "5100",
             "positionY": "300",
             "imageurl": "assets/images/object-crate-small.png",
@@ -177,8 +107,6 @@
         {
             "groupName": "endBlock",
             "breakable": false,
-            "traversable": false,
-            "drawn": true,
             "positionX": "5100",
             "positionY": "150",
             "imageurl": "assets/images/object-crate-small-alt.png",
@@ -187,8 +115,6 @@
         {
             "groupName": "endBlock",
             "breakable": false,
-            "traversable": false,
-            "drawn": true,
             "positionX": "5100",
             "positionY": "0",
             "imageurl": "assets/images/object-crate-small-alt.png",
@@ -197,8 +123,6 @@
         {
             "groupName": "endBlock",
             "breakable": false,
-            "traversable": false,
-            "drawn": true,
             "positionX": "5100",
             "positionY": "-150",
             "imageurl": "assets/images/object-crate-small-alt.png",
@@ -207,8 +131,6 @@
         {
             "groupName": "endBlock",
             "breakable": true,
-            "traversable": false,
-            "drawn": true,
             "positionX": "5100",
             "positionY": "450",
             "imageurl": "assets/images/object-crate-large-cracked-alt.png",

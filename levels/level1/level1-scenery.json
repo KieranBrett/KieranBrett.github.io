@@ -1,0 +1,23 @@
+{
+    "scenery": [
+        {
+            "groupName": "House",
+            "positionX": "300",
+            "positionY": "50",
+            "imageurl": "assets/images/house-large-green.png"
+        },
+        {
+            "groupName": "House",
+            "positionX": "1600",
+            "positionY": "50",
+            "imageurl": "assets/images/house-purple.png"
+        },
+        {
+            "groupName": "House",
+            "positionX": "2450",
+            "positionY": "150",
+            "imageurl": "assets/images/house-yellow.png"
+        }
+
+    ]
+}

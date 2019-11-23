@@ -1,0 +1,44 @@
+{
+    "enemies": [
+        {
+            "groupName": "spawnSoldier",
+            "positionX": "1000",
+            "positionY": "520",
+            "imageurl": "assets/images/enemy-image.png",
+            "health": "300",
+            "speed": "4"
+        },
+        {
+            "groupName": "spawnSoldier",
+            "positionX": "1400",
+            "positionY": "520",
+            "imageurl": "assets/images/enemy-image.png",
+            "health": "80",
+            "speed": "5"
+        },
+        {
+            "groupName": "spawnSoldier",
+            "positionX": "1600",
+            "positionY": "520",
+            "imageurl": "assets/images/enemy-image.png",
+            "health": "50",
+            "speed": "4"
+        },
+        {
+            "groupName": "spawnSoldier",
+            "positionX": "1800",
+            "positionY": "520",
+            "imageurl": "assets/images/enemy-image.png",
+            "health": "800",
+            "speed": "4"
+        },
+        {
+            "groupName": "spawnSoldier",
+            "positionX": "2000",
+            "positionY": "520",
+            "imageurl": "assets/images/enemy-image.png",
+            "health": "50",
+            "speed": "4"
+        }
+    ]
+}
