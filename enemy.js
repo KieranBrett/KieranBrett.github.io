@@ -1,16 +1,24 @@
+const SHOOTINGTIMER = 20;
+
 class Enemy {
-    constructor(x, y, imgUrl, health, speed) {
+
+    constructor(x, y, imgUrl, health, speed, fireRate) {
         this.x = x;
         this.y = y;
         this.relX;
-        this.relY;
         this.picture = loadImage(imgUrl);
         this.health = health;
         this.startHealth = health;
         this.speed = speed;
-        this.direction = -1;
+        this.direction = 1;
         this.healthBarCount = 0;
         this.damaged = false;
+        this.enemyGun = new Gun(true, this.x, this.y)
+
+        this.fireRate = fireRate;
+        this.gunTickCount = 0;
+        this.shooting = false;
+        this.shootCount = 0;
     }
 
     UpdateEnemy() {
@@ -25,8 +33,56 @@ class Enemy {
                 this.healthBarCount = 0;
             }
         }
-
         image(this.picture, this.relX, this.y)
+
+        this.enemyGun.update(parseInt(this.relX), parseInt(this.y));
+        this.lookForPlayer();
+        
+        if (this.shooting){
+            this.gunTickCount++;
+            if (this.gunTickCount >= this.fireRate){
+                this.enemyGun.shoot();
+                this.gunTickCount = 0;
+            }
+        }
+    }
+
+    lookForPlayer(){
+        if (this.shooting){
+            this.shootCount++;
+
+            if (this.shootCount > SHOOTINGTIMER){
+                this.shooting = false;
+                this.shootCount = 0;
+            }
+        }
+
+        this.shooting = this.canISeeHim();
+    }
+
+    canISeeHim(){
+        let canI = true;
+
+
+        if (this.direction === -1){
+            if (playerX < this.relX){
+                canI = true;
+            }
+            else{
+                canI = false;
+            }
+        }
+        else{
+            if (playerX > this.relX){
+                canI = true;
+            }
+            else{
+                canI = false;
+            }
+        }
+
+
+        return canI;
     }
 
     move(){
@@ -40,15 +96,19 @@ class Enemy {
 
         for (var i = 0; i < squares.length; i++){
             if (parseInt(this.x) + this.picture.width >= squares[i].x &&
-            this.x <= parseInt(squares[i].x) + squares[i].picture.width){
-                
+            this.x <= parseInt(squares[i].x) + squares[i].picture.width &&
+            this.y < parseInt(squares[i].y) + squares[i].picture.height &&
+            this.y + this.picture.height > parseInt(squares[i].y)){
+
                 if (parseInt(this.x) <= parseInt(squares[i].x) + squares[i].picture.width && parseInt(this.x) + this.picture.width >= parseInt(squares[i].x) + squares[i].picture.width){
                     this.x = parseInt(squares[i].x) + squares[i].picture.width
                     this.direction *= -1;
+                    this.enemyGun.direction = 1;
                 }
                 else{
                     this.x = parseInt(squares[i].x) - this.picture.width
                     this.direction *= -1;
+                    this.enemyGun.direction = 0;
                 }
 
                 break;

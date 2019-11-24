@@ -110,4 +110,12 @@ function movementUpdate() {
     // Draw Player
     fill(200, 20, 20);
     image(playerPic, playerX, playerY);
+
+    // Draw Hud
+    image(playerHud, 1060, -20);
+
+    // Health
+    rect(1130, 111, 200, 10);
+    fill(20, 200, 20);
+    rect(1130, 111, playerHealth, 10);
   }

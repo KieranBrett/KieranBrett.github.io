@@ -1,34 +1,47 @@
 class Gun {
-    constructor() {
+    constructor(enemy, playerX, playerY) {
       this.bullets = [];
       this.gunRight = loadImage("assets/images/gun-rifle-right.png");
       this.gunRightFlash = loadImage("assets/images/gun-rifle-right-flash.png");
   
       this.gunLeft = loadImage("assets/images/gun-rifle-left.png");
       this.gunLeftFlash = loadImage("assets/images/gun-rifle-left-flash.png");
+      this.gunY = playerX;
+      this.gunX = playerY;
+
+      this.enemyGun = enemy;
+      this.direction = 1;
+      this.shooting;
     }
   
     shoot() {
-      if (direction == 1) {
+      this.shooting = true;
+      if (this.direction == 1) {
         this.bullets.push(
           new Bullet(
-            playerX + PLAYERWIDTH / 2 + this.gunRight.width + 24,
-            playerY + (GUNPOS + 13) + random(-BULLETSPREAD, BULLETSPREAD),
-            direction
+            this.gunX + PLAYERWIDTH / 2 + this.gunRight.width + 24,
+            this.gunY + (GUNPOS + 13) + random(-BULLETSPREAD, BULLETSPREAD),
+            this.direction
           )
         );
       } else {
         this.bullets.push(
           new Bullet(
-            playerX + PLAYERWIDTH / 2 - this.gunLeft.width - 24,
-            playerY + (GUNPOS + 13) + random(-BULLETSPREAD, BULLETSPREAD),
-            direction
+            this.gunX + PLAYERWIDTH / 2 - this.gunLeft.width - 24,
+            this.gunY + (GUNPOS + 13) + random(-BULLETSPREAD, BULLETSPREAD),
+            this.direction
           )
         );
       }
     }
   
-    update() {
+    update(x, y) {
+
+      
+
+      this.gunX = x;
+      this.gunY = y;
+
       for (var i = 0; i < this.bullets.length; i++) {
         this.bullets[i].update();
   
@@ -51,7 +64,7 @@ class Gun {
               ) {
                 this.bullets.splice(i, 1);
   
-                if (squares[s].breakable) {
+                if (squares[s].breakable && !this.enemyGun) {
                   squares[s].health -= BULLETDMG;
                   
                   if (squares[s].health <= 0) {
@@ -67,58 +80,72 @@ class Gun {
             }
           } // Massive for loop checking each square
 
-          for (var e = 0; e < enemies.length; e++){
-            if (
-              this.bullets[i].posX + BULLETWIDTH >= enemies[e].relX && this.bullets[i].posX <= enemies[e].relX + enemies[e].picture.width
-            ) {
-
+          if (!this.enemyGun){ // Checking enemy hit
+            for (var e = 0; e < enemies.length; e++){
               if (
-                this.bullets[i].posY >= enemies[e].y &&this.bullets[i].posY <= parseInt(enemies[e].y) + enemies[e].picture.height
+                this.bullets[i].posX + BULLETWIDTH >= enemies[e].relX && this.bullets[i].posX <= enemies[e].relX + enemies[e].picture.width
               ) {
-                enemies[e].health -= BULLETDMG;
-                this.bullets.splice(i, 1);
-
-                if (enemies[e].health <= 0){
-                  enemies.splice(e, 1);
+  
+                if (
+                  this.bullets[i].posY + BULLETHEIGHT >= enemies[e].y &&this.bullets[i].posY <= parseInt(enemies[e].y) + enemies[e].picture.height
+                ) {
+                  enemies[e].health -= BULLETDMG;
+                  this.bullets.splice(i, 1);
+  
+                  if (enemies[e].health <= 0){
+                    enemies.splice(e, 1);
+                  }
+                  else{
+                    enemies[e].healthBarCount = 0;
+                    enemies[e].damaged = true;
+                  }
+  
+                  return;
                 }
-                else{
-                  enemies[e].healthBarCount = 0;
-                  enemies[e].damaged = true;
-                }
-
-                return;
               }
             }
           }
+          else{ // checking player hit
+            if (this.bullets[i].posY + BULLETHEIGHT > playerY && this.bullets[i].posY <= playerY + PLAYERHEIGHT){
+              if (this.bullets[i].posX + BULLETWIDTH >= playerX && this.bullets[i].posX <= playerX + PLAYERWIDTH){
+                playerHealth -= (BULLETDMG / 2);
+                this.bullets.splice(i, 1);
 
-
+                if (playerHealth < 0){
+                  gameOver = true;
+                }
+              }
+            }
+          }
         }
       }
   
-      if (direction == 1) {
-        image(this.gunRight, playerX + PLAYERWIDTH / 2, playerY + GUNPOS);
-        if (shooting) {
+      if (this.direction == 1) {
+        image(this.gunRight, this.gunX + PLAYERWIDTH / 2, this.gunY + GUNPOS);
+        if (this.shooting) {
           image(
             this.gunRightFlash,
-            playerX + (PLAYERWIDTH / 2 + this.gunRight.width),
-            playerY + (GUNPOS + 5)
+            this.gunX + (PLAYERWIDTH / 2 + this.gunRight.width),
+            this.gunY + (GUNPOS + 5)
           );
         }
       } else {
         image(
           this.gunLeft,
-          playerX + PLAYERWIDTH / 2 - this.gunLeft.width,
-          playerY + GUNPOS
+          this.gunX + PLAYERWIDTH / 2 - this.gunLeft.width,
+          this.gunY + GUNPOS
         );
-        if (shooting) {
+        if (this.shooting) {
           image(
             this.gunLeftFlash,
-            playerX +
+            this.gunX +
               (PLAYERWIDTH / 2 - this.gunLeft.width - this.gunLeftFlash.width),
-            playerY + (GUNPOS + 5)
+            this.gunY + (GUNPOS + 5)
           );
         }
       }
+
+      this.shooting = false;
     }
   }
 

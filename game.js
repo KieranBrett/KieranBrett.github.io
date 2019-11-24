@@ -1,6 +1,7 @@
 const DOUBLEJUMP = true;
 const WIDTH = 1600;
 const HEIGHT = 800;
+const RAYSTEP = 20;
 
 // SCENERY CONSTANT
 const GRASSPOS = 720;
@@ -46,6 +47,7 @@ const BULLETDMG = 20;
 let gunTickCount;
 
 // Player fields
+let playerHealth;
 let playerX;
 let playerY;
 let moving;
@@ -56,6 +58,7 @@ let yVelocity;
 let direction; // 0 = left, 1 = right;
 let gun;
 let playerPic;
+let playerHud;
 let effectiveStep;
 let sprinting;
 
@@ -73,9 +76,27 @@ const HEALTHBARTIME = 200;
 let frameRateTotal;
 let frameRateCount;
 
+let gameOver;
+let overScreen;
+let overCount;
+let imageOpacity;
+
 // LOADING OBJECTS
 
-fetch("levels/level1/level1-objects.json")
+function setup() {
+  canvas = createCanvas(WIDTH, HEIGHT);
+
+  gameOver = false;
+  squares = [];
+  scenery = [];
+  enemies = [];
+
+  overScreen = loadImage("assets/images/gameOver.png");
+  overDisplayed = false;
+  imageOpacity = 0;
+  overCount = 0;
+
+  fetch("levels/level1/level1-objects.json")
   .then(response => response.json())
   .then(data => {
     let objects = data;
@@ -127,7 +148,8 @@ fetch("levels/level1/level1-enemies.json")
           objects.enemies[i].positionY,
           objects.enemies[i].imageurl,
           objects.enemies[i].health,
-          objects.enemies[i].speed
+          objects.enemies[i].speed,
+          objects.enemies[i].fireRate
         )
       );
     }
@@ -135,10 +157,8 @@ fetch("levels/level1/level1-enemies.json")
     console.log(enemies);
   });
 
-function setup() {
-  canvas = createCanvas(WIDTH, HEIGHT);
-
   playerPic = loadImage("assets/images/player-image.png");
+  playerHud = loadImage("assets/images/hud.png");
   backgroundPic = loadImage("assets/images/background-stars.png");
   backgroundx = 0;
   backGrass = loadImage("assets/images/background-grass.png");
@@ -147,6 +167,7 @@ function setup() {
   foregroundGrassx = 0;
   foregroundHud = loadImage("assets/images/hud.png");
 
+  playerHealth = 200;
   playerX = 300;
   playerY = 700;
   moving = false;
@@ -155,7 +176,7 @@ function setup() {
   doubleJumped = false;
   yVelocity = 0;
   direction = 1;
-  gun = new Gun();
+  gun = new Gun(false, playerX, playerY);
   sprinting = false;
 
   gunTickCount = 0;
@@ -170,14 +191,32 @@ function setup() {
 
 // Main method
 function draw() {
-  clear();
+  if (playerHealth > 0){
+    clear();
 
   drawBackground();
+  
   drawObjects();
   updatePlayer();
   drawForeground();
 
-  gun.update();
+  gun.update(playerX, playerY);
+  }
+  else{
+    endGameFade();
+  }
+  
+}
+
+function endGameFade(){
+  overCount++;
+  if (overCount > 20){
+    overCount = 0;
+    imageOpacity++;
+  }
+
+  tint(255, imageOpacity);
+  image(overScreen, 0, 0);
 }
 
 // Event Methods
@@ -185,10 +224,12 @@ function keyPressed() {
   if (keyCode == LEFT_ARROW) {
     moving = true;
     direction = 0;
+    gun.direction = 0;
   }
   if (keyCode == RIGHT_ARROW) {
     moving = true;
     direction = 1;
+    gun.direction = 1;
   }
   if (keyCode == UP_ARROW) {
     if (!jumping) {

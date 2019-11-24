@@ -19,39 +19,18 @@
 
         {
             "groupName": "firstGroup",
-            "breakable": true,
-            "traversable": false,
-            "positionX": "600",
-            "positionY": "450",
-            "imageurl": "assets/images/object-crate-large-cracked.png",
-            "health": "500"
-        },
-        {
-            "groupName": "firstGroup",
-            "breakable": true,
-            "traversable": false,
+            "breakable": false,
             "positionX": "450",
             "positionY": "600",
-            "imageurl": "assets/images/object-crate-small-cracked-alt.png",
+            "imageurl": "assets/images/object-crate-small-alt.png",
             "health": "500"
         },
 
 
-
-
-        {
-            "groupName": "secondGroup",
-            "breakable": false,
-            "positionX": "3100",
-            "positionY": "300",
-            "imageurl": "assets/images/object-crate-small-alt.png",
-            "health": "100"
-        },
         {
             "groupName": "secondGroup",
             "breakable": true,
-            "traversable": false,
-            "positionX": "3100",
+            "positionX": "1500",
             "positionY": "450",
             "imageurl": "assets/images/object-crate-large-cracked-alt.png",
             "health": "100"
@@ -59,81 +38,125 @@
         {
             "groupName": "secondGroup",
             "breakable": false,
-            "positionX": "3400",
+            "positionX": "1350",
             "positionY": "600",
-            "imageurl": "assets/images/object-crate-small-alt.png",
+            "imageurl": "assets/images/object-crate-small.png",
             "health": "100"
         },
+
         {
-            "groupName": "secondGroup",
+            "groupName": "secondGroupRoof",
             "breakable": false,
-            "positionX": "3400",
-            "positionY": "450",
+            "positionX": "1798",
+            "positionY": "305",
             "imageurl": "assets/images/object-crate-small.png",
             "health": "100"
         },
         {
-            "groupName": "endBlock",
+            "groupName": "secondGroupRoof",
             "breakable": false,
-            "positionX": "4500",
-            "positionY": "600",
-            "imageurl": "assets/images/object-crate-small-alt.png",
-            "health": "100"
-        },
-        {
-            "groupName": "endBlock",
-            "breakable": false,
-            "positionX": "4650",
-            "positionY": "450",
-            "imageurl": "assets/images/object-crate-large.png",
-            "health": "100"
-        },
-        {
-            "groupName": "endBlock",
-            "breakable": false,
-            "positionX": "4800",
-            "positionY": "300",
-            "imageurl": "assets/images/object-crate-small-alt.png",
-            "health": "100"
-        },
-        {
-            "groupName": "endBlock",
-            "breakable": false,
-            "positionX": "5100",
-            "positionY": "300",
+            "positionX": "1948",
+            "positionY": "305",
             "imageurl": "assets/images/object-crate-small.png",
             "health": "100"
         },
         {
-            "groupName": "endBlock",
+            "groupName": "secondGroupRoof",
             "breakable": false,
-            "positionX": "5100",
-            "positionY": "150",
+            "positionX": "2098",
+            "positionY": "305",
             "imageurl": "assets/images/object-crate-small-alt.png",
             "health": "100"
         },
         {
-            "groupName": "endBlock",
+            "groupName": "secondGroupRoof",
             "breakable": false,
-            "positionX": "5100",
-            "positionY": "0",
+            "positionX": "2548",
+            "positionY": "305",
             "imageurl": "assets/images/object-crate-small-alt.png",
             "health": "100"
         },
         {
-            "groupName": "endBlock",
+            "groupName": "secondGroupRoof",
             "breakable": false,
-            "positionX": "5100",
-            "positionY": "-150",
+            "positionX": "2698",
+            "positionY": "305",
             "imageurl": "assets/images/object-crate-small-alt.png",
             "health": "100"
         },
         {
-            "groupName": "endBlock",
+            "groupName": "secondGroupRoof",
+            "breakable": false,
+            "positionX": "2848",
+            "positionY": "305",
+            "imageurl": "assets/images/object-crate-small-alt.png",
+            "health": "100"
+        },
+        {
+            "groupName": "secondGroupRoofBlock",
+            "breakable": false,
+            "positionX": "2990",
+            "positionY": "-350",
+            "imageurl": "assets/images/brick-light-full.png",
+            "health": "100"
+        },
+
+
+        {
+            "groupName": "thirdBlock",
+            "breakable": false,
+            "positionX": "3900",
+            "positionY": "350",
+            "imageurl": "assets/images/brick-light-full.png",
+            "health": "100"
+        },
+        {
+            "groupName": "thirdBlock",
+            "breakable": false,
+            "positionX": "4100",
+            "positionY": "500",
+            "imageurl": "assets/images/object-crate-large-alt.png",
+            "health": "100"
+        },
+
+        {
+            "groupName": "fourthBlock",
+            "breakable": false,
+            "positionX": "5300",
+            "positionY": "350",
+            "imageurl": "assets/images/brick-light-full.png",
+            "health": "100"
+        },
+        {
+            "groupName": "fourthBlock",
+            "breakable": false,
+            "positionX": "5300",
+            "positionY": "200",
+            "imageurl": "assets/images/object-crate-small.png",
+            "health": "100"
+        },
+        {
+            "groupName": "fourthBlock",
             "breakable": true,
-            "positionX": "5100",
-            "positionY": "450",
+            "positionX": "5000",
+            "positionY": "300",
             "imageurl": "assets/images/object-crate-large-cracked-alt.png",
+            "health": "50"
+        },
+        {
+            "groupName": "fourthBlock",
+            "breakable": false,
+            "positionX": "5000",
+            "positionY": "600",
+            "imageurl": "assets/images/object-crate-small-alt.png",
+            "health": "100"
+        },
+        {
+            "groupName": "fourthBlock",
+            "breakable": false,
+            "positionX": "5150",
+            "positionY": "600",
+            "imageurl": "assets/images/object-crate-small.png",
             "health": "100"
         }
     ]
