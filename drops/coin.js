@@ -5,6 +5,7 @@ class Coin {
         this.coin = loadImage("./drops/coin.png");
         this.medipack = loadImage("./drops/medipack.png");
         this.relX = posX;
+        this.relY = posY;
         this.posX = posX;
         this.posY = posY;
         this.value = value;
@@ -21,11 +22,11 @@ class Coin {
     Update(){
         switch(this.type){
             case 0:{
-                image(this.coin, this.relX, parseInt(this.posY) + this.yBob)
+                image(this.coin, this.relX, parseInt(this.relY) + this.yBob)
                 break;
             }
             case 1:{
-                image(this.medipack, this.relX, parseInt(this.posY) + this.yBob)
+                image(this.medipack, this.relX, parseInt(this.relY) + this.yBob)
                 break;
             }
         }

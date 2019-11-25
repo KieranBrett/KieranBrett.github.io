@@ -98,13 +98,13 @@ class Gun {
               ) {
   
                 if (
-                  this.bullets[i].posY + BULLETHEIGHT >= enemies[e].y &&this.bullets[i].posY <= parseInt(enemies[e].y) + enemies[e].picture.height
+                  this.bullets[i].posY + BULLETHEIGHT >= enemies[e].relY &&this.bullets[i].posY <= parseInt(enemies[e].relY) + enemies[e].picture.height
                 ) {
                   enemies[e].health -= BULLETDMG;
                   this.bullets.splice(i, 1);
   
                   if (enemies[e].health <= 0){ // if enemy is dead
-                    drops.drop(parseInt(enemies[e].x), enemies[e].y, COINVALUE, enemies[e].picture.height, enemies[e].picture.width);
+                    drops.drop(parseInt(enemies[e].relX), enemies[e].y, COINVALUE, enemies[e].picture.height, enemies[e].picture.width);
                     enemies.splice(e, 1);
                   }
                   else{

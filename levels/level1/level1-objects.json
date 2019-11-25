@@ -104,6 +104,14 @@
         {
             "groupName": "parkour",
             "breakable": false,
+            "positionX": "2848",
+            "positionY": "95",
+            "imageurl": "assets/images/object-crate-small-alt.png",
+            "health": "100"
+        },
+        {
+            "groupName": "parkour",
+            "breakable": false,
             "positionX": "2990",
             "positionY": "-750",
             "imageurl": "assets/images/object-crate-small.png",

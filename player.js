@@ -4,8 +4,8 @@ const SPRINTMULTIPLIER = 1.5;
 const VELMAX = -30;
 
 
-const JUMPFORCE = 40;
-const GRAVITYFORCE = -4;
+const JUMPFORCE = 29;
+const GRAVITYFORCE = -2;
 const PLAYERHEIGHT = 200;
 const PLAYERWIDTH = 100;
 const FRAMEXMOVESIZE = 550;
@@ -57,18 +57,18 @@ movementUpdate() {
     }
   
     for (var i = 0; i < squares.length; i++) {
-      if (
+      if ( // if inside of a box
         this.playerY + PLAYERHEIGHT >= squares[i].relY &&
         this.playerX + PLAYERWIDTH >= squares[i].relX &&
         this.playerX <= squares[i].relX + squares[i].picture.width &&
         this.playerY <= parseInt(squares[i].relY) + squares[i].picture.height
       ) {
+
         if (
           this.playerY + PLAYERHEIGHT >=
             parseInt(squares[i].relY) + squares[i].picture.height &&
             this.jumping == true
-        ) {
-          console.log("under");
+        ) { // if under the box
           this.yVelocity = 0;
           this.playerY = parseInt(squares[i].relY) + squares[i].picture.height + 1;
         } else {
@@ -89,18 +89,21 @@ movementUpdate() {
     }
 
     // DO Y SCROLLING
+    // If player is inside of a box, they cant move
 
     if (this.playerY < 0 + FRAMEYMOVESIZE){
       worldY -= this.yVelocity;
       this.playerY = 0 + FRAMEYMOVESIZE;
     }
-    else if (this.playerY + PLAYERHEIGHT > 0 - FRAMEYMOVESIZE){
+    else if (parseInt(this.playerY) + PLAYERHEIGHT > 800 - FRAMEYMOVESIZE){
       if (worldY >= 0){
         worldY = 0;
       }
       else{
         worldY -= this.yVelocity;
+        this.playerY = 800 - PLAYERHEIGHT - FRAMEYMOVESIZE;
       }
+      
     }
 
   }
