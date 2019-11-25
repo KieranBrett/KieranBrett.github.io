@@ -51,9 +51,12 @@ let overScreen;
 let overCount;
 let imageOpacity;
 
+let loaded;
+
 // LOADING OBJECTS
 
 function setup() {
+  loaded = false;
   canvas = createCanvas(WIDTH, HEIGHT);
 
   player = new Player(STARTX, STARTY, 200);
@@ -139,6 +142,8 @@ fetch("levels/level1/level1-enemies.json")
   foregroundGrassx = 0;
   foregroundHud = loadImage("assets/images/hud.png");
 
+  // drawBackground();
+
   gunTickCount = 0;
   worldX = 0;
   worldY = 0;
@@ -152,21 +157,22 @@ fetch("levels/level1/level1-enemies.json")
 
 // Main method
 function draw() {
-  if (player.playerHealth > 0){
-    clear();
-
-  drawBackground();
+  if (loaded){
+    if (player.playerHealth > 0){
+      clear();
   
-  drawObjects();
-  drops.updateDrops();
-  player.updatePlayer();
-  drawForeground();
-
-  }
-  else{
-    endGameFade();
-  }
+    drawBackground();
+    
+    drawObjects();
+    drops.updateDrops();
+    player.updatePlayer();
+    drawForeground();
   
+    }
+    else{
+      endGameFade();
+    }
+  }
 }
 
 function endGameFade(){
@@ -269,4 +275,6 @@ function drawObjects() {
 }
 
 
-
+window.addEventListener('load', function() {
+  loaded = true;
+})
