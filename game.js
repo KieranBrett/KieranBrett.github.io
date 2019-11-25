@@ -1,3 +1,7 @@
+const LEVELCOUNT = 2;
+
+
+
 const DOUBLEJUMP = true;
 //FrameSize
 const WIDTH = 1600;
@@ -8,6 +12,7 @@ const STARTY = 500;
 // HealthBars
 const HEALTHBARHEIGHT = 10;
 const HEALTHBARTIME = 200;
+const NEXTLEVELLOADTIME = 200;
 
 // Images Multipliers
 const BACKMULTI = 0.75; 
@@ -51,6 +56,10 @@ let overScreen;
 let overCount;
 let imageOpacity;
 
+let nextLevel = false;
+let nextLevelPic;
+let nextLevelCount = 0;
+
 let paused;
 let pauseScreen;
 let started;
@@ -65,18 +74,19 @@ function setup() {
 
   player = new Player(STARTX, STARTY, 200);
 
+  nextLevelPic = loadImage("assets/images/nextlevel.png");
   paused = false;
   pauseScreen = loadImage("assets/images/pauseScreen.png")
   started = false;
   startScreen = loadImage("assets/images/startScreen.png")
   gameOver = false;
+  gameOverScreen = loadImage("assets/images/AllLevelsForNow.png")
 
   squares = [];
   scenery = [];
   enemies = [];
 
   overScreen = loadImage("assets/images/gameOver.png");
-  overDisplayed = false;
   imageOpacity = 0;
   overCount = 0;
 
@@ -105,37 +115,98 @@ function setup() {
   noStroke();
 }
 
+
+
+
+
+
+
 // Main method
 function draw() {
-  if (started){
-    if (!paused){
-      if (player.playerHealth > 0){
-        clear();
-    
-      drawBackground();
-      
-      drawObjects();
-      drops.updateDrops();
-      player.updatePlayer();
-      drawForeground();
-    
+  if (!gameOver){
+    if (!nextLevel){
+      if (started){
+        if (!paused){
+          if (player.playerHealth > 0){
+            clear();
+        
+            drawBackground();
+          
+            drawObjects();
+            drops.updateDrops();
+            player.updatePlayer();
+            drawForeground();
+        
+            }
+            else{ // If game is over
+              endGameFade();
+          }
+        }
+        else{ // if game is paused
+          image(pauseScreen, 0, 0);
+        }
       }
-      else{ // If game is over
-        endGameFade();
+      else{ // if game hasnt started
+        mainMenu();
       }
     }
-    else{ // if game is paused
-      image(pauseScreen, 0, 0);
+    else{ // If next level is being loaded
+      loadNextLevel();
     }
   }
-  else{ // if game hasnt started
-    mainMenu();
+  else{ // If the have passed all levels
+    image(gameOverScreen, 0, 0);
+  }
+  
+}
+
+
+
+
+
+
+function loadNextLevel() {
+  nextLevelCount++;
+  image(nextLevelPic, 0, 0);
+
+  // Load screen
+  fill(255,255,255);
+  textSize(80);
+  text(`Level ${level}`, 700, 550)
+
+  if (nextLevelCount > NEXTLEVELLOADTIME){
+    textSize(30);
+    nextLevelCount = 0;
+    nextLevel = false;
+  }
+  else{
+    if (nextLevelCount === 1){
+      level++;
+      setup();
+    }
   }
 }
 
-function mainMenu(){
+
+
+
+
+
+
+
+
+function mainMenu(){ // MAIN MENU METHOD TO BE PUT HERE
   image(startScreen, 0, 0)
 }
+
+
+
+
+
+
+
+
+
 
 function endGameFade(){
   overCount++;
@@ -231,6 +302,20 @@ function drawObjects() {
       scenery[i].DrawScenery();
   }
 
+  if (player.playerX > scenery[scenery.length - 1].relX && parseInt(player.playerX) + playerPic.width < parseInt(scenery[scenery.length - 1].relX) + scenery[scenery.length - 1].picture.width){
+    if (parseInt(player.playerY) + playerPic.height > scenery[scenery.length - 1].relY){
+      if (level >= LEVELCOUNT){
+        gameOver = true;
+        console.log(level);
+      }
+      else{
+        nextLevel = true;
+      }
+      }
+  }
+
+
+
   for (var i = 0; i < squares.length; i++){
     if (
       parseInt(squares[i].x) + squares[i].picture.width >= worldX &&
@@ -248,8 +333,3 @@ function drawObjects() {
       enemies[i].UpdateEnemy();
   }
 }
-
-
-window.addEventListener('load', function() {
-  loaded = true;
-})

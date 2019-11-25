@@ -55,6 +55,8 @@ class Gun {
 
       for (var i = 0; i < this.bullets.length; i++) {
         this.bullets[i].update();
+
+        
   
         if (
           this.bullets[i].posX > WIDTH ||
