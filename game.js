@@ -56,6 +56,7 @@ let overScreen;
 let overCount;
 let imageOpacity;
 
+let setupBefore = false;
 let nextLevel = false;
 let nextLevelPic;
 let nextLevelCount = 0;
@@ -74,13 +75,19 @@ function setup() {
 
   player = new Player(STARTX, STARTY, 200);
 
-  nextLevelPic = loadImage("assets/images/nextlevel.png");
+  if (!setupBefore){
+    nextLevelPic = loadImage("assets/images/nextlevel.png");
+    setupBefore = true;
+  }
+  
   paused = false;
   pauseScreen = loadImage("assets/images/pauseScreen.png")
   started = false;
   startScreen = loadImage("assets/images/startScreen.png")
   gameOver = false;
   gameOverScreen = loadImage("assets/images/AllLevelsForNow.png")
+
+  
 
   squares = [];
   scenery = [];
