@@ -51,7 +51,11 @@ let overScreen;
 let overCount;
 let imageOpacity;
 
-let loaded;
+let paused;
+let pauseScreen;
+let started;
+let startScreen;
+let level = 1;
 
 // LOADING OBJECTS
 
@@ -61,7 +65,12 @@ function setup() {
 
   player = new Player(STARTX, STARTY, 200);
 
+  paused = false;
+  pauseScreen = loadImage("assets/images/pauseScreen.png")
+  started = false;
+  startScreen = loadImage("assets/images/startScreen.png")
   gameOver = false;
+
   squares = [];
   scenery = [];
   enemies = [];
@@ -71,66 +80,7 @@ function setup() {
   imageOpacity = 0;
   overCount = 0;
 
-  fetch("levels/level1/level1-objects.json")
-  .then(response => response.json())
-  .then(data => {
-    let objects = data;
-
-    for (var i = 0; i < objects.boxes.length; i++) {
-      squares.push(
-        new Barriers(
-          objects.boxes[i].positionX,
-          objects.boxes[i].positionY,
-          objects.boxes[i].imageurl,
-          objects.boxes[i].breakable,
-          objects.boxes[i].health
-        )
-      );
-    }
-
-    console.log(squares);
-  });
-
-fetch("levels/level1/level1-scenery.json")
-  .then(response => response.json())
-  .then(data => {
-    let objects = data;
-    console.log(objects.scenery.length);
-
-    for (var i = 0; i < objects.scenery.length; i++) {
-      scenery.push(
-        new Scenery(
-          objects.scenery[i].positionX,
-          objects.scenery[i].positionY,
-          objects.scenery[i].imageurl,
-        )
-      );
-    }
-
-    console.log(scenery);
-  });
-
-fetch("levels/level1/level1-enemies.json")
-  .then(response => response.json())
-  .then(data => {
-    let objects = data;
-    console.log(objects.enemies.length);
-
-    for (var i = 0; i < objects.enemies.length; i++) {
-      enemies .push(
-        new Enemy(
-          objects.enemies[i].positionX,
-          objects.enemies[i].positionY,
-          objects.enemies[i].imageurl,
-          objects.enemies[i].health,
-          objects.enemies[i].speed,
-          objects.enemies[i].fireRate
-        )
-      );
-    }
-
-    console.log(enemies);
-  });
+  loadLevel(level);
 
   playerPic = loadImage("assets/images/player-image.png");
   playerHud = loadImage("assets/images/hud.png");
@@ -157,29 +107,41 @@ fetch("levels/level1/level1-enemies.json")
 
 // Main method
 function draw() {
-  if (loaded){
-    if (player.playerHealth > 0){
-      clear();
-  
-    drawBackground();
+  if (started){
+    if (!paused){
+      if (player.playerHealth > 0){
+        clear();
     
-    drawObjects();
-    drops.updateDrops();
-    player.updatePlayer();
-    drawForeground();
-  
+      drawBackground();
+      
+      drawObjects();
+      drops.updateDrops();
+      player.updatePlayer();
+      drawForeground();
+    
+      }
+      else{ // If game is over
+        endGameFade();
+      }
     }
-    else{
-      endGameFade();
+    else{ // if game is paused
+      image(pauseScreen, 0, 0);
     }
   }
+  else{ // if game hasnt started
+    mainMenu();
+  }
+}
+
+function mainMenu(){
+  image(startScreen, 0, 0)
 }
 
 function endGameFade(){
   overCount++;
   if (overCount > 20){
     overCount = 0;
-    imageOpacity++;
+    imageOpacity += 20;
   }
 
   tint(255, imageOpacity);
@@ -189,35 +151,48 @@ function endGameFade(){
 // Event Methods
 function keyPressed() {
 
-  if (keyCode == LEFT_ARROW) {
-    player.moving = true;
-    player.direction = 0;
-    player.gun.direction = 0;
-  }
-  if (keyCode == RIGHT_ARROW) {
-    player.moving = true;
-    player.direction = 1;
-    player.gun.direction = 1;
-  }
-  if (keyCode == UP_ARROW) {
-    if (!player.jumping) {
-      player.yVelocity = JUMPFORCE;
-      player.jumping = true;
-    } else {
-      if (DOUBLEJUMP && !player.doubleJumped) {
-        player.yVelocity = JUMPFORCE;
-        player.doubleJumped = true;
+  if (started){
+      if (keyCode == LEFT_ARROW) {
+        player.moving = true;
+        player.direction = 0;
+        player.gun.direction = 0;
       }
+      if (keyCode == RIGHT_ARROW) {
+        player.moving = true;
+        player.direction = 1;
+        player.gun.direction = 1;
+      }
+      if (keyCode == UP_ARROW) {
+        if (!player.jumping) {
+          player.yVelocity = JUMPFORCE;
+          player.jumping = true;
+        } else {
+          if (DOUBLEJUMP && !player.doubleJumped) {
+            player.yVelocity = JUMPFORCE;
+            player.doubleJumped = true;
+          }
+        }
+        jumping = true;
+      }
+      if (keyCode == 32) {
+        player.shooting = true;
+        gunTickCount = FIRERATE;
+      }
+      if (keyCode == 16){
+        player.sprinting = true;
+      }
+
+    if (keyCode == 27){
+      paused = !paused;
     }
-    jumping = true;
   }
-  if (keyCode == 32) {
-    player.shooting = true;
-    gunTickCount = FIRERATE;
+  else{
+    if (keyCode == 13){
+      started = true;
+    }
   }
-  if (keyCode == 16){
-    player.sprinting = true;
-  }
+
+  
 }
 
 function keyReleased() {
