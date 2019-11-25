@@ -56,7 +56,6 @@ let overScreen;
 let overCount;
 let imageOpacity;
 
-let setupBefore = false;
 let nextLevel = false;
 let nextLevelPic;
 let nextLevelCount = 0;
@@ -75,10 +74,7 @@ function setup() {
 
   player = new Player(STARTX, STARTY, 200);
 
-  if (!setupBefore){
-    nextLevelPic = loadImage("assets/images/nextlevel.png");
-    setupBefore = true;
-  }
+  nextLevelPic = loadImage("assets/images/loading-next.png");
   
   paused = false;
   pauseScreen = loadImage("assets/images/pauseScreen.png")
