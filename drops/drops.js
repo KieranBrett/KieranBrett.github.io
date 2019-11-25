@@ -37,7 +37,7 @@ class DropController {
             this.drops[d].relY = parseInt(this.drops[d].posY) - worldY;
 
             if (this.drops[d].relX + DROPWIDTH > player.playerX && this.drops[d].relX < player.playerX + DROPWIDTH &&
-                this.drops[d].posY < player.playerY + playerPic.height && this.drops[d].posY + DROPWIDTH > player.playerY){
+                this.drops[d].relY < player.playerY + playerPic.height && this.drops[d].relY + DROPWIDTH > player.playerY){
                     switch(this.drops[d].type){
                         case 0:{
                             player.score += this.drops[d].value;
