@@ -1,13 +1,18 @@
+// SCENERY CONSTANT
+const GRASSPOS = 720;
+const GRASSOFFSET = 80;
+const SHADOWOFFSET = 190;
+
 function drawBackground() {
     // Background that will scroll foreverrrrrrrrr
   
     // BACKGROUND
-    image(backgroundPic, backgroundx, 0);
+    image(backgroundPic, backgroundx, backgroundy);
   
     if (backgroundx <= 0) {
-      image(backgroundPic, backgroundx + backgroundPic.width, 0); // Image width is 1200
+      image(backgroundPic, backgroundx + backgroundPic.width, backgroundy); // Image width is 1200
     } else {
-      image(backgroundPic, backgroundx - backgroundPic.width, 0);
+      image(backgroundPic, backgroundx - backgroundPic.width, backgroundy);
     }
   
     if (backgroundx >= backgroundPic.width) {
@@ -17,12 +22,12 @@ function drawBackground() {
     }
   
     // MIDGROUND
-    image(backGrass, backGrassx, GRASSPOS - SHADOWOFFSET);
+    image(backGrass, backGrassx, backGrassy);
   
     if (backGrassx <= 0) {
-      image(backGrass, backGrassx + backGrass.width, GRASSPOS - SHADOWOFFSET);
+      image(backGrass, backGrassx + backGrass.width, backGrassy);
     } else {
-      image(backGrass, backGrassx - backGrass.width, GRASSPOS - SHADOWOFFSET);
+      image(backGrass, backGrassx - backGrass.width, backGrassy);
     }
   
     if (backGrassx >= backGrass.width) {
@@ -33,22 +38,20 @@ function drawBackground() {
   }
   
   function drawForeground() {
-    fill(30, 129, 30);
-    rect(0, GRASSPOS, 1200, 100);
   
-    image(foregroundGrass, foregroundGrassx, GRASSPOS - GRASSOFFSET);
+    image(foregroundGrass, foregroundGrassx, foregroundGrassy);
   
     if (foregroundGrassx <= 0) {
       image(
         foregroundGrass,
         foregroundGrassx + foregroundGrass.width,
-        GRASSPOS - GRASSOFFSET
+        foregroundGrassy
       );
     } else {
       image(
         foregroundGrass,
         foregroundGrassx - foregroundGrass.width,
-        GRASSPOS - GRASSOFFSET
+        foregroundGrassy
       );
     }
   
@@ -73,4 +76,18 @@ function drawBackground() {
       50,
       100
     );
+  }
+
+
+  class Scenery {
+    constructor(x, y, imageURL){
+      this.x = x;
+      this.y = y;
+      this.relX;
+      this.picture = loadImage(imageURL);
+    }
+  
+    DrawScenery() {
+      image(this.picture, parseInt(this.relX), this.relY);
+    }
   }

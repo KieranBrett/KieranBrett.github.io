@@ -1,77 +1,47 @@
 const DOUBLEJUMP = true;
+//FrameSize
 const WIDTH = 1600;
 const HEIGHT = 800;
-const RAYSTEP = 20;
+// Player Start
+const STARTX = 300;
+const STARTY = 500;
+// HealthBars
+const HEALTHBARHEIGHT = 10;
+const HEALTHBARTIME = 200;
 
-// SCENERY CONSTANT
-const GRASSPOS = 720;
-const GRASSOFFSET = 80;
-const SHADOWOFFSET = 190;
-
-// PLAYER CONSTANTS
-const STEPSIZE = 10;
-const SPRINTMULTIPLIER = 1.5;
-
-
-const JUMPFORCE = 40;
-const GRAVITYFORCE = -4;
-const PLAYERHEIGHT = 200;
-const PLAYERWIDTH = 100;
-const FRAMEMOVESIZE = 550;
-
-// Images
-const BACKMULTI = 0.75;
-let backgroundPic;
+// Images Multipliers
+const BACKMULTI = 0.75; 
+let backgroundPic; // Stars
 let backgroundx;
-
+let backgroundy;
 const MIDMULTI = 0.85;
-let backGrass;
+let backGrass; // Black Shadow
 let backGrassx;
-
+let backGrassy;
 const FOREMULTI = 0.4;
-let foregroundGrass;
+let foregroundGrass; // Grass infront
 let foregroundGrassx;
+let foregroundGrassy;
 
 let foregroundHud;
 const foreGroundHudY = 800;
 
-const GUNPOS = 110;
-
-// BULLET CONSTS
-const BULLETWIDTH = 10;
-const BULLETHEIGHT = 5;
-const BULLETVELOCITY = 15;
-const FIRERATE = 7;
-const BULLETSPREAD = 10;
-const BULLETDMG = 20;
-let gunTickCount;
-
 // Player fields
-let playerHealth;
-let playerX;
-let playerY;
-let moving;
-let jumping;
-let doubleJumped;
-let shooting;
-let yVelocity;
-let direction; // 0 = left, 1 = right;
-let gun;
-let playerPic;
 let playerHud;
-let effectiveStep;
-let sprinting;
+let player;
 
 // Level Objects
 let squares = [];
 let scenery = [];
 let enemies = [];
 
+let drops = new DropController();
+
 // let
 let worldX;
+let worldY;
 
-const HEALTHBARHEIGHT = 10;
-const HEALTHBARTIME = 200;
+
 
 let frameRateTotal;
 let frameRateCount;
@@ -85,6 +55,8 @@ let imageOpacity;
 
 function setup() {
   canvas = createCanvas(WIDTH, HEIGHT);
+
+  player = new Player(STARTX, STARTY, 200);
 
   gameOver = false;
   squares = [];
@@ -167,20 +139,9 @@ fetch("levels/level1/level1-enemies.json")
   foregroundGrassx = 0;
   foregroundHud = loadImage("assets/images/hud.png");
 
-  playerHealth = 200;
-  playerX = 300;
-  playerY = 700;
-  moving = false;
-  jumping = true;
-  shooting = false;
-  doubleJumped = false;
-  yVelocity = 0;
-  direction = 1;
-  gun = new Gun(false, playerX, playerY);
-  sprinting = false;
-
   gunTickCount = 0;
   worldX = 0;
+  worldY = 0;
   frameRateTotal = 0;
   frameRateCount = 0;
 
@@ -191,16 +152,16 @@ fetch("levels/level1/level1-enemies.json")
 
 // Main method
 function draw() {
-  if (playerHealth > 0){
+  if (player.playerHealth > 0){
     clear();
 
   drawBackground();
   
   drawObjects();
-  updatePlayer();
+  drops.updateDrops();
+  player.updatePlayer();
   drawForeground();
 
-  gun.update(playerX, playerY);
   }
   else{
     endGameFade();
@@ -221,53 +182,59 @@ function endGameFade(){
 
 // Event Methods
 function keyPressed() {
+
   if (keyCode == LEFT_ARROW) {
-    moving = true;
-    direction = 0;
-    gun.direction = 0;
+    player.moving = true;
+    player.direction = 0;
+    player.gun.direction = 0;
   }
   if (keyCode == RIGHT_ARROW) {
-    moving = true;
-    direction = 1;
-    gun.direction = 1;
+    player.moving = true;
+    player.direction = 1;
+    player.gun.direction = 1;
   }
   if (keyCode == UP_ARROW) {
-    if (!jumping) {
-      yVelocity = JUMPFORCE;
+    if (!player.jumping) {
+      player.yVelocity = JUMPFORCE;
+      player.jumping = true;
     } else {
-      if (DOUBLEJUMP && !doubleJumped) {
-        yVelocity = JUMPFORCE;
-        doubleJumped = true;
+      if (DOUBLEJUMP && !player.doubleJumped) {
+        player.yVelocity = JUMPFORCE;
+        player.doubleJumped = true;
       }
     }
     jumping = true;
   }
   if (keyCode == 32) {
-    shooting = true;
+    player.shooting = true;
     gunTickCount = FIRERATE;
   }
   if (keyCode == 16){
-    sprinting = true;
+    player.sprinting = true;
   }
 }
 
 function keyReleased() {
-  if (keyCode == LEFT_ARROW || keyCode == RIGHT_ARROW) moving = false;
+
+  if (keyCode == LEFT_ARROW || keyCode == RIGHT_ARROW) player.moving = false;
   else if (keyCode == 32) {
     // Space bar
-    shooting = false;
+    player.shooting = false;
   }
   else if (keyCode == 16){
-    sprinting = false;
+    player.sprinting = false;
   }
 }
 
-// Player Methods
 
 
 // Object Methods
 function drawObjects() {
   fill(color(30, 90, 200));
+
+  backGrassy = parseInt(GRASSPOS) - SHADOWOFFSET - worldY;
+  backgroundy = -1800 - worldY;
+  foregroundGrassy = parseInt(GRASSPOS) - GRASSOFFSET - worldY;
 
   for (var i = 0; i < scenery.length; i++){
     // if (
@@ -279,6 +246,7 @@ function drawObjects() {
     // }
     
     scenery[i].relX = parseInt(scenery[i].x) - worldX;
+    scenery[i].relY = parseInt(scenery[i].y) - worldY;
       scenery[i].DrawScenery();
   }
 
@@ -288,12 +256,14 @@ function drawObjects() {
       squares[i].x <= worldX + WIDTH
     ) {
       squares[i].relX = parseInt(squares[i].x) - worldX;
+      squares[i].relY = parseInt(squares[i].y) - worldY;
       squares[i].Update();
     }
   }
 
   for (var i = 0; i < enemies.length; i++){
       enemies[i].relX = parseInt(enemies[i].x) - worldX;
+      enemies[i].relY = parseInt(enemies[i].y) - worldY;
       enemies[i].UpdateEnemy();
   }
 }

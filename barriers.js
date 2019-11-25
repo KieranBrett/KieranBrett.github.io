@@ -16,7 +16,7 @@ class Barriers {
     }
   
     drawSquare() {
-      image(this.picture, parseInt(this.relX), this.y);
+      image(this.picture, parseInt(this.relX), parseInt(this.relY));
     }
   
     Update(){
@@ -36,30 +36,18 @@ class Barriers {
     drawHealth(){
       fill(0)
       // BLACK BACKGROUND
-      rect((parseInt(this.relX) + (this.picture.width / 2) - (BARLENGTH / 2) - 3),(this.y - 50) - 3, parseInt(BARLENGTH) + 6, HEALTHBARHEIGHT + 6)
+      rect((parseInt(this.relX) + (this.picture.width / 2) - (BARLENGTH / 2) - 3),(this.relY - 50) - 3, parseInt(BARLENGTH) + 6, HEALTHBARHEIGHT + 6)
   
       // RED
 
       let ammount = (this.health / this.startHealth) * BARLENGTH;
 
       fill(200, 20, 20);
-      rect((parseInt(this.relX) + (this.picture.width / 2) - (BARLENGTH / 2)),(this.y - 50), BARLENGTH, HEALTHBARHEIGHT)
+      rect((parseInt(this.relX) + (this.picture.width / 2) - (BARLENGTH / 2)),(this.relY - 50), BARLENGTH, HEALTHBARHEIGHT)
   
       // GREEN
       fill (20, 200, 20)
-      rect((parseInt(this.relX) + (this.picture.width / 2) - (BARLENGTH / 2)),(this.y - 50), ammount, HEALTHBARHEIGHT)
+      rect((parseInt(this.relX) + (this.picture.width / 2) - (BARLENGTH / 2)),(this.relY - 50), ammount, HEALTHBARHEIGHT)
     }
   }
 
-class Scenery {
-  constructor(x, y, imageURL){
-    this.x = x;
-    this.y = y;
-    this.relX;
-    this.picture = loadImage(imageURL);
-  }
-
-  DrawScenery() {
-    image(this.picture, parseInt(this.relX), this.y);
-  }
-}

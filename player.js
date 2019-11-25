@@ -1,105 +1,167 @@
-function movementUpdate() {
-    if (sprinting === true){
-      effectiveStep = STEPSIZE * SPRINTMULTIPLIER;
+// PLAYER CONSTANTS
+const STEPSIZE = 10;
+const SPRINTMULTIPLIER = 1.5;
+const VELMAX = -30;
+
+
+const JUMPFORCE = 40;
+const GRAVITYFORCE = -4;
+const PLAYERHEIGHT = 200;
+const PLAYERWIDTH = 100;
+const FRAMEXMOVESIZE = 550;
+const FRAMEYMOVESIZE = 150;
+
+class Player {
+  constructor(playerX, playerY, playerHealth){
+    this.playerHealth = playerHealth;
+    this.startHealth = playerHealth;
+    this.playerX = playerX;
+    this.playerY = playerY;
+
+    this.moving = false;
+    this.jumping = false;
+    this.shooting = false;
+    this.sprinting = false;
+    this.doubleJumped = false;
+
+    this.doubleJumped = false;
+    this.yVelocity = 0;
+    this.direction = 1;
+    this.gun = new Gun(false, this.playerX, this.playerY);
+
+    this.playerPic;
+    this.effectiveStep = STEPSIZE;
+    this.score = 0;
+    
+  }
+
+movementUpdate() {
+    if (this.sprinting === true){
+      this.effectiveStep = STEPSIZE * SPRINTMULTIPLIER;
     }
     else{
-      effectiveStep = STEPSIZE;
+      this.effectiveStep = STEPSIZE;
     }
   
-    if (moving) {
-      movePlayer();
+    if (this.moving) {
+      this.movePlayer();
     }
   
-    playerY -= yVelocity;
-    yVelocity += GRAVITYFORCE;
+    this.playerY -= this.yVelocity;
+
+    if (this.yVelocity <= VELMAX){
+      this.yVelocity = VELMAX;
+    }
+    else{
+      this.yVelocity += GRAVITYFORCE;
+    }
   
     for (var i = 0; i < squares.length; i++) {
       if (
-        playerY + PLAYERHEIGHT >= squares[i].y &&
-        playerX + PLAYERWIDTH >= squares[i].relX &&
-        playerX <= squares[i].relX + squares[i].picture.width &&
-        playerY <= parseInt(squares[i].y) + squares[i].picture.height
+        this.playerY + PLAYERHEIGHT >= squares[i].relY &&
+        this.playerX + PLAYERWIDTH >= squares[i].relX &&
+        this.playerX <= squares[i].relX + squares[i].picture.width &&
+        this.playerY <= parseInt(squares[i].relY) + squares[i].picture.height
       ) {
         if (
-          playerY + PLAYERHEIGHT >=
-            parseInt(squares[i].y) + squares[i].picture.height &&
-          jumping == true
+          this.playerY + PLAYERHEIGHT >=
+            parseInt(squares[i].relY) + squares[i].picture.height &&
+            this.jumping == true
         ) {
           console.log("under");
-          yVelocity = 0;
-          playerY = parseInt(squares[i].y) + squares[i].picture.height + 1;
+          this.yVelocity = 0;
+          this.playerY = parseInt(squares[i].relY) + squares[i].picture.height + 1;
         } else {
-          playerY = squares[i].y - PLAYERHEIGHT;
-          jumping = false;
-          doubleJumped = false;
-          yVelocity = 0;
+          this.playerY = squares[i].relY - PLAYERHEIGHT;
+          this.jumping = false;
+          this.doubleJumped = false;
+          this.yVelocity = 0;
         }
       }
     }
   
-    if (playerY + PLAYERHEIGHT >= GRASSPOS) {
+    if (this.playerY + PLAYERHEIGHT >= GRASSPOS) {
       // 500 is position of grass
-      playerY = GRASSPOS - PLAYERHEIGHT;
-      jumping = false;
-      doubleJumped = false;
+      this.playerY = GRASSPOS - PLAYERHEIGHT;
+      this.jumping = false;
+      this.doubleJumped = false;
+      worldY = 0;
     }
+
+    // DO Y SCROLLING
+
+    if (this.playerY < 0 + FRAMEYMOVESIZE){
+      worldY -= this.yVelocity;
+      this.playerY = 0 + FRAMEYMOVESIZE;
+    }
+    else if (this.playerY + PLAYERHEIGHT > 0 - FRAMEYMOVESIZE){
+      if (worldY >= 0){
+        worldY = 0;
+      }
+      else{
+        worldY -= this.yVelocity;
+      }
+    }
+
   }
 
-  function movePlayer() {
+movePlayer() {
     let tempX;
     let canMove = true;
   
-    if (direction === 0) {
-      tempX = playerX - effectiveStep;
+    if (this.direction === 0) {
+      tempX = this.playerX - this.effectiveStep;
     } else {
-      tempX = playerX + effectiveStep;
+      tempX = this.playerX + this.effectiveStep;
     }
   
     squares.forEach(s => {
       if (
         tempX + PLAYERWIDTH >= s.relX &&
         tempX <= parseInt(s.relX) + s.picture.width &&
-        playerY + PLAYERHEIGHT > s.y &&
-        playerY <= parseInt(s.y) + s.picture.height
+        this.playerY + PLAYERHEIGHT > s.relY &&
+        this.playerY <= parseInt(s.relY) + s.picture.height
       ) {
         canMove = false;
       }
     });
   
     if (canMove) {
-      if (direction === 0) {
+      if (this.direction === 0) {
         // If left
   
-        if (playerX <= FRAMEMOVESIZE) {
+        if (this.playerX <= FRAMEXMOVESIZE) {
           // moves background if player is too far to left or right
-          backgroundx += effectiveStep * BACKMULTI;
-          backGrassx += effectiveStep * MIDMULTI;
-          foregroundGrassx += effectiveStep * FOREMULTI;
-          worldX -= effectiveStep;
+          backgroundx += this.effectiveStep * BACKMULTI;
+          backGrassx += this.effectiveStep * MIDMULTI;
+          foregroundGrassx += this.effectiveStep * FOREMULTI;
+          worldX -= this.effectiveStep;
         } else {
-          playerX -= effectiveStep;
+          this.playerX -= this.effectiveStep;
         }
       } else {
         // if right
   
-        if (playerX >= WIDTH - FRAMEMOVESIZE - PLAYERHEIGHT) {
-          backgroundx -= effectiveStep * BACKMULTI;
-          backGrassx -= effectiveStep * MIDMULTI;
-          foregroundGrassx -= effectiveStep * FOREMULTI;
-          worldX += effectiveStep;
+        if (this.playerX >= WIDTH - FRAMEXMOVESIZE - PLAYERHEIGHT) {
+          backgroundx -= this.effectiveStep * BACKMULTI;
+          backGrassx -= this.effectiveStep * MIDMULTI;
+          foregroundGrassx -= this.effectiveStep * FOREMULTI;
+          worldX += this.effectiveStep;
         } else {
-          playerX += effectiveStep;
+          this.playerX += this.effectiveStep;
         }
       }
     }
   }
 
-  function updatePlayer() {
-    movementUpdate(); // Includes jumping and checking boundaries
+  updatePlayer() {
+    this.movementUpdate(); // Includes jumping and checking boundaries
   
-    if (shooting) {
+    this.gun.update(this.playerX, this.playerY);
+
+    if (this.shooting) {
       if (gunTickCount >= FIRERATE) {
-        gun.shoot();
+        this.gun.shoot();
         gunTickCount = 0;
       }
       else{
@@ -109,7 +171,7 @@ function movementUpdate() {
   
     // Draw Player
     fill(200, 20, 20);
-    image(playerPic, playerX, playerY);
+    image(playerPic, this.playerX, this.playerY);
 
     // Draw Hud
     image(playerHud, 1060, -20);
@@ -117,5 +179,9 @@ function movementUpdate() {
     // Health
     rect(1130, 111, 200, 10);
     fill(20, 200, 20);
-    rect(1130, 111, playerHealth, 10);
+    rect(1130, 111, this.playerHealth, 10);
+
+    fill(255,255,255)
+    text(`Score: ${this.score}`, 1130, 80)
   }
+}

@@ -1,3 +1,14 @@
+// BULLET CONSTS
+const BULLETWIDTH = 10;
+const BULLETHEIGHT = 5;
+const BULLETVELOCITY = 15;
+const FIRERATE = 7;
+const BULLETSPREAD = 10;
+const BULLETDMG = 20;
+const GUNPOS = 110;
+
+let gunTickCount;
+
 class Gun {
     constructor(enemy, playerX, playerY) {
       this.bullets = [];
@@ -92,7 +103,8 @@ class Gun {
                   enemies[e].health -= BULLETDMG;
                   this.bullets.splice(i, 1);
   
-                  if (enemies[e].health <= 0){
+                  if (enemies[e].health <= 0){ // if enemy is dead
+                    drops.drop(parseInt(enemies[e].x), enemies[e].y, COINVALUE, enemies[e].picture.height, enemies[e].picture.width);
                     enemies.splice(e, 1);
                   }
                   else{
@@ -106,12 +118,12 @@ class Gun {
             }
           }
           else{ // checking player hit
-            if (this.bullets[i].posY + BULLETHEIGHT > playerY && this.bullets[i].posY <= playerY + PLAYERHEIGHT){
-              if (this.bullets[i].posX + BULLETWIDTH >= playerX && this.bullets[i].posX <= playerX + PLAYERWIDTH){
-                playerHealth -= (BULLETDMG / 2);
+            if (this.bullets[i].posY + BULLETHEIGHT > player.playerY && this.bullets[i].posY <= player.playerY + PLAYERHEIGHT){
+              if (this.bullets[i].posX + BULLETWIDTH >= player.playerX && this.bullets[i].posX <= player.playerX + PLAYERWIDTH){
+                player.playerHealth -= (BULLETDMG / 2);
                 this.bullets.splice(i, 1);
 
-                if (playerHealth < 0){
+                if (player.playerHealth < 0){
                   gameOver = true;
                 }
               }

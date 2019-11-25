@@ -6,6 +6,7 @@ class Enemy {
         this.x = x;
         this.y = y;
         this.relX;
+        this.relY;
         this.picture = loadImage(imgUrl);
         this.health = health;
         this.startHealth = health;
@@ -33,9 +34,9 @@ class Enemy {
                 this.healthBarCount = 0;
             }
         }
-        image(this.picture, this.relX, this.y)
+        image(this.picture, this.relX, this.relY)
 
-        this.enemyGun.update(parseInt(this.relX), parseInt(this.y));
+        this.enemyGun.update(parseInt(this.relX), parseInt(this.relY));
         this.lookForPlayer();
         
         if (this.shooting){
@@ -65,7 +66,7 @@ class Enemy {
 
 
         if (this.direction === -1){
-            if (playerX < this.relX){
+            if (player.playerX < this.relX){
                 canI = true;
             }
             else{
@@ -73,7 +74,7 @@ class Enemy {
             }
         }
         else{
-            if (playerX > this.relX){
+            if (player.playerX > this.relX){
                 canI = true;
             }
             else{
@@ -119,18 +120,18 @@ class Enemy {
     drawHealth(){
         fill(0)
       // BLACK BACKGROUND
-      rect((parseInt(this.relX) + (this.picture.width / 2) - (BARLENGTH / 2) - 3),(this.y - 50) - 3, parseInt(BARLENGTH) + 6, HEALTHBARHEIGHT + 6)
+      rect((parseInt(this.relX) + (this.picture.width / 2) - (BARLENGTH / 2) - 3),(this.relY - 50) - 3, parseInt(BARLENGTH) + 6, HEALTHBARHEIGHT + 6)
   
       // RED
 
       let ammount = (this.health / this.startHealth) * BARLENGTH;
 
       fill(200, 20, 20);
-      rect((parseInt(this.relX) + (this.picture.width / 2) - (BARLENGTH / 2)),(this.y - 50), BARLENGTH, HEALTHBARHEIGHT)
+      rect((parseInt(this.relX) + (this.picture.width / 2) - (BARLENGTH / 2)),(this.relY - 50), BARLENGTH, HEALTHBARHEIGHT)
   
       // GREEN
       fill (20, 200, 20)
-      rect((parseInt(this.relX) + (this.picture.width / 2) - (BARLENGTH / 2)),(this.y - 50), ammount, HEALTHBARHEIGHT)
+      rect((parseInt(this.relX) + (this.picture.width / 2) - (BARLENGTH / 2)),(this.relY - 50), ammount, HEALTHBARHEIGHT)
     }
 
 
