@@ -3,11 +3,12 @@
         {
             "groupName": "spawnSoldier",
             "positionX": "1000",
-            "positionY": "520",
+            "positionY": "530",
             "imageurl": "assets/images/enemy-image.png",
-            "health": "2000",
-            "speed": "8",
-            "fireRate": "999"
+            "health": "300",
+            "speed": "5",
+            "fireRate": "30",
+            "gunIndex": "0"
         }
     ]
 }

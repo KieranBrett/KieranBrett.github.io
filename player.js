@@ -161,11 +161,11 @@ movePlayer() {
   updatePlayer() {
     this.movementUpdate(); // Includes jumping and checking boundaries
   
-    this.gun.update(this.playerX, this.playerY);
+    this.gun.update(this.playerX, this.playerY, PLAYERWIDTH, PLAYERHEIGHT);
 
     if (this.shooting) {
       if (gunTickCount >= this.gun.fireRate) {
-        this.gun.shoot();
+        this.gun.shoot(this.playerX,this.playerY, PLAYERWIDTH, PLAYERHEIGHT);
         gunTickCount = 0;
       }
       else{

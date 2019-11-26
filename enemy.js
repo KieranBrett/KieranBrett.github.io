@@ -2,7 +2,7 @@ const SHOOTINGTIMER = 20;
 
 class Enemy {
 
-    constructor(x, y, imgUrl, health, speed, fireRate) {
+    constructor(x, y, imgUrl, health, speed, fireRate, gunIndex) {
         this.x = x;
         this.y = y;
         this.relX;
@@ -11,10 +11,11 @@ class Enemy {
         this.health = health;
         this.startHealth = health;
         this.speed = speed;
-        this.direction = 1;
+        this.direction = -1;
         this.healthBarCount = 0;
         this.damaged = false;
-        this.enemyGun = new GunController(true, this.x, this.y, guns[0])
+        this.enemyGun = new GunController(true, this.x, this.y, guns[gunIndex])
+        this.enemyGun.direction = 0;
 
         this.fireRate = fireRate;
         this.gunTickCount = 0;
@@ -36,13 +37,13 @@ class Enemy {
         }
         image(this.picture, this.relX, this.relY)
 
-        this.enemyGun.update(parseInt(this.relX), parseInt(this.relY));
+        this.enemyGun.update(parseInt(this.relX), parseInt(this.relY), this.picture.width, this.picture.height);
         this.lookForPlayer();
         
         if (this.shooting){
             this.gunTickCount++;
             if (this.gunTickCount >= this.fireRate){
-                this.enemyGun.shoot();
+                this.enemyGun.shoot(this.picture.width, this.picture.height);
                 this.gunTickCount = 0;
             }
         }

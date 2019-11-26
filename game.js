@@ -1,4 +1,4 @@
-const LEVELCOUNT = 2;
+const LEVELCOUNT = 3;
 
 
 
@@ -12,7 +12,7 @@ const STARTY = 500;
 // HealthBars
 const HEALTHBARHEIGHT = 10;
 const HEALTHBARTIME = 200;
-const NEXTLEVELLOADTIME = 200;
+const NEXTLEVELLOADTIME = 2;
 
 // Images Multipliers
 const BACKMULTI = 0.75; 
@@ -123,6 +123,7 @@ function loadGuns() {
   let gun1Left = "assets/images/gun-rifle-left.png"
   let gun1RightBullet = "assets/images/guns/rifle-bullet-right.png";
   let gun1LeftBullet = "assets/images/guns/rifle-bullet-left.png";
+
   let gun2Right = "assets/images/guns/shitpg.png"
   let gun2Left = "assets/images/guns/shitpg-left.png"
   let gun2RightBullet = "assets/images/guns/rpg-bullet-right.png"
@@ -131,6 +132,8 @@ function loadGuns() {
   guns.push (new Gun(15, 7, 10, 20, gun1Left, gun1Right, gun1RightBullet, gun1LeftBullet, 0))
   // ROCKET
   guns.push (new Gun(7, 25, 80, 200, gun2Left, gun2Right, gun2RightBullet, gun2LeftBullet, 50))
+  // BOSS FIGHT ROCKET
+  guns.push (new Gun(8, 55, 100, 75, gun2Left, gun2Right, gun2RightBullet, gun2LeftBullet, 50))
 }
 
 

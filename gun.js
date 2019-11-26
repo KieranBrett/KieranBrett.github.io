@@ -39,7 +39,7 @@ class GunController {
       if (this.direction == 1) {
         this.bullets.push(
           new Bullet(
-            this.gunX + PLAYERWIDTH / 2 + this.gunRight.width - this.gunOffset,
+            this.gunX + worldX + PLAYERWIDTH / 2 + this.gunRight.width - this.gunOffset,
             this.gunY + (GUNPOS + 13) + random(-this.bulletSpread, this.bulletSpread),
             this.direction,
             this.bulletRight
@@ -48,7 +48,7 @@ class GunController {
       } else {
         this.bullets.push(
           new Bullet(
-            this.gunX + PLAYERWIDTH / 2 - this.gunLeft.width + this.gunOffset,
+            this.gunX + worldX + PLAYERWIDTH / 2 - this.gunLeft.width + this.gunOffset,
             this.gunY + (GUNPOS + 13) + random(-this.bulletSpread, this.bulletSpread),
             this.direction,
             this.bulletLeft
@@ -65,25 +65,28 @@ class GunController {
       this.gunY = y;
 
       for (var i = 0; i < this.bullets.length; i++) {
+
+        this.bullets[i].relY = parseInt(this.bullets[i].posY) - worldY;
+        this.bullets[i].relX = parseInt(this.bullets[i].posX) - worldX;
         this.bullets[i].update(this.bulletVel);
 
         
   
         if (
-          this.bullets[i].posX > WIDTH ||
-          parseInt(this.bullets[i].posX) + this.bulletWidth < 0
+          this.bullets[i].relX > WIDTH ||
+          parseInt(this.bullets[i].relX) + this.bulletWidth < 0
         ) {
           this.bullets.splice(i, 1);
         } else { // If bullet is on screen
 
           for (var s = 0; s < squares.length; s++) {
             if (
-              parseInt(this.bullets[i].posX) + this.bullets[i].image.width >= squares[s].relX &&
-              this.bullets[i].posX <= parseInt(squares[s].relX) + squares[s].picture.width
+              parseInt(this.bullets[i].relX) + this.bullets[i].image.width >= squares[s].relX &&
+              this.bullets[i].relX <= parseInt(squares[s].relX) + squares[s].picture.width
             ) {
               if (
-                this.bullets[i].posY >= squares[s].y &&
-                this.bullets[i].posY <=
+                this.bullets[i].relY >= squares[s].y &&
+                this.bullets[i].relY <=
                   parseInt(squares[s].y) + squares[s].picture.height
               ) {
                 this.bullets.splice(i, 1);
@@ -107,12 +110,12 @@ class GunController {
           if (!this.enemyGun){ // Checking enemy hit
             for (var e = 0; e < enemies.length; e++){
               if (
-                this.bullets[i].posX + this.bullets[i].image.width >= enemies[e].relX && this.bullets[i].posX <= enemies[e].relX + enemies[e].picture.width
+                this.bullets[i].relX + this.bullets[i].image.width >= enemies[e].relX && this.bullets[i].relX <= enemies[e].relX + enemies[e].picture.width
               ) {
                 
   
                 if (
-                  this.bullets[i].posY + this.bullets[i].image.height >= enemies[e].relY &&this.bullets[i].posY <= parseInt(enemies[e].relY) + enemies[e].picture.height
+                  this.bullets[i].relY + this.bullets[i].image.height >= enemies[e].relY &&this.bullets[i].relY <= parseInt(enemies[e].relY) + enemies[e].picture.height
                 ) {
                   enemies[e].health -= this.bulletDmg;
                   this.bullets.splice(i, 1);
@@ -132,9 +135,9 @@ class GunController {
             }
           }
           else{ // checking player hit
-            if (this.bullets[i].posY + this.bulletHeight > player.playerY && this.bullets[i].posY <= player.playerY + this.bulletHeight){
-              if (this.bullets[i].posX + this.bulletWidth >= player.playerX && this.bullets[i].posX <= player.playerX + PLAYERWIDTH){
-                player.playerHealth -= (BULLETDMG / 2);
+            if (this.bullets[i].relY + this.bullets[i].image.height > player.playerY && this.bullets[i].relY <= player.playerY + PLAYERHEIGHT){
+              if (this.bullets[i].relX + this.bullets[i].image.width >= player.playerX && this.bullets[i].relX <= player.playerX + PLAYERWIDTH){
+                player.playerHealth -= this.bulletDmg;
                 this.bullets.splice(i, 1);
 
                 if (player.playerHealth < 0){
@@ -181,12 +184,15 @@ class GunController {
       this.posY = posY;
       this.direction = direction;
       this.image = image;
+
+      this.relX;
+      this.relY;
     }
   
     update(bulletVel) {
       fill(230, 190, 20); // Drawing before updating so we can see the bullet before it is moved
       // rect(this.posX - bulletWidth / 2, this.posY, bulletWidth, bulletHeight);
-      image(this.image,this.posX - this.image.width / 2, this.posY)
+      image(this.image,this.relX - this.image.width / 2, this.relY)
       // console.log(this.image)
   
       if (this.direction == 1) {

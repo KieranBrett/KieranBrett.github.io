@@ -57,7 +57,8 @@ fetch(enemiesUrl)
           objects.enemies[i].imageurl,
           objects.enemies[i].health,
           objects.enemies[i].speed,
-          objects.enemies[i].fireRate
+          objects.enemies[i].fireRate,
+          objects.enemies[i].gunIndex
         )
       );
     }
@@ -65,31 +66,27 @@ fetch(enemiesUrl)
     console.log(enemies);
   });
   
-  fetch("assets/guns.json")
-    .then(response => response.json())
-    .then(data => {
-      let objects = data;
+  // fetch("assets/guns.json")
+  //   .then(response => response.json())
+  //   .then(data => {
+  //     let objects = data;
   
       
   
-      // guns.push(new Gun(10, 5, 15, 7, 10, 20))
+  //     // guns.push(new Gun(10, 5, 15, 7, 10, 20))
   
-      for (var i = 0; i < objects.guns.length; i++) {
-        guns.push(
-          new Gun(objects.guns[i].bulletWidth,
-            objects.guns[i].bulletHeight,
-            objects.guns[i].bulletVel,
-            objects.guns[i].fireRate,
-            objects.guns[i].bulletSpread,
-            objects.guns[i].bulletDmg
-          )
-        );
-       }
-  
-       console.log(`GUNS 1 ------------ ${guns}`);
-    });
-
-    console.log(`GUNS 2 ------------ ${guns}`);
+  //     for (var i = 0; i < objects.guns.length; i++) {
+  //       guns.push(
+  //         new Gun(objects.guns[i].bulletWidth,
+  //           objects.guns[i].bulletHeight,
+  //           objects.guns[i].bulletVel,
+  //           objects.guns[i].fireRate,
+  //           objects.guns[i].bulletSpread,
+  //           objects.guns[i].bulletDmg
+  //         )
+  //       );
+  //      }
+  //   });
 
 }
 

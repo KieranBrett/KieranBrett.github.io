@@ -2,8 +2,6 @@
     "guns": [
         {
             "gunName": "startGun",
-            "bulletWidth": "10",
-            "bulletHeight": 5,
             "bulletVel": 15,
             "fireRate": 7,
             "bulletSpread": 10,
