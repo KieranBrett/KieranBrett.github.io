@@ -40,7 +40,7 @@ class GunController {
         this.bullets.push(
           new Bullet(
             this.gunX + worldX + PLAYERWIDTH / 2 + this.gunRight.width - this.gunOffset,
-            this.gunY + (GUNPOS + 13) + random(-this.bulletSpread, this.bulletSpread),
+            this.gunY + worldY + (GUNPOS + 13) + random(-this.bulletSpread, this.bulletSpread),
             this.direction,
             this.bulletRight
           )
@@ -49,7 +49,7 @@ class GunController {
         this.bullets.push(
           new Bullet(
             this.gunX + worldX + PLAYERWIDTH / 2 - this.gunLeft.width + this.gunOffset,
-            this.gunY + (GUNPOS + 13) + random(-this.bulletSpread, this.bulletSpread),
+            this.gunY + worldY + (GUNPOS + 13) + random(-this.bulletSpread, this.bulletSpread),
             this.direction,
             this.bulletLeft
           )
@@ -85,9 +85,9 @@ class GunController {
               this.bullets[i].relX <= parseInt(squares[s].relX) + squares[s].picture.width
             ) {
               if (
-                this.bullets[i].relY >= squares[s].y &&
+                this.bullets[i].relY >= squares[s].relY &&
                 this.bullets[i].relY <=
-                  parseInt(squares[s].y) + squares[s].picture.height
+                  parseInt(squares[s].relY) + squares[s].picture.height
               ) {
                 this.bullets.splice(i, 1);
   
