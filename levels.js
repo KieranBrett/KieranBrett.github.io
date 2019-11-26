@@ -64,4 +64,33 @@ fetch(enemiesUrl)
 
     console.log(enemies);
   });
+  
+  fetch("assets/guns.json")
+    .then(response => response.json())
+    .then(data => {
+      let objects = data;
+  
+      
+  
+      // guns.push(new Gun(10, 5, 15, 7, 10, 20))
+  
+      for (var i = 0; i < objects.guns.length; i++) {
+        guns.push(
+          new Gun(objects.guns[i].bulletWidth,
+            objects.guns[i].bulletHeight,
+            objects.guns[i].bulletVel,
+            objects.guns[i].fireRate,
+            objects.guns[i].bulletSpread,
+            objects.guns[i].bulletDmg
+          )
+        );
+       }
+  
+       console.log(`GUNS 1 ------------ ${guns}`);
+    });
+
+    console.log(`GUNS 2 ------------ ${guns}`);
+
 }
+
+  

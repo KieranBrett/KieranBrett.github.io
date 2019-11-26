@@ -14,7 +14,7 @@ class Enemy {
         this.direction = 1;
         this.healthBarCount = 0;
         this.damaged = false;
-        this.enemyGun = new Gun(true, this.x, this.y)
+        this.enemyGun = new GunController(true, this.x, this.y, guns[0])
 
         this.fireRate = fireRate;
         this.gunTickCount = 0;

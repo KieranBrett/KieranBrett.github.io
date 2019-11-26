@@ -27,7 +27,8 @@ class Player {
     this.doubleJumped = false;
     this.yVelocity = 0;
     this.direction = 1;
-    this.gun = new Gun(false, this.playerX, this.playerY);
+    this.gun = new GunController(false, this.playerX, this.playerY, guns[1]);
+    
 
     this.playerPic;
     this.effectiveStep = STEPSIZE;
@@ -163,7 +164,7 @@ movePlayer() {
     this.gun.update(this.playerX, this.playerY);
 
     if (this.shooting) {
-      if (gunTickCount >= FIRERATE) {
+      if (gunTickCount >= this.gun.fireRate) {
         this.gun.shoot();
         gunTickCount = 0;
       }

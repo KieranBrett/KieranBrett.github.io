@@ -39,6 +39,7 @@ let player;
 let squares = [];
 let scenery = [];
 let enemies = [];
+let guns = [];
 
 let drops = new DropController();
 
@@ -71,42 +72,39 @@ let level = 1;
 function setup() {
   loaded = false;
   canvas = createCanvas(WIDTH, HEIGHT);
-
-  player = new Player(STARTX, STARTY, 200);
+  
 
   nextLevelPic = loadImage("assets/images/loading-next.png");
-  
-  paused = false;
   pauseScreen = loadImage("assets/images/pauseScreen.png")
-  started = false;
   startScreen = loadImage("assets/images/startScreen.png")
-  gameOver = false;
   gameOverScreen = loadImage("assets/images/AllLevelsForNow.png")
+  overScreen = loadImage("assets/images/gameOver.png");
+  playerPic = loadImage("assets/images/player-image.png");
+  backgroundPic = loadImage("assets/images/background-stars.png");
+  playerHud = loadImage("assets/images/hud.png");
+  backGrass = loadImage("assets/images/background-grass.png");
+  foregroundGrass = loadImage("assets/images/foreground-grass-blurred.png");
+  foregroundHud = loadImage("assets/images/hud.png");
 
-  
+  paused = false;
+  started = false;
+  gameOver = false;
 
   squares = [];
   scenery = [];
   enemies = [];
-
-  overScreen = loadImage("assets/images/gameOver.png");
-  imageOpacity = 0;
-  overCount = 0;
+  guns = [];
 
   loadLevel(level);
+  loadGuns();
+  
+  player = new Player(STARTX, STARTY, 200);
 
-  playerPic = loadImage("assets/images/player-image.png");
-  playerHud = loadImage("assets/images/hud.png");
-  backgroundPic = loadImage("assets/images/background-stars.png");
+  imageOpacity = 0;
+  overCount = 0;
   backgroundx = 0;
-  backGrass = loadImage("assets/images/background-grass.png");
   backGrassx = 0;
-  foregroundGrass = loadImage("assets/images/foreground-grass-blurred.png");
   foregroundGrassx = 0;
-  foregroundHud = loadImage("assets/images/hud.png");
-
-  // drawBackground();
-
   gunTickCount = 0;
   worldX = 0;
   worldY = 0;
@@ -120,7 +118,20 @@ function setup() {
 
 
 
-
+function loadGuns() {
+  let gun1Right = "assets/images/gun-rifle-right.png"
+  let gun1Left = "assets/images/gun-rifle-left.png"
+  let gun1RightBullet = "assets/images/guns/rifle-bullet-right.png";
+  let gun1LeftBullet = "assets/images/guns/rifle-bullet-left.png";
+  let gun2Right = "assets/images/guns/shitpg.png"
+  let gun2Left = "assets/images/guns/shitpg-left.png"
+  let gun2RightBullet = "assets/images/guns/rpg-bullet-right.png"
+  let gun2LeftBullet = "assets/images/guns/rpg-bullet-left.png"
+  // START GUN
+  guns.push (new Gun(15, 7, 10, 20, gun1Left, gun1Right, gun1RightBullet, gun1LeftBullet, 0))
+  // ROCKET
+  guns.push (new Gun(7, 25, 80, 200, gun2Left, gun2Right, gun2RightBullet, gun2LeftBullet, 50))
+}
 
 
 
