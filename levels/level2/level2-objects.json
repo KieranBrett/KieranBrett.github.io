@@ -101,47 +101,6 @@
             "health": "100"
         },
 
-        {
-            "groupName": "parkour",
-            "breakable": false,
-            "positionX": "2848",
-            "positionY": "95",
-            "imageurl": "assets/images/object-crate-small-alt.png",
-            "health": "100"
-        },
-        {
-            "groupName": "parkour",
-            "breakable": false,
-            "positionX": "2990",
-            "positionY": "-750",
-            "imageurl": "assets/images/object-crate-small.png",
-            "health": "100"
-        },
-        {
-            "groupName": "parkour",
-            "breakable": false,
-            "positionX": "2490",
-            "positionY": "-750",
-            "imageurl": "assets/images/object-crate-small.png",
-            "health": "100"
-        },
-        {
-            "groupName": "parkour",
-            "breakable": false,
-            "positionX": "1700",
-            "positionY": "-750",
-            "imageurl": "assets/images/object-crate-large-alt.png",
-            "health": "100"
-        },
-        {
-            "groupName": "parkour",
-            "breakable": false,
-            "positionX": "1700",
-            "positionY": "-1650",
-            "imageurl": "assets/images/object-crate-large-cracked-alt.png",
-            "health": "100"
-        },
-
 
         {
             "groupName": "thirdBlock",

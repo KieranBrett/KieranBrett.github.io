@@ -1,8 +1,38 @@
 {
     "scenery": [
         {
+            "groupName": "help",
+            "positionX": "500",
+            "positionY": "400",
+            "imageurl": "assets/images/tutorial/help-1.png"
+        },
+        {
+            "groupName": "help",
+            "positionX": "1700",
+            "positionY": "250",
+            "imageurl": "assets/images/tutorial/help-2.png"
+        },
+        {
+            "groupName": "help",
+            "positionX": "2950",
+            "positionY": "350",
+            "imageurl": "assets/images/tutorial/help-3.png"
+        },
+        {
+            "groupName": "help",
+            "positionX": "3400",
+            "positionY": "200",
+            "imageurl": "assets/images/tutorial/help-4.png"
+        },
+        {
+            "groupName": "help",
+            "positionX": "4300",
+            "positionY": "400",
+            "imageurl": "assets/images/tutorial/help-5.png"
+        },
+        {
             "groupName": "portal",
-            "positionX": "2300",
+            "positionX": "4800",
             "positionY": "460",
             "imageurl": "assets/images/portalScenery.png"
         }
