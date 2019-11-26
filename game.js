@@ -12,7 +12,7 @@ const STARTY = 500;
 // HealthBars
 const HEALTHBARHEIGHT = 10;
 const HEALTHBARTIME = 200;
-const NEXTLEVELLOADTIME = 2;
+const NEXTLEVELLOADTIME = 200;
 
 // Images Multipliers
 const BACKMULTI = 0.75; 
