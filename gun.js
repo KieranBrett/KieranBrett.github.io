@@ -40,7 +40,8 @@ class GunController {
       this.dropped;
       this.bobbed = false;
       this.yBob = 0;
-
+      this.canBePicked;
+      this.dropCount = 0;
     }
   
     shoot() {
@@ -186,6 +187,14 @@ class GunController {
             this.bobbed = false;
         }
       }
+    }
+
+    dropGun(playerX, playerY) {
+      this.canBePicked = false;
+      this.dropped = true;
+      this.dropCount = 0;
+      this.gunX = playerX + worldX;
+      this.gunY = playerY + worldY;
     }
   }
 

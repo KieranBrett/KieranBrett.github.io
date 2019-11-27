@@ -148,6 +148,7 @@ function loadGuns() {
   // DROPPED GUNS
   droppedGuns.push (new GunController(false, 1250, 250, guns[1]))
   droppedGuns[0].dropped = true;
+  droppedGuns[0].canBePicked = true;
 }
 
 
@@ -257,12 +258,16 @@ function keyPressed() {
       if (keyCode == LEFT_ARROW) {
         player.moving = true;
         player.direction = 0;
-        player.inventory[player.inventoryIndex].direction = 0;
+        if (player.inventory[player.inventoryIndex] != null)
+          player.inventory[player.inventoryIndex].direction = 0;
+
       }
       else if (keyCode == RIGHT_ARROW) {
         player.moving = true;
         player.direction = 1;
-        player.inventory[player.inventoryIndex].direction = 1;
+        if (player.inventory[player.inventoryIndex] != null)
+          player.inventory[player.inventoryIndex].direction = 1;
+
       }
       else if (keyCode == UP_ARROW) {
         if (!player.jumping) {
@@ -283,14 +288,17 @@ function keyPressed() {
       else if (keyCode == 16){
         player.sprinting = true;
       }// INVENTORY BLOCK
-      else if (keyCode == 49 || keyCode == 50 || keyCode == 51 || keyCode == 52) // inventory
+      else if (keyCode == 49 || keyCode == 50 || keyCode == 51 || keyCode == 52 || keyCode == 81) // inventory
       {
         switch (keyCode){
           case 49:
-            if (player.inventory[0] != null){
+            if (player.inventory[0] != null && player.inventory[player.inventoryIndex] != null){
             player.inventory[0].direction = player.inventory[player.inventoryIndex].direction;
             player.inventory[0].bullets = player.inventory[player.inventoryIndex].bullets
             player.inventoryIndex = 0;
+            }
+            else{
+              player.inventoryIndex = 0;
             }
 
             break;
@@ -318,6 +326,15 @@ function keyPressed() {
               player.inventoryIndex = 3;
             }
             break;
+
+            case 81:
+              player.inventory[player.inventoryIndex].dropGun(player.playerX, player.playerY)
+              droppedGuns.push(player.inventory[player.inventoryIndex]);
+              player.inventory.splice(player.inventoryIndex, 1);
+
+              // player.shuffleInventory();
+              break;
+
         }
       }
 
@@ -432,7 +449,8 @@ function drawObjects() {
     if (droppedGuns[i].relX < player.playerX + PLAYERWIDTH &&
       droppedGuns[i].relX + droppedGuns[i].gunRight.width > player.playerX &&
       droppedGuns[i].relY < player.playerY + PLAYERHEIGHT &&
-      droppedGuns[i].relY + droppedGuns[i].gunRight.height > player.playerY){
+      droppedGuns[i].relY + droppedGuns[i].gunRight.height > player.playerY &&
+      droppedGuns[i].canBePicked){
         console.log("inside gun");
         droppedGuns[i].dropped = false;
         player.inventory.push(droppedGuns[i]);
@@ -440,5 +458,11 @@ function drawObjects() {
         droppedGuns.splice(i, 1);
         return;
       }
+
+    droppedGuns[i].dropCount++;
+
+    if (droppedGuns[i].dropCount > 200){
+      droppedGuns[i].canBePicked = true;
+    }
   }
 }

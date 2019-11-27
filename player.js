@@ -167,7 +167,8 @@ movePlayer() {
     // Draw Player
     fill(200, 20, 20);
     image(playerPic, this.playerX, this.playerY);
-    this.inventory[this.inventoryIndex].gunX = this.playerX;
+    if (this.inventory[this.inventoryIndex] != null){
+      this.inventory[this.inventoryIndex].gunX = this.playerX;
     this.inventory[this.inventoryIndex].gunY = this.playerY;
     this.inventory[this.inventoryIndex].update();
 
@@ -180,6 +181,8 @@ movePlayer() {
         gunTickCount++;
       }
     }
+    } 
+    
   
 
     fill(200, 20, 20);
