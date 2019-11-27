@@ -34,7 +34,6 @@ class GunController {
 
       this.enemyGun = enemy;
       this.direction = 1;
-      this.shooting;
 
 
       this.dropped;
@@ -45,25 +44,28 @@ class GunController {
     }
   
     shoot() {
-      this.shooting = true;
       if (this.direction == 1) {
-        this.bullets.push(
+        bullets.push(
           new Bullet(
             this.gunX + worldX + PLAYERWIDTH / 2 + this.gunRight.width - this.gunOffset,
             this.gunY + worldY + (GUNPOS + 13) + random(-this.bulletSpread, this.bulletSpread),
             this.direction,
             this.bulletRight,
-            this.bulletVel
+            this.bulletVel,
+            this.bulletDmg,
+            this.enemyGun
           )
         );
       } else {
-        this.bullets.push(
+        bullets.push(
           new Bullet(
             this.gunX + worldX + PLAYERWIDTH / 2 - this.gunLeft.width + this.gunOffset,
             this.gunY + worldY + (GUNPOS + 13) + random(-this.bulletSpread, this.bulletSpread),
             this.direction,
             this.bulletLeft,
-            this.bulletVel
+            this.bulletVel,
+            this.bulletDmg,
+            this.enemyGun
           )
         );
       }
@@ -77,94 +79,8 @@ class GunController {
         } else {
           image( this.gunLeft, this.gunX + PLAYERWIDTH / 2 - this.gunLeft.width + this.gunOffset, this.gunY + GUNPOS);
         }
-  
-  
-        for (var i = 0; i < this.bullets.length; i++) {
-  
-          this.bullets[i].relY = parseInt(this.bullets[i].posY) - worldY;
-          this.bullets[i].relX = parseInt(this.bullets[i].posX) - worldX;
-          this.bullets[i].update();
-  
-          
-    
-          if (
-            this.bullets[i].relX > WIDTH ||
-            parseInt(this.bullets[i].relX) + this.bulletWidth < 0
-          ) {
-            this.bullets.splice(i, 1);
-          } else { // If bullet is on screen
-  
-            for (var s = 0; s < squares.length; s++) {
-              if (
-                parseInt(this.bullets[i].relX) + this.bullets[i].image.width >= squares[s].relX &&
-                this.bullets[i].relX <= parseInt(squares[s].relX) + squares[s].picture.width
-              ) {
-                if (
-                  this.bullets[i].relY >= squares[s].relY &&
-                  this.bullets[i].relY <=
-                    parseInt(squares[s].relY) + squares[s].picture.height
-                ) {
-                  this.bullets.splice(i, 1);
-    
-                  if (squares[s].breakable && !this.enemyGun) {
-                    squares[s].health -= this.bulletDmg;
-                    
-                    if (squares[s].health <= 0) {
-                      squares.splice(s, 1);
-                    }
-                    else{
-                      squares[s].healthBarCount = 0;
-                      squares[s].damaged = true;
-                    }
-                  }
-                  return;
-                }
-              }
-            } // Massive for loop checking each square
-  
-            if (!this.enemyGun){ // Checking enemy hit
-              for (var e = 0; e < enemies.length; e++){
-                if (
-                  this.bullets[i].relX + this.bullets[i].image.width >= enemies[e].relX && this.bullets[i].relX <= enemies[e].relX + enemies[e].picture.width
-                ) {
-                  
-    
-                  if (
-                    this.bullets[i].relY + this.bullets[i].image.height >= enemies[e].relY &&this.bullets[i].relY <= parseInt(enemies[e].relY) + enemies[e].picture.height
-                  ) {
-                    enemies[e].health -= this.bulletDmg;
-                    this.bullets.splice(i, 1);
-    
-                    if (enemies[e].health <= 0){ // if enemy is dead
-                      drops.drop(parseInt(enemies[e].x), enemies[e].y, COINVALUE, enemies[e].picture.height, enemies[e].picture.width);
-                      enemies.splice(e, 1);
-                    }
-                    else{
-                      enemies[e].healthBarCount = 0;
-                      enemies[e].damaged = true;
-                    }
-    
-                    return;
-                  }
-                }
-              }
-            }
-            else{ // checking player hit
-              if (this.bullets[i].relY + this.bullets[i].image.height > player.playerY && this.bullets[i].relY <= player.playerY + PLAYERHEIGHT){
-                if (this.bullets[i].relX + this.bullets[i].image.width >= player.playerX && this.bullets[i].relX <= player.playerX + PLAYERWIDTH){
-                  player.playerHealth -= this.bulletDmg;
-                  this.bullets.splice(i, 1);
-  
-                  if (player.playerHealth < 0){
-                    gameOver = true;
-                  }
-                }
-              }
-            }
-          }
-        }
 
-        this.shooting = false;
+        // this.shooting = false;
       }
       else{ // IF IT IS DROPPED
         if (this.direction == 1) {
@@ -199,12 +115,15 @@ class GunController {
   }
 
   class Bullet {
-    constructor(posX, posY, direction, image, bulletVel) {
+    constructor(posX, posY, direction, image, bulletVel, dmg, enemy) {
       this.posX = posX;
       this.posY = posY;
       this.direction = direction;
       this.image = image;
       this.vel = bulletVel
+      this.width = image.width;
+      this.dmg = dmg;
+      this.enemyBullet = enemy;
 
       this.relX;
       this.relY;
@@ -237,5 +156,92 @@ class GunController {
       this.gunRight = gunRight;
       this.gunOffset = gunOffset;
       this.gunName = gunName;
+    }
+  }
+
+  function bulletUpdate(){
+    for (var i = 0; i < bullets.length; i++) {
+    
+      bullets[i].relY = parseInt(bullets[i].posY) - worldY;
+      bullets[i].relX = parseInt(bullets[i].posX) - worldX;
+      bullets[i].update();
+  
+      
+  
+      if (
+        bullets[i].relX > WIDTH ||
+        parseInt(bullets[i].relX) + bullets[i].width < 0
+      ) {
+        bullets.splice(i, 1);
+      } else { // If bullet is on screen
+  
+        for (var s = 0; s < squares.length; s++) {
+          if (
+            parseInt(bullets[i].relX) + bullets[i].width >= squares[s].relX &&
+            bullets[i].relX <= parseInt(squares[s].relX) + squares[s].picture.width
+          ) {
+            if (
+              bullets[i].relY >= squares[s].relY &&
+              bullets[i].relY <=
+                parseInt(squares[s].relY) + squares[s].picture.height
+            ) {
+              bullets.splice(i, 1);
+  
+              if (squares[s].breakable && !this.enemyGun) {
+                squares[s].health -= bullets[i].dmg;
+                
+                if (squares[s].health <= 0) {
+                  squares.splice(s, 1);
+                }
+                else{
+                  squares[s].healthBarCount = 0;
+                  squares[s].damaged = true;
+                }
+              }
+              return;
+            }
+          }
+        } // Massive for loop checking each square
+  
+        if (!bullets[i].enemyBullet){ // Checking enemy hit
+          for (var e = 0; e < enemies.length; e++){
+            if (
+              bullets[i].relX + bullets[i].width >= enemies[e].relX && bullets[i].relX <= enemies[e].relX + enemies[e].picture.width
+            ) {
+              
+  
+              if (
+                bullets[i].relY + bullets[i].image.height >= enemies[e].relY && bullets[i].relY <= parseInt(enemies[e].relY) + enemies[e].picture.height
+              ) {
+                enemies[e].health -= bullets[i].dmg;
+                bullets.splice(i, 1);
+  
+                if (enemies[e].health <= 0){ // if enemy is dead
+                  drops.drop(parseInt(enemies[e].x), enemies[e].y, COINVALUE, enemies[e].picture.height, enemies[e].picture.width);
+                  enemies.splice(e, 1);
+                }
+                else{
+                  enemies[e].healthBarCount = 0;
+                  enemies[e].damaged = true;
+                }
+  
+                return;
+              }
+            }
+          }
+        }
+        else{ // checking player hit
+          if (bullets[i].relY + bullets[i].image.height > player.playerY && bullets[i].relY <= player.playerY + PLAYERHEIGHT){
+            if (bullets[i].relX + bullets[i].width >= player.playerX && bullets[i].relX <= player.playerX + PLAYERWIDTH){
+              player.playerHealth -= bullets[i].width;
+              bullets.splice(i, 1);
+  
+              if (player.playerHealth < 0){
+                gameOver = true;
+              }
+            }
+          }
+        }
+      }
     }
   }

@@ -40,7 +40,9 @@ let squares = [];
 let scenery = [];
 let enemies = [];
 let guns = [];
+let bullets = [];
 let droppedGuns = [];
+
 
 let drops = new DropController();
 
@@ -141,7 +143,7 @@ function loadGuns() {
   // START GUN
   guns.push (new Gun(17, 7, 10, 20, gun1Left, gun1Right, gun1RightBullet, gun1LeftBullet, 0, "Starter Rifle"))
   // ROCKET
-  guns.push (new Gun(7, 25, 80, 200, gun2Left, gun2Right, gun2RightBullet, gun2LeftBullet, 50, "Basic RPG"))
+  guns.push (new Gun(6, 25, 80, 200, gun2Left, gun2Right, gun2RightBullet, gun2LeftBullet, 50, "Basic RPG"))
   // BOSS FIGHT ROCKET
   guns.push (new Gun(8, 55, 100, 75, gun2Left, gun2Right, gun2RightBullet, gun2LeftBullet, 50, "Boss RPG"))
 
@@ -168,6 +170,8 @@ function draw() {
             drops.updateDrops();
             player.updatePlayer();
             drawForeground();
+
+            bulletUpdate();
         
             }
             else{ // If game is over
@@ -250,6 +254,7 @@ function endGameFade(){
   tint(255, imageOpacity);
   image(overScreen, 0, 0);
 }
+
 
 // Event Methods
 function keyPressed() {
