@@ -59,10 +59,15 @@ class GunController {
   
     update(x, y) {
 
-      
-
       this.gunX = x;
       this.gunY = y;
+
+      if (this.direction == 1) {
+        image(this.gunRight, this.gunX + PLAYERWIDTH / 2 - this.gunOffset, this.gunY + GUNPOS);
+      } else {
+        image( this.gunLeft, this.gunX + PLAYERWIDTH / 2 - this.gunLeft.width + this.gunOffset, this.gunY + GUNPOS);
+      }
+
 
       for (var i = 0; i < this.bullets.length; i++) {
 
@@ -149,30 +154,7 @@ class GunController {
         }
       }
   
-      if (this.direction == 1) {
-        image(this.gunRight, this.gunX + PLAYERWIDTH / 2 - this.gunOffset, this.gunY + GUNPOS);
-        // if (this.shooting) {
-        //   image(
-        //     this.gunRightFlash,
-        //     this.gunX + (PLAYERWIDTH / 2 + this.gunRight.width),
-        //     this.gunY + (GUNPOS + 5)
-        //   );
-        // }
-      } else {
-        image(
-          this.gunLeft,
-          this.gunX + PLAYERWIDTH / 2 - this.gunLeft.width + this.gunOffset,
-          this.gunY + GUNPOS
-        );
-        // if (this.shooting) {
-        //   image(
-        //     this.gunLeftFlash,
-        //     this.gunX +
-        //       (PLAYERWIDTH / 2 - this.gunLeft.width - this.gunLeftFlash.width),
-        //     this.gunY + (GUNPOS + 5)
-        //   );
-        // }
-      }
+      
 
       this.shooting = false;
     }

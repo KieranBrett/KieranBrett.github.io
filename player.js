@@ -161,6 +161,11 @@ movePlayer() {
   updatePlayer() {
     this.movementUpdate(); // Includes jumping and checking boundaries
   
+    // Draw Player
+    fill(200, 20, 20);
+    image(playerPic, this.playerX, this.playerY);
+    this.gun.update(this.playerX, this.playerY, PLAYERWIDTH, PLAYERHEIGHT);
+
     if (this.shooting) {
       if (gunTickCount >= this.gun.fireRate) {
         this.gun.shoot(this.playerX,this.playerY, PLAYERWIDTH, PLAYERHEIGHT);
@@ -171,10 +176,6 @@ movePlayer() {
       }
     }
   
-    // Draw Player
-    fill(200, 20, 20);
-    image(playerPic, this.playerX, this.playerY);
-    this.gun.update(this.playerX, this.playerY, PLAYERWIDTH, PLAYERHEIGHT);
 
     fill(200, 20, 20);
     // Draw Hud
