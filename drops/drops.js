@@ -41,6 +41,7 @@ class DropController {
                     switch(this.drops[d].type){
                         case 0:{
                             player.score += this.drops[d].value;
+                            break;
                         }
                         case 1:{
 
@@ -50,7 +51,7 @@ class DropController {
                             else{
                                 player.playerHealth = player.startHealth;
                             }
-                            
+                            break;
                         }
                     }
                 this.drops.splice(d, 1);

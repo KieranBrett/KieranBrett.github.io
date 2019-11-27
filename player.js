@@ -199,51 +199,64 @@ movePlayer() {
     text(`Inventory`, 30, 60);
     textSize(30)
 
+    for (var i = 0; i < 4; i++){
+      if (this.inventory[i] != null){
+        if (i == this.inventoryIndex){
+          fill (255, 0, 0);
+        }
+        text(`${i + 1}. ${this.inventory[i].gunName}`, 30, 100 + (35 * i));
+        fill (255,255,255)
+      }
+      else{
+        text(`${i + 1}. Empty`, 30, 100 + (35 * i))
+      }
+    }
+
     
-    if (this.inventory[0] != null){
-      if (0 == this.inventoryIndex){
-        fill(200, 20, 20);
-      }
-      text(`1. ${this.inventory[0].gunName}`, 30, 100)
-      fill(255,255,255);
-    }
-    else{
-      text(`1. Empty`, 30, 100)
+    // if (this.inventory[0] != null){
+    //   if (0 == this.inventoryIndex){
+    //     fill(200, 20, 20);
+    //   }
+    //   text(`1. ${this.inventory[0].gunName}`, 30, 100)
+    //   fill(255,255,255);
+    // }
+    // else{
+    //   text(`1. Empty`, 30, 100)
       
-    }
+    // }
 
-    if (this.inventory[1] != null){
-      if (1 == this.inventoryIndex){
-        fill(200, 20, 20);
-      }
-      text(`2. ${this.inventory[1].gunName}`, 30, 135)
-      fill(255,255,255);
-    }
-    else{
-      text(`2. Empty`, 30, 135)
-    }
+    // if (this.inventory[1] != null){
+    //   if (1 == this.inventoryIndex){
+    //     fill(200, 20, 20);
+    //   }
+    //   text(`2. ${this.inventory[1].gunName}`, 30, 135)
+    //   fill(255,255,255);
+    // }
+    // else{
+    //   text(`2. Empty`, 30, 135)
+    // }
 
-    if (this.inventory[2] != null){
-      if (2 == this.inventoryIndex){
-        fill(200, 20, 20);
-      }
-      text(`3. ${this.inventory[2].gunName}`, 30, 170)
-      fill(255,255,255);
-    }
-    else{
-      text(`3. Empty`, 30, 170)
-    }
+    // if (this.inventory[2] != null){
+    //   if (2 == this.inventoryIndex){
+    //     fill(200, 20, 20);
+    //   }
+    //   text(`3. ${this.inventory[2].gunName}`, 30, 170)
+    //   fill(255,255,255);
+    // }
+    // else{
+    //   text(`3. Empty`, 30, 170)
+    // }
 
-    if (this.inventory[3] != null){
-      if (3 == this.inventoryIndex){
-        fill(200, 20, 20);
-      }
-      text(`4. ${this.inventory[3].gunName}`, 30, 205)
-      fill(255,255,255);
-    }
-    else{
-      text(`4. Empty`, 30, 205)
-    }
+    // if (this.inventory[3] != null){
+    //   if (3 == this.inventoryIndex){
+    //     fill(200, 20, 20);
+    //   }
+    //   text(`4. ${this.inventory[3].gunName}`, 30, 205)
+    //   fill(255,255,255);
+    // }
+    // else{
+    //   text(`4. Empty`, 30, 205)
+    // }
     
   }
 }
