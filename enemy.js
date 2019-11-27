@@ -37,7 +37,9 @@ class Enemy {
         }
         image(this.picture, this.relX, this.relY)
 
-        this.enemyGun.update(parseInt(this.relX), parseInt(this.relY), this.picture.width, this.picture.height);
+        this.enemyGun.gunX = this.relX;
+        this.enemyGun.gunY = this.relY;
+        this.enemyGun.update();
         this.lookForPlayer();
         
         if (this.shooting){

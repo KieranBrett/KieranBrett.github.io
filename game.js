@@ -40,6 +40,7 @@ let squares = [];
 let scenery = [];
 let enemies = [];
 let guns = [];
+let droppedGuns = [];
 
 let drops = new DropController();
 
@@ -95,6 +96,7 @@ function setup() {
   scenery = [];
   enemies = [];
   guns = [];
+  droppedGuns = [];
 
   loadLevel(level);
   loadGuns();
@@ -135,12 +137,17 @@ function loadGuns() {
   let gun2Left = "assets/images/guns/shitpg-left.png"
   let gun2RightBullet = "assets/images/guns/rpg-bullet-right.png"
   let gun2LeftBullet = "assets/images/guns/rpg-bullet-left.png"
+
   // START GUN
-  guns.push (new Gun(15, 7, 10, 20, gun1Left, gun1Right, gun1RightBullet, gun1LeftBullet, 0, "Starter Rifle"))
+  guns.push (new Gun(17, 7, 10, 20, gun1Left, gun1Right, gun1RightBullet, gun1LeftBullet, 0, "Starter Rifle"))
   // ROCKET
   guns.push (new Gun(7, 25, 80, 200, gun2Left, gun2Right, gun2RightBullet, gun2LeftBullet, 50, "Basic RPG"))
   // BOSS FIGHT ROCKET
   guns.push (new Gun(8, 55, 100, 75, gun2Left, gun2Right, gun2RightBullet, gun2LeftBullet, 50, "Boss RPG"))
+
+  // DROPPED GUNS
+  droppedGuns.push (new GunController(false, 1250, 250, guns[1]))
+  droppedGuns[0].dropped = true;
 }
 
 
@@ -411,5 +418,11 @@ function drawObjects() {
       enemies[i].relX = parseInt(enemies[i].x) - worldX;
       enemies[i].relY = parseInt(enemies[i].y) - worldY;
       enemies[i].UpdateEnemy();
+  }
+
+  for (var i = 0; i < droppedGuns.length; i++){
+    droppedGuns[i].relX = parseInt(droppedGuns[i].gunX) - worldX;
+    droppedGuns[i].relY = parseInt(droppedGuns[i].gunY) - worldY;
+    droppedGuns[i].update();
   }
 }

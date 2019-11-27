@@ -8,3 +8,4 @@ enemies drop weapons
 show current weapon stats
 Enemies only shoot when player is within certain distance
 Player keeps health, score and inventory selection through level change
+Guns sit on proper sides of players
