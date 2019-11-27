@@ -21,6 +21,7 @@ class GunController {
       this.gunY = playerX;
       this.gunX = playerY;
 
+      this.gunName = gun.gunName;
       this.bulletWidth = gun.bulletWidth;
       this.bulletHeight = gun.bulletHeight;
       this.bulletVel = gun.bulletVel;
@@ -42,7 +43,8 @@ class GunController {
             this.gunX + worldX + PLAYERWIDTH / 2 + this.gunRight.width - this.gunOffset,
             this.gunY + worldY + (GUNPOS + 13) + random(-this.bulletSpread, this.bulletSpread),
             this.direction,
-            this.bulletRight
+            this.bulletRight,
+            this.bulletVel
           )
         );
       } else {
@@ -51,7 +53,8 @@ class GunController {
             this.gunX + worldX + PLAYERWIDTH / 2 - this.gunLeft.width + this.gunOffset,
             this.gunY + worldY + (GUNPOS + 13) + random(-this.bulletSpread, this.bulletSpread),
             this.direction,
-            this.bulletLeft
+            this.bulletLeft,
+            this.bulletVel
           )
         );
       }
@@ -73,7 +76,7 @@ class GunController {
 
         this.bullets[i].relY = parseInt(this.bullets[i].posY) - worldY;
         this.bullets[i].relX = parseInt(this.bullets[i].posX) - worldX;
-        this.bullets[i].update(this.bulletVel);
+        this.bullets[i].update();
 
         
   
@@ -161,11 +164,12 @@ class GunController {
   }
 
   class Bullet {
-    constructor(posX, posY, direction, image) {
+    constructor(posX, posY, direction, image, bulletVel) {
       this.posX = posX;
       this.posY = posY;
       this.direction = direction;
       this.image = image;
+      this.vel = bulletVel
 
       this.relX;
       this.relY;
@@ -178,15 +182,15 @@ class GunController {
       // console.log(this.image)
   
       if (this.direction == 1) {
-        this.posX += bulletVel;
+        this.posX += this.vel;
       } else {
-        this.posX -= bulletVel;
+        this.posX -= this.vel;
       }
     }
   }
 
   class Gun{
-    constructor(bulletVel, fireRate, bulletSpread, bulletDmg, gunLeft, gunRight, bulletRight, bulletLeft, gunOffset){
+    constructor(bulletVel, fireRate, bulletSpread, bulletDmg, gunLeft, gunRight, bulletRight, bulletLeft, gunOffset, gunName){
       this.bulletLeft = bulletLeft;
       this.bulletRight = bulletRight;
 
@@ -197,5 +201,6 @@ class GunController {
       this.gunLeft = gunLeft;
       this.gunRight = gunRight;
       this.gunOffset = gunOffset;
+      this.gunName = gunName;
     }
   }

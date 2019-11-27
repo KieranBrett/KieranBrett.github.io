@@ -12,7 +12,7 @@ const FRAMEXMOVESIZE = 550;
 const FRAMEYMOVESIZE = 150;
 
 class Player {
-  constructor(playerX, playerY, playerHealth){
+  constructor(playerX, playerY, playerHealth, gunIndex){
     this.playerHealth = playerHealth;
     this.startHealth = playerHealth;
     this.playerX = playerX;
@@ -27,12 +27,17 @@ class Player {
     this.doubleJumped = false;
     this.yVelocity = 0;
     this.direction = 1;
-    this.gun = new GunController(false, this.playerX, this.playerY, guns[1]);
+    this.inventory = [];
+    this.inventoryIndex;
+    this.gunIndex = gunIndex;
+    this.inventory.push(new GunController(false, this.playerX, this.playerY, guns[gunIndex]));
+    this.inventory.push(new GunController(false, this.playerX, this.playerY, guns[0]));
     
 
     this.playerPic;
     this.effectiveStep = STEPSIZE;
     this.score = 0;
+    this.inventoryIndex = 0;
     
   }
 
@@ -164,11 +169,11 @@ movePlayer() {
     // Draw Player
     fill(200, 20, 20);
     image(playerPic, this.playerX, this.playerY);
-    this.gun.update(this.playerX, this.playerY, PLAYERWIDTH, PLAYERHEIGHT);
+    this.inventory[this.inventoryIndex].update(this.playerX, this.playerY, PLAYERWIDTH, PLAYERHEIGHT);
 
     if (this.shooting) {
-      if (gunTickCount >= this.gun.fireRate) {
-        this.gun.shoot(this.playerX,this.playerY, PLAYERWIDTH, PLAYERHEIGHT);
+      if (gunTickCount >= this.inventory[this.inventoryIndex].fireRate) {
+        this.inventory[this.inventoryIndex].shoot(this.playerX,this.playerY, PLAYERWIDTH, PLAYERHEIGHT);
         gunTickCount = 0;
       }
       else{
@@ -188,5 +193,57 @@ movePlayer() {
 
     fill(255,255,255)
     text(`Score: ${this.score}`, 1130, 80)
+
+    // DRAWING INVENTORY
+    textSize(45)
+    text(`Inventory`, 30, 60);
+    textSize(30)
+
+    
+    if (this.inventory[0] != null){
+      if (0 == this.inventoryIndex){
+        fill(200, 20, 20);
+      }
+      text(`1. ${this.inventory[0].gunName}`, 30, 100)
+      fill(255,255,255);
+    }
+    else{
+      text(`1. Empty`, 30, 100)
+      
+    }
+
+    if (this.inventory[1] != null){
+      if (1 == this.inventoryIndex){
+        fill(200, 20, 20);
+      }
+      text(`2. ${this.inventory[1].gunName}`, 30, 135)
+      fill(255,255,255);
+    }
+    else{
+      text(`2. Empty`, 30, 135)
+    }
+
+    if (this.inventory[2] != null){
+      if (2 == this.inventoryIndex){
+        fill(200, 20, 20);
+      }
+      text(`3. ${this.inventory[2].gunName}`, 30, 170)
+      fill(255,255,255);
+    }
+    else{
+      text(`3. Empty`, 30, 170)
+    }
+
+    if (this.inventory[3] != null){
+      if (3 == this.inventoryIndex){
+        fill(200, 20, 20);
+      }
+      text(`4. ${this.inventory[3].gunName}`, 30, 205)
+      fill(255,255,255);
+    }
+    else{
+      text(`4. Empty`, 30, 205)
+    }
+    
   }
 }

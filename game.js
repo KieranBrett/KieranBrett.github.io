@@ -98,7 +98,7 @@ function setup() {
   loadLevel(level);
   loadGuns();
   
-  player = new Player(STARTX, STARTY, 200);
+  player = new Player(STARTX, STARTY, 200, 1);
 
   imageOpacity = 0;
   overCount = 0;
@@ -129,11 +129,11 @@ function loadGuns() {
   let gun2RightBullet = "assets/images/guns/rpg-bullet-right.png"
   let gun2LeftBullet = "assets/images/guns/rpg-bullet-left.png"
   // START GUN
-  guns.push (new Gun(15, 7, 10, 20, gun1Left, gun1Right, gun1RightBullet, gun1LeftBullet, 0))
+  guns.push (new Gun(15, 7, 10, 20, gun1Left, gun1Right, gun1RightBullet, gun1LeftBullet, 0, "Starter Rifle"))
   // ROCKET
-  guns.push (new Gun(7, 25, 80, 200, gun2Left, gun2Right, gun2RightBullet, gun2LeftBullet, 50))
+  guns.push (new Gun(7, 25, 80, 200, gun2Left, gun2Right, gun2RightBullet, gun2LeftBullet, 50, "Basic RPG"))
   // BOSS FIGHT ROCKET
-  guns.push (new Gun(8, 55, 100, 75, gun2Left, gun2Right, gun2RightBullet, gun2LeftBullet, 50))
+  guns.push (new Gun(8, 55, 100, 75, gun2Left, gun2Right, gun2RightBullet, gun2LeftBullet, 50, "Boss RPG"))
 }
 
 
@@ -243,14 +243,14 @@ function keyPressed() {
       if (keyCode == LEFT_ARROW) {
         player.moving = true;
         player.direction = 0;
-        player.gun.direction = 0;
+        player.inventory[player.inventoryIndex].direction = 0;
       }
-      if (keyCode == RIGHT_ARROW) {
+      else if (keyCode == RIGHT_ARROW) {
         player.moving = true;
         player.direction = 1;
-        player.gun.direction = 1;
+        player.inventory[player.inventoryIndex].direction = 1;
       }
-      if (keyCode == UP_ARROW) {
+      else if (keyCode == UP_ARROW) {
         if (!player.jumping) {
           player.yVelocity = JUMPFORCE;
           player.jumping = true;
@@ -261,18 +261,74 @@ function keyPressed() {
           }
         }
         jumping = true;
-      }
-      if (keyCode == 32) {
+      } // Shooting
+      else if (keyCode == 32) {
         player.shooting = true;
         gunTickCount = FIRERATE;
-      }
-      if (keyCode == 16){
+      } // Sprinting
+      else if (keyCode == 16){
         player.sprinting = true;
+      }// INVENTORY BLOCK
+      else if (keyCode == 49 || keyCode == 50 || keyCode == 51 || keyCode == 52) // inventory
+      {
+        switch (keyCode){
+          case 49:
+            player.inventory[0].direction = player.inventory[player.inventoryIndex].direction;
+            player.inventory[0].bullets = player.inventory[player.inventoryIndex].bullets
+            player.inventoryIndex = 0;
+
+            break;
+
+          case 50:
+              player.inventory[1].direction = player.inventory[player.inventoryIndex].direction;
+              player.inventory[1].bullets = player.inventory[player.inventoryIndex].bullets
+              player.inventoryIndex = 1;
+            break;
+
+          case 51:
+            if (player.inventory[2] != null){
+              player.inventory[2].direction = player.inventory[player.inventoryIndex].direction;
+              player.inventory[2].bullets = player.inventory[player.inventoryIndex].bullets
+              player.inventoryIndex = 2;
+            }
+            break;
+
+          case 52:
+            if (player.inventory[3] != null){
+              player.inventory[3].direction = player.inventory[player.inventoryIndex].direction;
+              player.inventory[3].bullets = player.inventory[player.inventoryIndex].bullets
+              player.inventoryIndex = 3;
+            }
+            break;
+        }
       }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+      // Pause
     if (keyCode == 27){
       paused = !paused;
     }
+
+
+
+
+
+
+
+
+
   }
   else{
     if (keyCode == 13){
