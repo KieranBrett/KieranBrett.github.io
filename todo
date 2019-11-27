@@ -1,4 +1,10 @@
-Inventory System, 4 guns can be held, Store the slot number of the gun in the guns category instead of any other way
-gun flickering fix
+Small Details:
 Upgrade Graphics on Player, Hud and some textures
 Adjust Bullet Hit registration, bullets splice instantly when touching any box, and bullet doesnt splice unless top side passes box y
+
+Bigger Features:
+Drop weapons and be able to pick weapons up
+enemies drop weapons
+show current weapon stats
+Enemies only shoot when player is within certain distance
+Player keeps health, score and inventory selection through level change

@@ -69,6 +69,7 @@ let level = 1;
 
 // LOADING OBJECTS
 
+
 function setup() {
   loaded = false;
   canvas = createCanvas(WIDTH, HEIGHT);
@@ -97,8 +98,6 @@ function setup() {
 
   loadLevel(level);
   loadGuns();
-  
-  player = new Player(STARTX, STARTY, 200, 1);
 
   imageOpacity = 0;
   overCount = 0;
@@ -114,6 +113,14 @@ function setup() {
   frameRate(75);
   textSize(30);
   noStroke();
+
+  if (level === 1){
+    player = new Player(STARTX, STARTY, 200, 1);
+  }
+  else{
+    player.playerX = STARTX;
+    player.playerY = STARTY;
+  }
 }
 
 
