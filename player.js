@@ -12,7 +12,7 @@ const FRAMEXMOVESIZE = 550;
 const FRAMEYMOVESIZE = 150;
 
 class Player {
-  constructor(playerX, playerY, playerHealth, gunIndex){
+  constructor(playerX, playerY, playerHealth){
     this.playerHealth = playerHealth;
     this.startHealth = playerHealth;
     this.playerX = playerX;
@@ -29,8 +29,6 @@ class Player {
     this.direction = 1;
     this.inventory = [];
     this.inventoryIndex;
-    this.gunIndex = gunIndex;
-    this.inventory.push(new GunController(false, this.playerX, this.playerY, guns[gunIndex]));
     this.inventory.push(new GunController(false, this.playerX, this.playerY, guns[0]));
     
 

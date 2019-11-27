@@ -287,16 +287,20 @@ function keyPressed() {
       {
         switch (keyCode){
           case 49:
+            if (player.inventory[0] != null){
             player.inventory[0].direction = player.inventory[player.inventoryIndex].direction;
             player.inventory[0].bullets = player.inventory[player.inventoryIndex].bullets
             player.inventoryIndex = 0;
+            }
 
             break;
 
           case 50:
+            if (player.inventory[1] != null){
               player.inventory[1].direction = player.inventory[player.inventoryIndex].direction;
               player.inventory[1].bullets = player.inventory[player.inventoryIndex].bullets
               player.inventoryIndex = 1;
+            }
             break;
 
           case 51:
@@ -424,5 +428,17 @@ function drawObjects() {
     droppedGuns[i].relX = parseInt(droppedGuns[i].gunX) - worldX;
     droppedGuns[i].relY = parseInt(droppedGuns[i].gunY) - worldY;
     droppedGuns[i].update();
+
+    if (droppedGuns[i].relX < player.playerX + PLAYERWIDTH &&
+      droppedGuns[i].relX + droppedGuns[i].gunRight.width > player.playerX &&
+      droppedGuns[i].relY < player.playerY + PLAYERHEIGHT &&
+      droppedGuns[i].relY + droppedGuns[i].gunRight.height > player.playerY){
+        console.log("inside gun");
+        droppedGuns[i].dropped = false;
+        player.inventory.push(droppedGuns[i]);
+
+        droppedGuns.splice(i, 1);
+        return;
+      }
   }
 }
