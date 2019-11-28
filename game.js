@@ -77,18 +77,11 @@ let introStrings = {
   "doubleJump":"You could try double jumping"
 }
 
-if (level == 1){
-  tips.push(new CheckPoints(0, "intro"))
-  tips.push(new CheckPoints(1500, "doubleJump"))
-}
-
-
-
 function setup() {
   loaded = false;
   canvas = createCanvas(WIDTH, HEIGHT);
   
-
+  createButtons();
   nextLevelPic = loadImage("assets/images/loading-next.png");
   pauseScreen = loadImage("assets/images/pauseScreen.png")
   startScreen = loadImage("assets/images/startScreen.png")
@@ -100,16 +93,23 @@ function setup() {
   backGrass = loadImage("assets/images/background-grass.png");
   foregroundGrass = loadImage("assets/images/foreground-grass-blurred.png");
   foregroundHud = loadImage("assets/images/hud.png");
+  shopBack = loadImage("assets/images/shop-back.png");
+  coins = loadImage("assets/images/shop-coins.png");
+  exitShop = loadImage("assets/images/shop-exit.png")
 
   paused = false;
   started = false;
   gameOver = false;
+  shopping = true;
 
   squares = [];
   scenery = [];
   enemies = [];
   guns = [];
   droppedGuns = [];
+  tips = [];
+
+  loadTips();
 
   loadLevel(level);
   loadGuns();
@@ -225,16 +225,10 @@ function loadNextLevel() {
   textSize(80);
   text(`Level ${level}`, 700, 550)
 
-  if (nextLevelCount > NEXTLEVELLOADTIME){
-    textSize(30);
-    nextLevelCount = 0;
+  if (!showShop(nextLevel)){
     nextLevel = false;
-  }
-  else{
-    if (nextLevelCount === 1){
-      level++;
-      setup();
-    }
+    level++;
+    setup();
   }
 }
 
@@ -359,41 +353,16 @@ function keyPressed() {
 
         }
       }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
       // Pause
     if (keyCode == 27){
       paused = !paused;
     }
-
-
-
-
-
-
-
-
-
   }
   else{
     if (keyCode == 13){
       started = true;
     }
   }
-
-  
 }
 
 function keyReleased() {
@@ -405,6 +374,12 @@ function keyReleased() {
   }
   else if (keyCode == 16){
     player.sprinting = false;
+  }
+}
+
+function mouseClicked() {
+  if (nextLevel){
+    checkClick(mouseX, mouseY)
   }
 }
 

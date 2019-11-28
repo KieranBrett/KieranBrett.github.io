@@ -4,6 +4,13 @@ const PAUSESENTENCE = 100;
 const SUBTITLEHEIGHT = 200;
 let textShowing = false;
 
+function loadTips(){
+    if (level == 1){
+      tips.push(new CheckPoints(0, "intro"))
+      tips.push(new CheckPoints(1500, "doubleJump"))
+    }
+  }
+  
 function updateText(){
     fill(255, 255, 255)
     textStyle(BOLD)
