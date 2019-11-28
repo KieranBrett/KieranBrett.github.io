@@ -148,9 +148,12 @@ function loadGuns() {
   guns.push (new Gun(8, 55, 100, 75, gun2Left, gun2Right, gun2RightBullet, gun2LeftBullet, 50, "Boss RPG"))
 
   // DROPPED GUNS
+  if (level === 1){ // Level 1 dropped guns
   droppedGuns.push (new GunController(false, 1250, 250, guns[1]))
   droppedGuns[0].dropped = true;
   droppedGuns[0].canBePicked = true;
+  }
+  
 }
 
 
@@ -333,9 +336,11 @@ function keyPressed() {
             break;
 
             case 81:
-              player.inventory[player.inventoryIndex].dropGun(player.playerX, player.playerY)
+              if (player.inventory[player.inventoryIndex] != null){
+                player.inventory[player.inventoryIndex].dropGun(player.playerX, player.playerY)
               droppedGuns.push(player.inventory[player.inventoryIndex]);
               player.inventory.splice(player.inventoryIndex, 1);
+              }
 
               // player.shuffleInventory();
               break;

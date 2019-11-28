@@ -185,9 +185,7 @@ class GunController {
               bullets[i].relY <=
                 parseInt(squares[s].relY) + squares[s].picture.height
             ) {
-              bullets.splice(i, 1);
-  
-              if (squares[s].breakable && !this.enemyGun) {
+              if (squares[s].breakable && !bullets[i].enemyBullet) {
                 squares[s].health -= bullets[i].dmg;
                 
                 if (squares[s].health <= 0) {
@@ -198,6 +196,8 @@ class GunController {
                   squares[s].damaged = true;
                 }
               }
+
+              bullets.splice(i, 1);
               return;
             }
           }
