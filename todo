@@ -8,7 +8,6 @@ show current weapon stats
 Enemies only shoot when player is within certain distance
 Player keeps health, score and inventory selection through level change
 Guns sit on proper sides of players
-Point system so player can upgrade weapons stats
 
-need to display player stats in upgrade menu
-need to be able to change inventory index in upgrade menu
+Need each gun to have max attributes
+

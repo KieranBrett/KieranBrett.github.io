@@ -9,6 +9,11 @@ const GUNPOS = 70;
 
 let gunTickCount;
 
+const MAXVELOCITY = 30;
+const MAXFIRERATE = 2;
+const MAXSPREAD = 100;
+const MAXDAMAGE = 50;
+
 class GunController {
     constructor(enemy, playerX, playerY, gun) {
       this.bullets = [];

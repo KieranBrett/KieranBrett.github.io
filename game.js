@@ -55,6 +55,7 @@ let worldY;
 let frameRateTotal;
 let frameRateCount;
 
+let clicked;
 let gameOver;
 let overScreen;
 let overCount;
@@ -78,10 +79,9 @@ let introStrings = {
 }
 
 function setup() {
+  clicked = false;
   loaded = false;
   canvas = createCanvas(WIDTH, HEIGHT);
-  
-  createButtons();
   nextLevelPic = loadImage("assets/images/loading-next.png");
   pauseScreen = loadImage("assets/images/pauseScreen.png")
   startScreen = loadImage("assets/images/startScreen.png")
@@ -107,8 +107,12 @@ function setup() {
   enemies = [];
   guns = [];
   droppedGuns = [];
-  tips = [];
+  
 
+  shopButtons = [];
+  createButtons();
+
+  tips = [];
   loadTips();
 
   loadLevel(level);
@@ -127,7 +131,7 @@ function setup() {
 
   frameRate(75);
   textSize(30);
-  noStroke();
+  // noStroke();
 
   if (level === 1){
     player = new Player(STARTX, STARTY, 200, 1);
@@ -154,7 +158,7 @@ function loadGuns() {
   // START GUN
   guns.push (new Gun(17, 7, 10, 20, gun1Left, gun1Right, gun1RightBullet, gun1LeftBullet, 0, "Starter Rifle"))
   // ROCKET
-  guns.push (new Gun(6, 25, 80, 200, gun2Left, gun2Right, gun2RightBullet, gun2LeftBullet, 50, "Basic RPG"))
+  guns.push (new Gun(6, 25, 80, 50, gun2Left, gun2Right, gun2RightBullet, gun2LeftBullet, 50, "Basic RPG"))
   // BOSS FIGHT ROCKET
   guns.push (new Gun(8, 55, 100, 75, gun2Left, gun2Right, gun2RightBullet, gun2LeftBullet, 50, "Boss RPG"))
 
@@ -232,26 +236,9 @@ function loadNextLevel() {
   }
 }
 
-
-
-
-
-
-
-
-
 function mainMenu(){ // MAIN MENU METHOD TO BE PUT HERE
   image(startScreen, 0, 0)
 }
-
-
-
-
-
-
-
-
-
 
 function endGameFade(){
   overCount++;
@@ -377,7 +364,7 @@ function keyReleased() {
   }
 }
 
-function mouseClicked() {
+function mousePressed() {
   if (nextLevel){
     checkClick(mouseX, mouseY)
   }

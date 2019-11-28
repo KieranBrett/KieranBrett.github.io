@@ -7,6 +7,15 @@ let exitShop;
 const EXITX = 1250;
 const EXITY = 600;
 
+const GUNFIELDS = 4;
+
+const BUTTONGAP = 75;
+const GUNNEGX = 200;
+const GUNPOSX = 275;
+const BUTTONYSTART = 250;
+
+const STATBARLENGTH = 280;
+const STATBARHEIGHT = 20;
 
 function showShop(nextLevel){
     // if (shopping != nextLevel){
@@ -26,21 +35,23 @@ function showShop(nextLevel){
                 fieldText = "Bullet Velocity"
                 value = 80;
                 break;
-            
+
             case 1:
-                fieldText = "Fire Rate"
-                value = 100;
-                break;
-    
-            case 2:
                 fieldText = "Bullet Damage"
                 value = 70;
                 break;
             
-            case 3:
+            case 2:
                 fieldText = "Bullet Spread"
                 value = 50;
                 break;
+            
+            case 3:
+                fieldText = "Fire Rate"
+                value = 100;
+                break;
+    
+            
         }
 
 
@@ -53,6 +64,61 @@ function showShop(nextLevel){
         text(value, GUNPOSX + 300, textY);
     }
 
+    // Drawing Gun Stats
+    // Inventory
+    for (var i = 0; i < 4; i++){
+        if (player.inventory[i] != null){
+          if (i == player.inventoryIndex){
+            fill (255, 0, 0);
+          }
+          text(`${i + 1}. ${player.inventory[i].gunName}`, 900, BUTTONYSTART + 30 + (35 * i));
+          fill (255,255,255)
+        }
+        else{
+          text(`${i + 1}. Empty`, 900, BUTTONYSTART + 30 + (35 * i))
+        }
+      }
+    // Stats
+    strokeWeight(4);
+    stroke(0);
+    fill(50)
+    // Outter
+    rect(1070, BUTTONYSTART, 300, 300)
+    
+    // Displaying stats
+    
+    fill(255);
+    let ammount = (player.inventory[player.inventoryIndex].bulletVel / VELMAX) * STATBARLENGTH;
+    text("Bullet Velocity", 1080, BUTTONYSTART + 30);
+    rect(1080, BUTTONYSTART + 30 + 10, STATBARLENGTH, STATBARHEIGHT);
+    fill(20, 200, 20);
+    rect(1080, BUTTONYSTART + 30 + 10, -ammount, STATBARHEIGHT);
+
+    
+    fill(255);
+    ammount = (player.inventory[player.inventoryIndex].bulletDmg / MAXDAMAGE) * STATBARLENGTH;
+    text("Bullet Damage", 1080, BUTTONYSTART + 95);
+    rect(1080, BUTTONYSTART + 95 + 10, STATBARLENGTH, STATBARHEIGHT);
+    fill(20, 200, 20);
+    rect(1080, BUTTONYSTART + 95 + 10, ammount, STATBARHEIGHT);
+    
+    fill(255);
+    ammount = (player.inventory[player.inventoryIndex].bulletSpread / MAXSPREAD) * STATBARLENGTH;
+    text("Bullet Spread", 1080, BUTTONYSTART + 160);
+    rect(1080, BUTTONYSTART + 160 + 10, STATBARLENGTH, STATBARHEIGHT);
+    fill(20, 200, 20);
+    rect(1080, BUTTONYSTART + 160 + 10, ammount, STATBARHEIGHT);
+
+    fill(255);
+    ammount = (MAXFIRERATE / player.inventory[player.inventoryIndex].fireRate) * STATBARLENGTH;
+    text("Gun Fire Rate", 1080, BUTTONYSTART + 225);
+    rect(1080, BUTTONYSTART + 225 + 10, STATBARLENGTH, STATBARHEIGHT);
+    fill(20, 200, 20);
+    rect(1080, BUTTONYSTART + 225 + 10, ammount, STATBARHEIGHT);
+
+
+
+    // Drawing Buttons
     shopButtons.forEach(b => {
         b.draw();
     })
@@ -66,57 +132,75 @@ const UPGRADEAMMOUNT = 2;
 const BULLETUPGRADE = 5;
 
 function checkClick(x, y){
-    console.log(x)
+    console.log("CheckClick")
     
     shopButtons.forEach(s => {
         if (s.x < x && s.x + s.image.width > x &&
             s.y < y && s.y + s.image.height > y){
-                console.log(`Button click ${s.fieldIndex}`)
+                console.log("Clicked")
 
                 if (player.score >= s.cost){
-                    player.score -= s.cost / 2;
-                }
 
                 switch(s.fieldIndex){
                     case 0:
                     if (s.positive){
-                        player.inventory[player.inventoryIndex].bulletVel += UPGRADEAMMOUNT;
+                        if (player.inventory[player.inventoryIndex].bulletVel <= MAXVELOCITY - UPGRADEAMMOUNT){
+                            player.inventory[player.inventoryIndex].bulletVel += UPGRADEAMMOUNT;
+                            player.score -= parseInt(s.cost);
+                        }  
                     }
                     else{
                         player.inventory[player.inventoryIndex].bulletVel -= UPGRADEAMMOUNT;
                     }
                     break;
-            
+
                 case 1:
                     if (s.positive){
-                        player.inventory[player.inventoryIndex].fireRate -= 1;
-                    }
-                    else{
-                        player.inventory[player.inventoryIndex].fireRate += 1;
-                    }
-                    break;
-    
-                case 2:
-                    if (s.positive){
-                        player.inventory[player.inventoryIndex].bulletDmg += BULLETUPGRADE;
+                        if (player.inventory[player.inventoryIndex].bulletDmg <= MAXDAMAGE - BULLETUPGRADE){
+
+                            player.inventory[player.inventoryIndex].bulletDmg += BULLETUPGRADE;
+                            player.score -= parseInt(s.cost);
+                        }
                     }
                     else{
                         player.inventory[player.inventoryIndex].bulletDmg -= BULLETUPGRADE;
                     }
                     break;
             
-                case 3:
+                case 2:
                     if (s.positive){
-                        player.inventory[player.inventoryIndex].bulletSpread += UPGRADEAMMOUNT;
+                        if (player.inventory[player.inventoryIndex].bulletSpread <= MAXSPREAD - UPGRADEAMMOUNT){
+
+                            player.inventory[player.inventoryIndex].bulletSpread += UPGRADEAMMOUNT;
+                            player.score -= parseInt(s.cost);
+                        }
                     }
                     else{
-                        player.inventory[player.inventoryIndex].bulletSpread -= UPGRADEAMMOUNT;
+                        if (player.inventory[player.inventoryIndex].bulletSpread > 0 + UPGRADEAMMOUNT){
+                            player.inventory[player.inventoryIndex].bulletSpread -= UPGRADEAMMOUNT;
+                            player.score -= parseInt(s.cost);
+                        }
+                        
+                    }
+                    break;
+            
+                case 3:
+                    if (s.positive){
+                        if (player.inventory[player.inventoryIndex].fireRate >= MAXFIRERATE + 1){
+
+                            player.inventory[player.inventoryIndex].fireRate -= 1;
+                            player.score -= parseInt(s.cost);
+                        }
+                    }
+                    else{
+                        player.inventory[player.inventoryIndex].fireRate += 1;
                     }
                     break;
                 }
-
-                return;
             }
+
+            return;
+        }
     })
 
     if (x > EXITX && x < EXITX + exitShop.width &&
@@ -125,13 +209,6 @@ function checkClick(x, y){
             shopping = false;
         }
 }
-
-const GUNFIELDS = 4;
-
-const BUTTONGAP = 75;
-const GUNNEGX = 200;
-const GUNPOSX = 275;
-const BUTTONYSTART = 300;
 
 function createButtons(){
 
@@ -148,27 +225,29 @@ function createButtons(){
                 positive = true;
                 value = 80;
                 break;
-            
+
             case 1:
-                fieldText = "Fire Rate"
-                minus = false;
-                positive = true;
-                value = 100;
-                break;
-    
-            case 2:
                 fieldText = "Bullet Damage"
                 minus = false;
                 positive = true;
                 value = 70;
                 break;
             
-            case 3:
+            case 2:
                 fieldText = "Bullet Spread"
                 minus = true;
                 positive = true;
                 value = 50;
                 break;
+            
+            case 3:
+                fieldText = "Fire Rate"
+                minus = false;
+                positive = true;
+                value = 100;
+                break;
+    
+            
         }
     
         if (minus){
