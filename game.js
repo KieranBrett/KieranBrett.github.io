@@ -70,7 +70,18 @@ let started;
 let startScreen;
 let level = 1;
 
-// LOADING OBJECTS
+
+// SUBTITLES
+let introStrings = {
+  "intro":"Welcome to my game, Unnamed Game",
+  "doubleJump":"You could try double jumping"
+}
+
+if (level == 1){
+  tips.push(new CheckPoints(0, "intro"))
+  tips.push(new CheckPoints(1500, "doubleJump"))
+}
+
 
 
 function setup() {
@@ -175,6 +186,7 @@ function draw() {
             drawForeground();
 
             bulletUpdate();
+            updateText();
         
             }
             else{ // If game is over

@@ -71,7 +71,7 @@ function drawBackground() {
   
     // FPS AND WORLD X
     // fill(color("white"));
-    // text(`World X : ${worldX}`, 50, 50);
+    // text(`World X : ${worldX}`, 50, 550);
     // text(
     //   `Average FPS : ${(frameRateTotal / frameRateCount).toFixed(2)}`,
     //   50,
