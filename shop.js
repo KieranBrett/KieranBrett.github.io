@@ -7,6 +7,7 @@ let exitShop;
 const EXITX = 1250;
 const EXITY = 600;
 
+
 function showShop(nextLevel){
     // if (shopping != nextLevel){
     //     shopping = nextLevel;
@@ -23,17 +24,17 @@ function showShop(nextLevel){
         switch (i){
             case 0:
                 fieldText = "Bullet Velocity"
-                value = 200;
+                value = 80;
                 break;
             
             case 1:
                 fieldText = "Fire Rate"
-                value = 300;
+                value = 100;
                 break;
     
             case 2:
                 fieldText = "Bullet Damage"
-                value = 400;
+                value = 70;
                 break;
             
             case 3:
@@ -61,6 +62,9 @@ function showShop(nextLevel){
     return shopping;
 }
 
+const UPGRADEAMMOUNT = 2;
+const BULLETUPGRADE = 5;
+
 function checkClick(x, y){
     console.log(x)
     
@@ -68,6 +72,50 @@ function checkClick(x, y){
         if (s.x < x && s.x + s.image.width > x &&
             s.y < y && s.y + s.image.height > y){
                 console.log(`Button click ${s.fieldIndex}`)
+
+                if (player.score >= s.cost){
+                    player.score -= s.cost / 2;
+                }
+
+                switch(s.fieldIndex){
+                    case 0:
+                    if (s.positive){
+                        player.inventory[player.inventoryIndex].bulletVel += UPGRADEAMMOUNT;
+                    }
+                    else{
+                        player.inventory[player.inventoryIndex].bulletVel -= UPGRADEAMMOUNT;
+                    }
+                    break;
+            
+                case 1:
+                    if (s.positive){
+                        player.inventory[player.inventoryIndex].fireRate -= 1;
+                    }
+                    else{
+                        player.inventory[player.inventoryIndex].fireRate += 1;
+                    }
+                    break;
+    
+                case 2:
+                    if (s.positive){
+                        player.inventory[player.inventoryIndex].bulletDmg += BULLETUPGRADE;
+                    }
+                    else{
+                        player.inventory[player.inventoryIndex].bulletDmg -= BULLETUPGRADE;
+                    }
+                    break;
+            
+                case 3:
+                    if (s.positive){
+                        player.inventory[player.inventoryIndex].bulletSpread += UPGRADEAMMOUNT;
+                    }
+                    else{
+                        player.inventory[player.inventoryIndex].bulletSpread -= UPGRADEAMMOUNT;
+                    }
+                    break;
+                }
+
+                return;
             }
     })
 
@@ -86,9 +134,6 @@ const GUNPOSX = 275;
 const BUTTONYSTART = 300;
 
 function createButtons(){
-    // shopButtons.push(new Buttons(200, 300, 0, 200, false))
-    // shopButtons.push(new Buttons(500, 300, 0, 200, true))
-    // text("")
 
     let fieldText;
     let minus;
@@ -101,21 +146,21 @@ function createButtons(){
                 fieldText = "Bullet Velocity"
                 minus = false;
                 positive = true;
-                value = 200;
+                value = 80;
                 break;
             
             case 1:
                 fieldText = "Fire Rate"
-                minus = true;
+                minus = false;
                 positive = true;
-                value = 300;
+                value = 100;
                 break;
     
             case 2:
                 fieldText = "Bullet Damage"
-                minus = true;
+                minus = false;
                 positive = true;
-                value = 400;
+                value = 70;
                 break;
             
             case 3:
@@ -135,9 +180,6 @@ function createButtons(){
         let textX = (GUNNEGX + ((GUNPOSX - GUNNEGX) / 2)) - textWidth(text);
         let textY = BUTTONYSTART + (i * BUTTONGAP);
         text(fieldText, textX, textY)
-
-        console.log(fieldText);
-        console.log(textX);
     }
 }
 
