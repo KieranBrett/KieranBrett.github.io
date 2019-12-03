@@ -88,29 +88,29 @@ function showShop(nextLevel){
     // Displaying stats
     
     fill(255);
-    let ammount = (player.inventory[player.inventoryIndex].bulletVel / VELMAX) * STATBARLENGTH;
+    let ammount = (player.inventory[player.inventoryIndex].bulletVel / player.inventory[player.inventoryIndex].maxVelocity) * STATBARLENGTH;
     text("Bullet Velocity", 1080, BUTTONYSTART + 30);
     rect(1080, BUTTONYSTART + 30 + 10, STATBARLENGTH, STATBARHEIGHT);
     fill(20, 200, 20);
-    rect(1080, BUTTONYSTART + 30 + 10, -ammount, STATBARHEIGHT);
+    rect(1080, BUTTONYSTART + 30 + 10, ammount, STATBARHEIGHT);
 
     
     fill(255);
-    ammount = (player.inventory[player.inventoryIndex].bulletDmg / MAXDAMAGE) * STATBARLENGTH;
+    ammount = (player.inventory[player.inventoryIndex].bulletDmg / player.inventory[player.inventoryIndex].maxDamage) * STATBARLENGTH;
     text("Bullet Damage", 1080, BUTTONYSTART + 95);
     rect(1080, BUTTONYSTART + 95 + 10, STATBARLENGTH, STATBARHEIGHT);
     fill(20, 200, 20);
     rect(1080, BUTTONYSTART + 95 + 10, ammount, STATBARHEIGHT);
     
     fill(255);
-    ammount = (player.inventory[player.inventoryIndex].bulletSpread / MAXSPREAD) * STATBARLENGTH;
+    ammount = (player.inventory[player.inventoryIndex].bulletSpread / player.inventory[player.inventoryIndex].maxSpread) * STATBARLENGTH;
     text("Bullet Spread", 1080, BUTTONYSTART + 160);
     rect(1080, BUTTONYSTART + 160 + 10, STATBARLENGTH, STATBARHEIGHT);
     fill(20, 200, 20);
     rect(1080, BUTTONYSTART + 160 + 10, ammount, STATBARHEIGHT);
 
     fill(255);
-    ammount = (MAXFIRERATE / player.inventory[player.inventoryIndex].fireRate) * STATBARLENGTH;
+    ammount = (player.inventory[player.inventoryIndex].maxFirerate / player.inventory[player.inventoryIndex].fireRate) * STATBARLENGTH;
     text("Gun Fire Rate", 1080, BUTTONYSTART + 225);
     rect(1080, BUTTONYSTART + 225 + 10, STATBARLENGTH, STATBARHEIGHT);
     fill(20, 200, 20);
@@ -144,7 +144,7 @@ function checkClick(x, y){
                 switch(s.fieldIndex){
                     case 0:
                     if (s.positive){
-                        if (player.inventory[player.inventoryIndex].bulletVel <= MAXVELOCITY - UPGRADEAMMOUNT){
+                        if (player.inventory[player.inventoryIndex].bulletVel <= player.inventory[player.inventoryIndex].maxVelocity - UPGRADEAMMOUNT){
                             player.inventory[player.inventoryIndex].bulletVel += UPGRADEAMMOUNT;
                             player.score -= parseInt(s.cost);
                         }  
@@ -156,7 +156,7 @@ function checkClick(x, y){
 
                 case 1:
                     if (s.positive){
-                        if (player.inventory[player.inventoryIndex].bulletDmg <= MAXDAMAGE - BULLETUPGRADE){
+                        if (player.inventory[player.inventoryIndex].bulletDmg <= player.inventory[player.inventoryIndex].maxDamage - BULLETUPGRADE){
 
                             player.inventory[player.inventoryIndex].bulletDmg += BULLETUPGRADE;
                             player.score -= parseInt(s.cost);
@@ -169,7 +169,7 @@ function checkClick(x, y){
             
                 case 2:
                     if (s.positive){
-                        if (player.inventory[player.inventoryIndex].bulletSpread <= MAXSPREAD - UPGRADEAMMOUNT){
+                        if (player.inventory[player.inventoryIndex].bulletSpread <= player.inventory[player.inventoryIndex].maxSpread - UPGRADEAMMOUNT){
 
                             player.inventory[player.inventoryIndex].bulletSpread += UPGRADEAMMOUNT;
                             player.score -= parseInt(s.cost);
@@ -186,7 +186,7 @@ function checkClick(x, y){
             
                 case 3:
                     if (s.positive){
-                        if (player.inventory[player.inventoryIndex].fireRate >= MAXFIRERATE + 1){
+                        if (player.inventory[player.inventoryIndex].fireRate >= player.inventory[player.inventoryIndex].maxFirerate + 1){
 
                             player.inventory[player.inventoryIndex].fireRate -= 1;
                             player.score -= parseInt(s.cost);

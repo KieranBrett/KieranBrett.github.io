@@ -1,7 +1,5 @@
 const LEVELCOUNT = 3;
 
-
-
 const DOUBLEJUMP = true;
 //FrameSize
 const WIDTH = 1600;
@@ -70,13 +68,6 @@ let pauseScreen;
 let started;
 let startScreen;
 let level = 1;
-
-
-// SUBTITLES
-let introStrings = {
-  "intro":"Welcome to my game, Unnamed Game",
-  "doubleJump":"You could try double jumping"
-}
 
 function setup() {
   clicked = false;
@@ -155,20 +146,25 @@ function loadGuns() {
   let gun2RightBullet = "assets/images/guns/rpg-bullet-right.png"
   let gun2LeftBullet = "assets/images/guns/rpg-bullet-left.png"
 
+  //
+
+
   // START GUN
-  guns.push (new Gun(17, 7, 10, 20, gun1Left, gun1Right, gun1RightBullet, gun1LeftBullet, 0, "Starter Rifle"))
+  guns.push (new Gun(17, 7, 10, 20, gun1Left, gun1Right, gun1RightBullet, gun1LeftBullet, 0, 20, 2, 30, 50, "Starter Rifle"))
   // ROCKET
-  guns.push (new Gun(6, 25, 80, 50, gun2Left, gun2Right, gun2RightBullet, gun2LeftBullet, 50, "Basic RPG"))
+  guns.push (new Gun(6, 25, 80, 50, gun2Left, gun2Right, gun2RightBullet, gun2LeftBullet, 50, 20, 10, 100, 100, "Basic RPG"))
   // BOSS FIGHT ROCKET
-  guns.push (new Gun(8, 55, 100, 75, gun2Left, gun2Right, gun2RightBullet, gun2LeftBullet, 50, "Boss RPG"))
+  guns.push (new Gun(8, 55, 100, 75, gun2Left, gun2Right, gun2RightBullet, gun2LeftBullet, 0, 0, 0, 0, 0, "Boss RPG"))
 
   // DROPPED GUNS
-  if (level === 1){ // Level 1 dropped guns
-  droppedGuns.push (new GunController(false, 1250, 250, guns[1]))
-  droppedGuns[0].dropped = true;
-  droppedGuns[0].canBePicked = true;
+
+  switch (level){
+    case 1:
+        droppedGuns.push (new GunController(false, 2250, -20, guns[1]))
+        droppedGuns[0].dropped = true;
+        droppedGuns[0].canBePicked = true;
+      break;
   }
-  
 }
 
 
@@ -181,17 +177,13 @@ function draw() {
         if (!paused){
           if (player.playerHealth > 0){
             clear();
-        
             drawBackground();
-          
             drawObjects();
             drops.updateDrops();
             player.updatePlayer();
             drawForeground();
-
             bulletUpdate();
             updateText();
-        
             }
             else{ // If game is over
               endGameFade();
@@ -212,7 +204,6 @@ function draw() {
   else{ // If the have passed all levels
     image(gameOverScreen, 0, 0);
   }
-  
 }
 
 
@@ -284,7 +275,7 @@ function keyPressed() {
       } // Shooting
       else if (keyCode == 32) {
         player.shooting = true;
-        gunTickCount = FIRERATE;
+        gunTickCount = player.inventory[player.inventoryIndex].fireRate;
       } // Sprinting
       else if (keyCode == 16){
         player.sprinting = true;

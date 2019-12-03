@@ -1,18 +1,13 @@
-// BULLET CONSTS
-const BULLETWIDTH = 10;
-const BULLETHEIGHT = 5;
-const BULLETVELOCITY = 15;
-const FIRERATE = 7;
-const BULLETSPREAD = 10;
-const BULLETDMG = 20;
+// // BULLET CONSTS
+// const BULLETWIDTH = 10;
+// const BULLETHEIGHT = 5;
+// const BULLETVELOCITY = 15;
+// const FIRERATE = 7;
+// const BULLETSPREAD = 10;
+// const BULLETDMG = 20;
 const GUNPOS = 70;
 
 let gunTickCount;
-
-const MAXVELOCITY = 30;
-const MAXFIRERATE = 2;
-const MAXSPREAD = 100;
-const MAXDAMAGE = 50;
 
 class GunController {
     constructor(enemy, playerX, playerY, gun) {
@@ -36,6 +31,11 @@ class GunController {
       this.bulletSpread = gun.bulletSpread;
       this.bulletDmg = gun.bulletDmg;
       this.gunOffset = gun.gunOffset;
+
+      this.maxVelocity = gun.maxVelocity;
+      this.maxFirerate = gun.maxFirerate;
+      this.maxSpread = gun.maxSpread;
+      this.maxDamage = gun.maxDamage;
 
       this.enemyGun = enemy;
       this.direction = 1;
@@ -149,7 +149,7 @@ class GunController {
   }
 
   class Gun{
-    constructor(bulletVel, fireRate, bulletSpread, bulletDmg, gunLeft, gunRight, bulletRight, bulletLeft, gunOffset, gunName){
+    constructor(bulletVel, fireRate, bulletSpread, bulletDmg, gunLeft, gunRight, bulletRight, bulletLeft, gunOffset, maxVelocity, maxFirerate, maxSpread, maxDamage, gunName){
       this.bulletLeft = bulletLeft;
       this.bulletRight = bulletRight;
 
@@ -161,6 +161,11 @@ class GunController {
       this.gunRight = gunRight;
       this.gunOffset = gunOffset;
       this.gunName = gunName;
+
+      this.maxVelocity = maxVelocity;
+      this.maxFirerate = maxFirerate;
+      this.maxSpread = maxSpread;
+      this.maxDamage = maxDamage;
     }
   }
 

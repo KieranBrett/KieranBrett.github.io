@@ -1,13 +1,38 @@
 
-const LETTERSPEED = 5;
-const PAUSESENTENCE = 100;
+const SUBTITLEWIDTH = 800;
+const LETTERSPEED = 1;
+const PAUSESENTENCE = 80;
 const SUBTITLEHEIGHT = 200;
 let textShowing = false;
 
+// SUBTITLES
+let introStrings = {
+    // Level 1
+    "intro":"Welcome to Unnamed Game",
+    "doubleJump":"You could sprint double jump using shift",
+    "Weapon":"Stand on a weapon to pick it up, press Q to drop it",
+    "shoot": "Hold space to shoot your gun",
+    "drops":"Enemies will drop items which you can pickup",
+    "portal":"Jump in the portal to continue",
+
+    // Level 2
+    "breakable":"Cracked boxes can be shot and broken"
+  }
+
 function loadTips(){
-    if (level == 1){
-      tips.push(new CheckPoints(0, "intro"))
-      tips.push(new CheckPoints(1500, "doubleJump"))
+    switch (level){
+        case 1:
+                tips.push(new CheckPoints(200, "intro"))
+                tips.push(new CheckPoints(1200, "doubleJump"))
+                tips.push(new CheckPoints(2200, "Weapon"))
+                tips.push(new CheckPoints(2800, "shoot"))
+                tips.push(new CheckPoints(3200, "drops"))
+                tips.push(new CheckPoints(4500, "portal"))
+            break;
+
+        case 2:
+            tips.push(new CheckPoints(500, "breakable"))
+            break;
     }
   }
   
@@ -29,12 +54,16 @@ function updateText(){
 
             }
         }
-        else{ // If no text showing
-
-        }
-
-        if (tips[i].drawing == true){
-            tips[i].drawText(i);
+        else{ // If text is showing
+            if (tips[i].drawing == true){
+                tips[i].drawText(i);
+                
+                // Remove tip if player has run past
+                // if (player.playerX > tips[i].relX + SUBTITLEWIDTH){
+                //     tips.splice(i, 1)
+                //     textShowing = false;
+                // }
+            }
         }
     }
 }
@@ -67,15 +96,9 @@ class CheckPoints {
                         console.log(this.tipName);
                             this.textDone = true;
                             this.stringIndex--;
-                        // this.stringIndex++;
-                        // if (this.stringIndex >= introStrings[`${this.tipName}`].length){
-                            
-                        // }
-                        // else{
-                        //     this.charIndex = 0;
-                        // }
                     }
                 }
+                
                     let textWid = textWidth(introStrings[`${this.tipName}`].substring(0, this.charIndex))
                     text(`${introStrings[`${this.tipName}`].substring(0, this.charIndex)}`, 800 - (textWid / 2), SUBTITLEHEIGHT)
             }
@@ -83,7 +106,6 @@ class CheckPoints {
                 this.timerCount++;
                 if (this.timerCount >= PAUSESENTENCE){
                     this.timerDone = true;
-
                     textShowing = false;
                 }
 

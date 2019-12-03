@@ -3,13 +3,14 @@ const STEPSIZE = 10;
 const SPRINTMULTIPLIER = 1.5;
 const VELMAX = -30;
 
-
 const JUMPFORCE = 29;
 const GRAVITYFORCE = -2;
 const PLAYERHEIGHT = 200;
 const PLAYERWIDTH = 100;
 const FRAMEXMOVESIZE = 550;
 const FRAMEYMOVESIZE = 150;
+
+const STARTSCORE = 10000;
 
 class Player {
   constructor(playerX, playerY, playerHealth){
@@ -34,7 +35,7 @@ class Player {
 
     this.playerPic;
     this.effectiveStep = STEPSIZE;
-    this.score = 0;
+    this.score = STARTSCORE;
     this.inventoryIndex = 0;
     
   }
