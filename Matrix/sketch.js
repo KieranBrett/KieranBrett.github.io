@@ -3,7 +3,13 @@ const MAXLENGTH = 15;
 const MINTEXT = 5;
 const MAXTEXT = 50
 
-let create;
+let r;
+let g;
+let b;
+let rDes;
+let gDes;
+let bDes;
+
 let characters = ['ﾊ', 'ﾐ',
                   'ﾋ', 'ｰ', 'ｳ',
                   'ｼ', 'ﾅ', 'ﾓ',
@@ -28,12 +34,18 @@ let strings = [];
 function setup() {
   createCanvas(windowWidth, windowHeight);
   
-  create = false;
-  fill(255, 60, 120);
+  r = random(256);
+  rDes = false;
+  g = random(256);
+  gDes = false;
+  b = random(256);
+  bDes = false;
+
+  fill(r, g, b);
 }
 
 function draw() {
-  background(10, 100); // adds motion blur effect
+  background(10, 200); // adds motion blur effect
   
   for (let i = strings.length - 1; i >= 0; i--){
     strings[i].update()
@@ -47,9 +59,8 @@ function draw() {
     strings.push(new TextString());
   }
   
-  // if (create === true){
-  //   strings.push(new TextString());
-  // }
+  updateColour();
+
 }
 
 class TextString{
@@ -94,10 +105,58 @@ class Character{
   }
 }
 
-function touchStarted(){
-  create = true;
-}
-
-function touchEnded() {
-  create = false;
+function updateColour(){
+  
+  let number = parseInt(random(2));
+  
+  if (number === 0){
+    if (rDes){
+      r--
+      if (r < 0){
+        r = 0;
+        rDes = false;
+      }
+    }
+    else{
+      r++
+      if (r > 255){
+        r = 255;
+        rDes = true;
+      }
+    }
+  } else if (number === 1){
+   if (gDes){
+      g--
+      if (g < 0){
+        g = 0;
+        gDes = false;
+      }
+    }
+    else{
+      g++
+      if (g > 255){
+        g = 255;
+        gDes = true;
+      }
+    }
+  } else if (number === 2){
+    if (bDes){
+      b--
+      if (b < 0){
+        b = 0;
+        bDes = false;
+      }
+    }
+    else{
+      b++
+      if (b > 255){
+        b = 255;
+        bDes = true;
+      }
+    }
+  } else{
+    console.log("somehow got here");
+  }
+    
+  fill(r, g, b);
 }
