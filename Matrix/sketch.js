@@ -43,13 +43,13 @@ function draw() {
     }
   }
   
-  // if (frameCount % 20 == 0){
-  //   strings.push(new TextString());
-  // }
-  
-  if (create === true){
+  if (frameCount % 4 == 0){
     strings.push(new TextString());
   }
+  
+  // if (create === true){
+  //   strings.push(new TextString());
+  // }
 }
 
 class TextString{
