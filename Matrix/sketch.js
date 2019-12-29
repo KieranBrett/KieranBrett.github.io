@@ -3,6 +3,7 @@ const MAXLENGTH = 15;
 const MINTEXT = 5;
 const MAXTEXT = 50
 
+let create;
 let characters = ['ﾊ', 'ﾐ',
                   'ﾋ', 'ｰ', 'ｳ',
                   'ｼ', 'ﾅ', 'ﾓ',
@@ -27,6 +28,7 @@ let strings = [];
 function setup() {
   createCanvas(windowWidth, windowHeight);
   
+  create = false;
   fill(255, 60, 120);
 }
 
@@ -45,7 +47,7 @@ function draw() {
   //   strings.push(new TextString());
   // }
   
-  if (keyIsPressed === true){
+  if (create === true){
     strings.push(new TextString());
   }
 }
@@ -90,4 +92,12 @@ class Character{
       this.character = characters[parseInt(random(0, characters.length - 1))]
     }
   }
+}
+
+function touchStarted(){
+  create = true;
+}
+
+function touchEnded() {
+  create = false;
 }
