@@ -82,9 +82,18 @@ class TextString{
   
   update(){
     textSize(this.textSize)
+
     for (let i = 0; i < this.characters.length; i++){
+
+
       text(this.characters[i].character, this.x, this.y - (i * this.textSize))
-      this.characters[i].update()
+      // filter(BLUR, 2);
+      // text(this.characters[i].character, this.x, this.y - (i * this.textSize))
+
+      if (random(0, 10) < 1.5){
+        this.characters[i].update()
+
+      }
     }
     
     this.y += this.textSpeed;
@@ -99,9 +108,7 @@ class Character{
   }
   
   update(){
-    if (random(20) < 5){
       this.character = characters[parseInt(random(0, characters.length - 1))]
-    }
   }
 }
 
