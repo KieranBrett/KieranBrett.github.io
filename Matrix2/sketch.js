@@ -1,6 +1,39 @@
-const TESTSTR = `THE MATRIX`
-const TEXTSPEED = 15;
-const STRPAD = 3; // Ammount of blank spaces on either side of string
+const TESTSTR = `TUMEKE`
+const TEXTSPEED = 12;
+
+const STRPAD = 4; // Ammount of blank spaces on either side of string
+const SPAWNRATE = 3;
+const STARRATE = 60;
+
+// Colour values sourced from https://www.schemecolor.com/matrix-code-green.php
+
+//Normal Colours
+const R = 0;
+const G = 143;
+const B = 17;
+
+//Shooting Stars
+const STARR = 120;
+const STARG = 255;
+const STARB = 120;
+
+
+//MESSAGE Fade Colours
+const LETTERR = 200;
+const LETTERG = 255;
+const LETTERB = 200;
+
+//MESSAGE Static Colours
+const STATICR = 0;
+const STATICG = 255;
+const STATICB = 0;
+
+//Stroke Colours
+const STROKER = 0;
+const STROKEG = 59;
+const STROKEB = 0;
+
+const COLOURJUMP = 2; // Ammount colour skips
 
 let characters = ['ﾊ', 'ﾐ',
                   'ﾋ', 'ｳ',
@@ -25,11 +58,12 @@ let letters;
 let charUpdate;
 
 function setup() {
-  createCanvas(windowWidth, windowHeight);
+  sourceCanvas = createCanvas(windowWidth, windowHeight);
+  sourceCanvas.id('p5sourceCanvas')
   frameRate(60);
 
   textAlign(CENTER);
-  stroke(0, 255, 0);
+  stroke(STROKER, STROKEG, STROKEB);
   strokeWeight(5)
 
   fontSize = windowWidth / (TESTSTR.length + STRPAD);
@@ -37,16 +71,19 @@ function setup() {
   strController = new StringController(TESTSTR);
   letters = [];
 
-  fill(40,220,30)
+  fill(R, G, B)
 }
 
 function draw() {
-  background(10, 160); // adds motion blur effect
+  background(0, 100); // adds motion blur effect
 
   strController.update();
 
   for (let i = 0; i < letters.length; i++){
+    push();
+    
     letters[i].update();
+    pop();
   }
 }
 
@@ -55,9 +92,44 @@ class Letters{
     this.letter = letter;
     this.x = x;
     this.y = y;
+
+
+    // LETTERS COLOR
+    this.r = LETTERR;
+    this.g = LETTERG;
+    this.b = LETTERB;
+    this.rDes = true;
+    this.gDes = true;
+    this.bDes = true;
   }
   update(){
+    fill(this.r, this.g, this.b)
     text(this.letter, this.x, this.y)
     
+    if (this.rDes){
+      this.r -= COLOURJUMP
+      if (this.r <= STATICR){
+        this.r = STATICR;
+        this.rDes = false;
+      }
+    }
+
+    if (this.gDes){
+      this.g -= COLOURJUMP
+      if (this.g <= STATICG){
+        this.g = STATICG;
+        this.gDes = false;
+      }
+    }
+
+    if (this.bDes){
+      this.b -= COLOURJUMP
+      if (this.b <= STATICB){
+        this.b = STATICB;
+        this.bDes = false;
+      }
+    }
+
+
   }
 }

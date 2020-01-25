@@ -22,8 +22,18 @@ class TextString{
   
       for (let i = 0; i < this.characters.length; i++){
   
-  
-        text(this.characters[i].letter, this.x, this.y - (i * fontSize))
+        if (i == 0){
+          if (this.characters[i].bright){
+            push()
+          fill(STARR,STARG,STARB)
+          text(this.characters[i].letter, this.x, this.y - (i * fontSize))
+          pop()
+          }
+        }
+        else{
+          text(this.characters[i].letter, this.x, this.y - (i * fontSize))
+        }
+        
   
       }
       

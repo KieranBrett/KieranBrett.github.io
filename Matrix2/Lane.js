@@ -47,6 +47,9 @@ class Lane{
 
     spawnString(){
         this.strings.push(new TextString(this.letter, this.x))
+        if (random(100) < STARRATE){
+            this.strings[this.strings.length - 1].characters[0].bright = true;
+        }
     }
 
     updateCharacters(){
