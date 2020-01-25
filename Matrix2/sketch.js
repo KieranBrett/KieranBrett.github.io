@@ -1,5 +1,5 @@
-const TESTSTR = "123456789"
-const TEXTSPEED = 10;
+const TESTSTR = `THE MATRIX`
+const TEXTSPEED = 25;
 const STRPAD = 3; // Ammount of blank spaces on either side of string
 
 let characters = ['ﾊ', 'ﾐ',
@@ -21,21 +21,43 @@ let characters = ['ﾊ', 'ﾐ',
 
 let strController;
 let fontSize;
+let letters;
 let charUpdate;
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
+  frameRate(30);
+
   textAlign(CENTER);
+  stroke(0, 255, 0);
+  strokeWeight(5)
 
   fontSize = windowWidth / (TESTSTR.length + STRPAD);
-  charUpdate = TESTSTR.length / 4
+  charUpdate = TESTSTR.length
   strController = new StringController(TESTSTR);
+  letters = [];
+
+  fill(40,220,30)
 }
 
 function draw() {
-  background(10, 200); // adds motion blur effect
+  background(10, 160); // adds motion blur effect
 
-  fill(40,200,30)
   strController.update();
+
+  for (let i = 0; i < letters.length; i++){
+    letters[i].update();
+  }
 }
 
+class Letters{
+  constructor(letter, x, y){
+    this.letter = letter;
+    this.x = x;
+    this.y = y;
+  }
+  update(){
+    text(this.letter, this.x, this.y)
+    
+  }
+}

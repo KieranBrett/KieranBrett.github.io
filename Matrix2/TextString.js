@@ -5,6 +5,7 @@ class TextString{
       this.x = x;
       this.y = 0;
       
+      this.enabled = true;
   
       this.characters = [];
   
@@ -25,12 +26,13 @@ class TextString{
         text(this.characters[i].letter, this.x, this.y - (i * fontSize))
   
       }
-  
+      
+      if (this.enabled)
       this.y += TEXTSPEED;
     }
   
     updateCharacters(){
-      this.characters[parseInt(random(0, this.characters.length))].update();
+      this.characters[parseInt(random(0, this.characters.length - 1))].update();
     }
 
     getY(){

@@ -16,7 +16,8 @@ class LaneController{
             this.lanes[i].update();
         }
 
-        for (let i = 0; i < 1; i++){ // Randomly Spawning 5 Strings
+        if (frameCount % 2 == 0)
+        {
 
                 let randomLane = parseInt(random(0, this.lanes.length))
 
@@ -30,7 +31,7 @@ class LaneController{
         // Randomly updating characters
       for (let i = 0; i < 5; i++){
 
-          if (random(0, 20) < 5){
+          if (random(0, 15) < charUpdate){
               this.lanes[parseInt(random(0, this.lanes.length))].updateCharacters();
           }
       }

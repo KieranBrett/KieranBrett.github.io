@@ -2,9 +2,10 @@ class Lane{
     constructor(letter, x){
         this.x = x;
         this.letter = letter;
-        this.available;
+        this.available = true;
 
         this.strings = []
+        this.laneTripped = false;
     }
 
     update(){
@@ -16,12 +17,28 @@ class Lane{
             }
           }
 
-          if (this.strings.length < 1){
-              this.available = true;
+          if (this.strings.length != 0){
+            switch(this.letter){
+                case ";":
+    
+                    break;
+    
+                default:
+                    if (this.strings[0].y > (windowHeight / 2) + (fontSize / 2) && !this.laneTripped){
+
+                        letters.push(new Letters(this.letter, this.x, (windowHeight / 2) + (fontSize / 2)))
+
+                        // this.strings[0].characters[0].letter = " "
+
+                        this.strings[0].characters.splice(0, 1);
+                        this.strings[0].y -= fontSize;
+
+                        this.laneTripped = true;
+                    }
+                    break;
+            }
           }
-          else{
-              this.available = false;
-          }
+        
 
     }
 
