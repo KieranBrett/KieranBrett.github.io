@@ -26,7 +26,7 @@ let charUpdate;
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
-  frameRate(30);
+  frameRate(60);
 
   textAlign(CENTER);
   stroke(0, 255, 0);
