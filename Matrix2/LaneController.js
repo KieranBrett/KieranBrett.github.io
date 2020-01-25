@@ -16,7 +16,7 @@ class LaneController{
             this.lanes[i].update();
         }
 
-        if (frameCount % 2 == 0)
+        if (frameCount % 12 == 0)
         {
 
                 let randomLane = parseInt(random(0, this.lanes.length))

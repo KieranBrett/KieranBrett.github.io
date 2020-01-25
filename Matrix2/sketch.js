@@ -1,5 +1,5 @@
 const TESTSTR = `THE MATRIX`
-const TEXTSPEED = 25;
+const TEXTSPEED = 15;
 const STRPAD = 3; // Ammount of blank spaces on either side of string
 
 let characters = ['ﾊ', 'ﾐ',

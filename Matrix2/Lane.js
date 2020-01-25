@@ -38,6 +38,9 @@ class Lane{
                     break;
             }
           }
+          else{
+              this.available = true;
+          }
         
 
     }
