@@ -1,4 +1,4 @@
-const TESTSTR = `TUMEKE`
+const TESTSTR = `KieranBrett.co.nz`
 const TEXTSPEED = 12;
 
 const STRPAD = 4; // Ammount of blank spaces on either side of string
@@ -30,7 +30,7 @@ const STATICB = 0;
 
 //Stroke Colours
 const STROKER = 0;
-const STROKEG = 59;
+const STROKEG = 80;
 const STROKEB = 0;
 
 const COLOURJUMP = 2; // Ammount colour skips
@@ -57,7 +57,17 @@ let fontSize;
 let letters;
 let charUpdate;
 
-function setup() {
+
+function setup(message) {
+  let string;
+  if (message != null){
+    string = message
+    console.log(string)
+  }
+  else{
+    string = TESTSTR
+  }
+
   sourceCanvas = createCanvas(windowWidth, windowHeight);
   sourceCanvas.id('p5sourceCanvas')
   frameRate(60);
@@ -66,16 +76,17 @@ function setup() {
   stroke(STROKER, STROKEG, STROKEB);
   strokeWeight(5)
 
-  fontSize = windowWidth / (TESTSTR.length + STRPAD);
-  charUpdate = TESTSTR.length
-  strController = new StringController(TESTSTR);
+  fontSize = windowWidth / (string.length + STRPAD);
+  charUpdate = string.length
+  strController = new StringController(string);
   letters = [];
 
   fill(R, G, B)
+  
 }
 
 function draw() {
-  background(0, 100); // adds motion blur effect
+    background(0, 100); // adds motion blur effect
 
   strController.update();
 

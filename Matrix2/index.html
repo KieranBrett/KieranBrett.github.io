@@ -8,7 +8,21 @@
   </head>
   
   <body>
-    <script src="seriously.js"></script>
+
+    
+    <p id="StringEntry">Enter Your String   <input type="text" name="" id="String"><button id="Matrix">Enter the Matrix</button></p>
+    <script>
+      let button = document.getElementById("Matrix")
+      let stringEntry = document.getElementById("StringEntry")
+      let string = document.getElementById("String")
+
+      button.addEventListener("click", () => {
+        button.parentElement.removeChild(button)
+        stringEntry.parentElement.removeChild(stringEntry)
+
+        setup(string.value)
+      })
+    </script>
     <script src="TextString.js"></script>
     <script src="Lane.js"></script>
     <script src="LaneController.js"></script>
