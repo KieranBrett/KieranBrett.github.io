@@ -45,9 +45,9 @@ class LaneController{
         
 
         // Randomly updating characters
-      for (let i = 0; i < 5; i++){
+      for (let i = 0; i < SWITCHCHANCES; i++){
 
-          if (random(0, 15) < charUpdate){
+          if (random(0, 100) < CHANGERATE){
               this.lanes[parseInt(random(0, this.lanes.length))].updateCharacters();
           }
       }

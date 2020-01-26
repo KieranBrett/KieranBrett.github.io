@@ -1,4 +1,4 @@
-const TESTSTR = `Welcome to the Matrix 2.0`
+const TESTSTR = `        THE MATRIX        `
 
 //Normal Colours
 const R = 0;
@@ -10,15 +10,19 @@ const STARR = 120;
 const STARG = 255;
 const STARB = 120;
 
+// Strings
+const VANISHONPASS = true; // if letters vanish when passing the message
+const STRPAD = 8; // Ammount of blank spaces on either side of string
+const SWEEP = false; // If it rains or just falls once per lane
+const SPAWNRATE = 3;
+
 // Characters
 const CHARCOLOUROFFSET = 50
-const VANISHONPASS = true; // if letters vanish when passing the message
 const FLASHWHENHIT = false; // flashes a box around the letter when a piece of text hits it
-const STRPAD = 8; // Ammount of blank spaces on either side of string
-const SPAWNRATE = 3;
 const STARRATE = 60;
 const CHANCEOFFLIPPED = 40 // PERCENT OF CHANCE
-const SWEEP = false; // If it rains or just falls once per lane
+const CHANGERATE = 70; // PERCENT
+const SWITCHCHANCES = 10; // Ammount of times to try for changing characters
 
 // Rain
 const TEXTSPEED = 12;
@@ -126,7 +130,7 @@ function setup(message) {
 }
 
 function draw() {
-    background(0, 50); // adds motion blur effect
+    background(0, 100); // adds motion blur effect
 
   strController.update();
 
@@ -136,6 +140,16 @@ function draw() {
     letters[i].update();
     pop();
   }
+
+  // Signature
+  push();
+
+  fill(255,255,255)
+  strokeWeight(5);
+  textSize(12);
+  textAlign(LEFT);
+  text("Made By Kieran Brett", 10, windowHeight - 10)
+  pop();
 }
 
 class Letters{

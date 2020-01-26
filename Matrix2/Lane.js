@@ -85,8 +85,11 @@ class Lane{
     }
 
     updateCharacters(){
-        for (let i = this.strings.length - 1; i > 0; i--){
+        for (let i = this.strings.length - 1; i >= 0; i--){
+            // console.log(`${this.strings[i].updateCharacters()}`)
             this.strings[i].updateCharacters();
         }
+
+        // console.log(this.strings.length)
     }
 }
