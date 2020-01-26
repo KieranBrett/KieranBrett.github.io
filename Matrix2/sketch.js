@@ -1,12 +1,4 @@
-const TESTSTR = `KieranBrett.co.nz`
-const TEXTSPEED = 12;
-
-const STRPAD = 4; // Ammount of blank spaces on either side of string
-const SPAWNRATE = 3;
-const STARRATE = 60;
-const CHANCEOFFLIPPED = 20 // PERCENT OF CHANCE
-
-// Colour values sourced from https://www.schemecolor.com/matrix-code-green.php
+const TESTSTR = `Welcome to the Matrix 2.0`
 
 //Normal Colours
 const R = 0;
@@ -18,23 +10,41 @@ const STARR = 120;
 const STARG = 255;
 const STARB = 120;
 
+// Characters
+const CHARCOLOUROFFSET = 50
+const VANISHONPASS = true; // if letters vanish when passing the message
+const FLASHWHENHIT = false; // flashes a box around the letter when a piece of text hits it
+const STRPAD = 8; // Ammount of blank spaces on either side of string
+const SPAWNRATE = 3;
+const STARRATE = 60;
+const CHANCEOFFLIPPED = 40 // PERCENT OF CHANCE
+const SWEEP = false; // If it rains or just falls once per lane
 
-//MESSAGE Fade Colours
-const LETTERR = 200;
-const LETTERG = 255;
-const LETTERB = 200;
-
-//MESSAGE Static Colours
-const STATICR = 0;
-const STATICG = 255;
-const STATICB = 0;
+// Rain
+const TEXTSPEED = 12;
+const SPEEDVARY = 4;
+const LENGTHMIN = 3;
+const LENGTHMAX = 15;
 
 //Stroke Colours
 const STROKER = 0;
 const STROKEG = 80;
 const STROKEB = 0;
 
-const COLOURJUMP = 2; // Ammount colour skips
+// Message
+//MESSAGE Fade Colours
+const LETTERR = 255;
+const LETTERG = 255;
+const LETTERB = 255;
+const COLOURJUMP = 2; // Ammount colour updates every frame
+//Static Colours
+const STATICR = 150;
+const STATICG = 255;
+const STATICB = 150;
+//MESSAGE Border
+const BORDERR = 255;
+const BORDERG = 255;
+const BORDERB = 255;
 
 let characters = ['ﾊ', 'ﾐ',
                   'ﾋ', 'ｳ',
@@ -79,9 +89,15 @@ let strController;
 let fontSize;
 let letters;
 let charUpdate;
+let goOnce;
+
+let matrixFont;
 
 
 function setup(message) {
+
+  matrixFont = loadFont('WESTM.TTF')
+
   let string;
   if (message != null){
     string = message
@@ -103,13 +119,14 @@ function setup(message) {
   charUpdate = string.length
   strController = new StringController(string);
   letters = [];
+  goOnce = SWEEP;
 
   fill(R, G, B)
   
 }
 
 function draw() {
-    background(0, 100); // adds motion blur effect
+    background(0, 50); // adds motion blur effect
 
   strController.update();
 
@@ -127,7 +144,6 @@ class Letters{
     this.x = x;
     this.y = y;
 
-
     // LETTERS COLOR
     this.r = LETTERR;
     this.g = LETTERG;
@@ -138,6 +154,9 @@ class Letters{
   }
   update(){
     fill(this.r, this.g, this.b)
+    stroke(0)
+    strokeWeight(20)
+    textFont(matrixFont)
     text(this.letter, this.x, this.y)
     
     if (this.rDes){

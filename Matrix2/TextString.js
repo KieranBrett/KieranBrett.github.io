@@ -1,9 +1,10 @@
 class TextString{
     constructor(letter, x){
       this.letter = letter;
-      this.length = random(2, 10)
+      this.length = random(LENGTHMIN, LENGTHMAX)
       this.x = x;
       this.y = 0;
+      this.speed = random(TEXTSPEED - SPEEDVARY, TEXTSPEED + SPEEDVARY - 1)
       
       this.enabled = true;
   
@@ -24,23 +25,26 @@ class TextString{
     update(){
   
       for (let i = 0; i < this.characters.length; i++){
+        push()
+
+        fill(this.characters[i].r,this.characters[i].g,this.characters[i].b)
 
         if (i == 0){ // Only first characters can be bright
           if (this.characters[i].bright){ // Makes character bright
-            push()
+            
           fill(STARR,STARG,STARB)
           text(this.characters[i].letter, this.x, this.y - (i * fontSize))
-          pop()
+          
           }
         }
         else{
           if (this.characters[i].flipped){ // Flips character
-            push()
+            
             translate(this.x, this.y - (i * fontSize))
             var s = map(0,0,width,-1,1);
             scale(s,1);
             text(this.characters[i].letter, 0, 0)
-            pop()
+            
           }
           else{ // Normal Character
             text(this.characters[i].letter, this.x, this.y - (i * fontSize))
@@ -48,11 +52,11 @@ class TextString{
           
         }
         
-  
+        pop()
       }
       
       if (this.enabled)
-      this.y += TEXTSPEED;
+      this.y += this.speed;
     }
   
     updateCharacters(){

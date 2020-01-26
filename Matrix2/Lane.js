@@ -37,11 +37,41 @@ class Lane{
 
                         this.laneTripped = true;
                     }
+                    else if(VANISHONPASS){ // Hiding letter if it passes word
+                        if (this.strings[0].y > (windowHeight / 2) + ( fontSize / 2)){
+                            push()
+                            noStroke()
+                            if (FLASHWHENHIT){
+                                fill(255,255,255)
+                            }
+                            else{
+                                fill(0,0,0)
+                            }
+                            
+
+                            let rectX = this.strings[0].x - (fontSize / 2);
+                            let rectY = (windowHeight / 2) - (fontSize / 3)
+                            rect(rectX,rectY, fontSize,fontSize)
+
+                            if (this.strings[0].y - fontSize > rectY){ // If letter has passed main letter
+                                this.strings[0].characters.splice(0, 1);
+                                this.strings[0].y -= fontSize;
+
+                                if (this.strings[0].characters.length == 0){
+                                    this.strings.splice(0, 1)
+                                }
+                            }
+
+                            pop()
+                        }
+                    }
                     break;
             }
           }
           else{
-              this.available = true;
+              if (!goOnce){
+                this.available = true;
+              }
           }
         
 
@@ -55,7 +85,7 @@ class Lane{
     }
 
     updateCharacters(){
-        for (let i = 0; i < this.strings.length; i++){
+        for (let i = this.strings.length - 1; i > 0; i--){
             this.strings[i].updateCharacters();
         }
     }
