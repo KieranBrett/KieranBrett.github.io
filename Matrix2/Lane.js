@@ -17,10 +17,12 @@ class Lane{
             }
           }
 
+          // If there is a string
           if (this.strings.length != 0){
             switch(this.letter){
                 case ";":
-    
+                case " ":
+                    // Normal Strings
                     break;
     
                 default:
