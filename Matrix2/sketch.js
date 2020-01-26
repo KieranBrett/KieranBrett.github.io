@@ -145,7 +145,7 @@ function draw() {
   push();
 
   fill(255,255,255)
-  strokeWeight(5);
+  noStroke();
   textSize(12);
   textAlign(LEFT);
   text("Made By Kieran Brett", 10, windowHeight - 10)
