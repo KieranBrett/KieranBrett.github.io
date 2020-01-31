@@ -1,13 +1,21 @@
 const TESTSTR = `        THE MATRIX        `
+let defaultStrings = ["Hello", "Tumeke", "Churr Cuzzi", "Bring Back $1 Frozen Cokes", "I think Jacinda is doing a good job", "Whats the weather like?", "Huh", 
+                    "Creationism", "Eric the God eating penguin", "Snowflake", "Dunedin", "I like cheese", "Whats up?"]
+const TRANSPARENCY = 90;
 
 //Normal Colours
-const R = 0;
-const G = 143;
-const B = 17;
+const R = 150;
+const G = 0;
+const B = 7;
+
+//Stroke Colours
+const STROKER = 80;
+const STROKEG = 0;
+const STROKEB = 0;
 
 //Shooting Stars
-const STARR = 120;
-const STARG = 255;
+const STARR = 255;
+const STARG = 120;
 const STARB = 120;
 
 // Strings
@@ -17,10 +25,10 @@ const SWEEP = false; // If it rains or just falls once per lane
 const SPAWNRATE = 3;
 
 // Characters
-const CHARCOLOUROFFSET = 50
+const CHARCOLOUROFFSET = 60
 const FLASHWHENHIT = false; // flashes a box around the letter when a piece of text hits it
-const STARRATE = 60;
-const CHANCEOFFLIPPED = 40 // PERCENT OF CHANCE
+const STARRATE = 60; // PERCENT
+const CHANCEOFFLIPPED = 50 // PERCENT
 const CHANGERATE = 70; // PERCENT
 const SWITCHCHANCES = 10; // Ammount of times to try for changing characters
 
@@ -30,25 +38,23 @@ const SPEEDVARY = 4;
 const LENGTHMIN = 3;
 const LENGTHMAX = 15;
 
-//Stroke Colours
-const STROKER = 0;
-const STROKEG = 80;
-const STROKEB = 0;
-
 // Message
 //MESSAGE Fade Colours
 const LETTERR = 255;
 const LETTERG = 255;
 const LETTERB = 255;
 const COLOURJUMP = 2; // Ammount colour updates every frame
+
 //Static Colours
-const STATICR = 150;
-const STATICG = 255;
-const STATICB = 150;
+const STATICR = 255;
+const STATICG = 50;
+const STATICB = 50;
+
 //MESSAGE Border
 const BORDERR = 255;
 const BORDERG = 255;
 const BORDERB = 255;
+const BORDERWEIGHT = 3;
 
 let characters = ['ﾊ', 'ﾐ',
                   'ﾋ', 'ｳ',
@@ -108,7 +114,7 @@ function setup(message) {
     console.log(string)
   }
   else{
-    string = TESTSTR
+    string = random(defaultStrings)
   }
 
   sourceCanvas = createCanvas(windowWidth, windowHeight);
@@ -130,7 +136,7 @@ function setup(message) {
 }
 
 function draw() {
-    background(0, 100); // adds motion blur effect
+    background(0, TRANSPARENCY); // adds motion blur effect
 
   strController.update();
 
@@ -168,8 +174,8 @@ class Letters{
   }
   update(){
     fill(this.r, this.g, this.b)
-    stroke(0)
-    strokeWeight(20)
+    stroke(BORDERR, BORDERG, BORDERB)
+    strokeWeight(BORDERWEIGHT)
     textFont(matrixFont)
     text(this.letter, this.x, this.y)
     
