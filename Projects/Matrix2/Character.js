@@ -4,9 +4,9 @@ class Character{
       this.bright = false;
       this.flipped = false;
       
-    this.r = R + random(CHARCOLOUROFFSET);
-    this.g = G - random(CHARCOLOUROFFSET);
-    this.b = B + random(CHARCOLOUROFFSET)
+    this.r = textR + random(-CHARCOLOUROFFSET, CHARCOLOUROFFSET);
+    this.g = textG + random(-CHARCOLOUROFFSET, CHARCOLOUROFFSET);
+    this.b = textB + random(-CHARCOLOUROFFSET, CHARCOLOUROFFSET)
     
     }
     

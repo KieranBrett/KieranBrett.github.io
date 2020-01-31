@@ -9,18 +9,26 @@
   
   <body>
 
+    <form id="form" style="text-align: center; padding: 20px;">
+      <p>String:<input type="text" name="" id="string" /></p>
+      <p>Text Colour:<input type="color" id="colour" /></p>
     
-    <p id="StringEntry">Enter Your String   <input type="text" name="" id="String"><button id="Matrix">Enter the Matrix</button></p>
+        
+      <br><input type="submit" value="Enter The Matrix"></input>
+    </form>
+    
     <script>
-      let button = document.getElementById("Matrix")
-      let stringEntry = document.getElementById("StringEntry")
-      let string = document.getElementById("String")
+      let form = document.getElementById('form')
+      let string = document.getElementById("string")
+      let colour = document.getElementById("colour")
+      
 
-      button.addEventListener("click", () => {
-        button.parentElement.removeChild(button)
-        stringEntry.parentElement.removeChild(stringEntry)
 
-        setup(string.value)
+      form.addEventListener("submit", (e) => {
+        e.preventDefault();
+
+        setup(string.value, colour.value)
+        form.parentElement.removeChild(form)
       })
     </script>
     <script src="TextString.js"></script>

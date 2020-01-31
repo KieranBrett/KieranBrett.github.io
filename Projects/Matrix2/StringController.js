@@ -13,7 +13,7 @@ class StringController{
       ////////////////////////////////////
   
       this.strings = [];
-      console.log(`String Length: ${this.string.length}`)
+      // console.log(`String Length: ${this.string.length}`)
       textSize(fontSize)
 
       this.generateLanes();

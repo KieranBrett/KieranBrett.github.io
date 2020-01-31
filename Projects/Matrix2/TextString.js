@@ -32,7 +32,7 @@ class TextString{
         if (i == 0){ // Only first characters can be bright
           if (this.characters[i].bright){ // Makes character bright
             
-          fill(STARR,STARG,STARB)
+          fill(textR + STARR,textG + STARG,textB + STARB)
           text(this.characters[i].letter, this.x, this.y - (i * fontSize))
           
           }

@@ -3,20 +3,20 @@ let defaultStrings = ["Hello", "Tumeke", "Churr Cuzzi", "Bring Back $1 Frozen Co
                     "Creationism", "Eric the God eating penguin", "Snowflake", "Dunedin", "I like cheese", "Whats up?"]
 const TRANSPARENCY = 90;
 
-//Normal Colours
-const R = 150;
-const G = 0;
-const B = 7;
+// DEFAULT COLOURS
+const R = 40;
+const G = 190;
+const B = 40;
 
-//Stroke Colours
+//Stroke Colours DIFFERENCE
 const STROKER = 80;
-const STROKEG = 0;
-const STROKEB = 0;
+const STROKEG = 80;
+const STROKEB = 80;
 
 //Shooting Stars
-const STARR = 255;
-const STARG = 120;
-const STARB = 120;
+const STARR = 100;
+const STARG = 100;
+const STARB = 100;
 
 // Strings
 const VANISHONPASS = true; // if letters vanish when passing the message
@@ -25,7 +25,7 @@ const SWEEP = false; // If it rains or just falls once per lane
 const SPAWNRATE = 3;
 
 // Characters
-const CHARCOLOUROFFSET = 60
+const CHARCOLOUROFFSET = 15
 const FLASHWHENHIT = false; // flashes a box around the letter when a piece of text hits it
 const STARRATE = 60; // PERCENT
 const CHANCEOFFLIPPED = 50 // PERCENT
@@ -40,15 +40,12 @@ const LENGTHMAX = 15;
 
 // Message
 //MESSAGE Fade Colours
-const LETTERR = 255;
-const LETTERG = 255;
-const LETTERB = 255;
 const COLOURJUMP = 2; // Ammount colour updates every frame
 
 //Static Colours
-const STATICR = 255;
-const STATICG = 50;
-const STATICB = 50;
+const STATICR = 100;
+const STATICG = 100;
+const STATICB = 100;
 
 //MESSAGE Border
 const BORDERR = 255;
@@ -98,16 +95,20 @@ let collection = ['A', 'B','C','D','E','F','G','H','I','J','K','L','M','N',
 let strController;
 let fontSize;
 let letters;
-let charUpdate;
 let goOnce;
 
 let matrixFont;
+let textR;
+let textG;
+let textB;
 
 
-function setup(message) {
-
-  matrixFont = loadFont('WESTM.TTF')
-
+function setup(message, colour) {
+  createCanvas(windowWidth, windowHeight);
+  frameRate(60);
+  
+  // Setting up user options
+  // String 
   let string;
   if (message != null){
     string = message
@@ -117,22 +118,43 @@ function setup(message) {
     string = random(defaultStrings)
   }
 
-  sourceCanvas = createCanvas(windowWidth, windowHeight);
-  sourceCanvas.id('p5sourceCanvas')
-  frameRate(60);
+  // Colour
+  if (colour != null){
+    textR = hexToRgb(colour).r;
+    textG = hexToRgb(colour).g;
+    textB = hexToRgb(colour).b;
+    
+    console.log(`textR: ${textR} textG: ${textG} textB: ${textB}`)
+  }
+  else{
+    console.log("default")
+
+    textR = R;
+    textG = G;
+    textB = B;
+  }
+  
+
+  
 
   textAlign(CENTER);
-  stroke(STROKER, STROKEG, STROKEB);
+  stroke(textR - STROKER, textG - STROKEG, textB - STROKEB);
   strokeWeight(5)
 
   fontSize = windowWidth / (string.length + STRPAD);
-  charUpdate = string.length
   strController = new StringController(string);
   letters = [];
   goOnce = SWEEP;
+  matrixFont = loadFont('WESTM.TTF')
+}
 
-  fill(R, G, B)
-  
+function hexToRgb(hex) { // Source: https://stackoverflow.com/questions/5623838/rgb-to-hex-and-hex-to-rgb
+  var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+  return result ? {
+    r: parseInt(result[1], 16),
+    g: parseInt(result[2], 16),
+    b: parseInt(result[3], 16)
+  } : null;
 }
 
 function draw() {
@@ -165,9 +187,9 @@ class Letters{
     this.y = y;
 
     // LETTERS COLOR
-    this.r = LETTERR;
-    this.g = LETTERG;
-    this.b = LETTERB;
+    this.r = 255;
+    this.g = 255;
+    this.b = 255;
     this.rDes = true;
     this.gDes = true;
     this.bDes = true;
@@ -181,24 +203,24 @@ class Letters{
     
     if (this.rDes){
       this.r -= COLOURJUMP
-      if (this.r <= STATICR){
-        this.r = STATICR;
+      if (this.r <= textR +STATICR){
+        this.r = textR + STATICR;
         this.rDes = false;
       }
     }
 
     if (this.gDes){
       this.g -= COLOURJUMP
-      if (this.g <= STATICG){
-        this.g = STATICG;
+      if (this.g <= textG + STATICG){
+        this.g = textG + STATICG;
         this.gDes = false;
       }
     }
 
     if (this.bDes){
       this.b -= COLOURJUMP
-      if (this.b <= STATICB){
-        this.b = STATICB;
+      if (this.b <= textB + STATICB){
+        this.b = textB + STATICB;
         this.bDes = false;
       }
     }

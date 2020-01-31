@@ -8,7 +8,7 @@ class LaneController{
             this.lanes.push(new Lane(string.charAt(i),
             (i * (windowWidth / string.length)) + ((windowWidth / string.length) / 2)));
         }
-        console.log(this.lanes)
+        // console.log(this.lanes)
     }
 
     update(){
