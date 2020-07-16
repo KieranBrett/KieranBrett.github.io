@@ -10,7 +10,7 @@ const PLAYERWIDTH = 100;
 const FRAMEXMOVESIZE = 550;
 const FRAMEYMOVESIZE = 150;
 
-const STARTSCORE = 10000;
+const STARTSCORE = 5000;
 
 class Player {
   constructor(playerX, playerY, playerHealth){

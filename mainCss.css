@@ -1,0 +1,40 @@
+@font-face { font-family: CustomFont; src: url('Nersans Three.otf');}
+
+.sideBar { 
+    height: 100%;
+    width: 260px;
+    position: fixed;
+    top: 0;
+    left: 0;
+
+    background-color: #FACC6B;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+}
+
+#links {
+    font-family: CustomFont, Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 25px;
+    font-weight: bolder;
+    text-align: center;
+    padding: 10px;
+
+    color: black;
+}
+
+#links a:visited, #links a:focus, #links a:active {
+    text-decoration: none; 
+    color: black;
+}
+#links a:hover {
+    text-decoration: none;
+    color: #E9980C;
+    text-shadow: 2px 2px white;
+}
+
+.content {
+    margin-left: 260px;
+    padding-left: 15px;
+    width: 65%;
+}
