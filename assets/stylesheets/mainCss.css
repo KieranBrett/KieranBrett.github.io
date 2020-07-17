@@ -15,7 +15,6 @@ Nav Bar
     justify-content: space-between;
     z-index: 4;
     align-items: center;
-    text-align: center;
     padding-left: 20px;
     box-shadow: 2px 2px 8px black;
 }
@@ -39,24 +38,24 @@ Side Bar
  */
 #sideBar { 
     height: 100%;
-    width: 260px;
+    width: 15%;
     position: fixed;
     top: 45px;
-    left: 0;
+    left: -18%;
     background-color: #e7e7e7;
     align-items: center;
     justify-content: center;
     display: flex;
     box-shadow: 0px 0px 10px black;
-    transition: .4s ease-in-out;
+    transition: .6s ease-in-out;
 }
 
 #links {
     font-family: CustomFont, Verdana, Geneva, Tahoma, sans-serif;
-    font-size: 25px;
+    font-size: 1.5em;
     font-weight: bolder;
-    text-align: center;
-    padding: 10px;
+    text-align: left;
+    /* padding: 10px; */
 
     text-decoration: none;
     color: black;
@@ -78,10 +77,14 @@ Side Bar
 Content Pane
  */
 #contentPane {
-    margin-left: 260px;
+    width: 80%;
+    flex-direction: column;
+    margin-left: 0px;
+    padding-left: 10%;
     padding-right: 10%;
-    transition: .4s ease-in-out;
+    transition: .6s ease-in-out;
     padding-top: 50px;
+    /* border-style: solid; */
 }
 
 
@@ -96,10 +99,15 @@ Content Pane
     width: 100%;
     box-shadow: 1px 1px 8px black;
     background-color: #e6e6e6;
-    padding: 20px 25px 20px 25px;
+    /* padding: 10px; */
     margin: 0px;
+    /* border-style: solid; */
 }
 
 .project h1 {
     font-weight: bolder;
+}
+
+.project p, .project img, .project a, .project h1 {
+    padding: 10px;
 }
