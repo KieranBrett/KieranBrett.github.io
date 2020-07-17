@@ -48,11 +48,12 @@ Side Bar
     display: flex;
     box-shadow: 0px 0px 10px black;
     transition: .6s ease-in-out;
+    visibility: hidden;
 }
 
 #links {
     font-family: CustomFont, Verdana, Geneva, Tahoma, sans-serif;
-    font-size: 1.5em;
+    font-size: 200%;
     font-weight: bolder;
     text-align: left;
     /* padding: 10px; */
