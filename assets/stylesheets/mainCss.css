@@ -109,6 +109,21 @@ Content Pane
     font-weight: bolder;
 }
 
-.project p, .project img, .project a, .project h1 {
-    padding: 10px;
+.project p, .project h1 {
+    padding: 15px;
+}
+
+.project img, .project a {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    text-decoration: none;
+    padding-bottom: 5px;
+}
+
+@media (max-width : 1000px){
+    #sideBar{
+        width: 100%;
+    }
 }

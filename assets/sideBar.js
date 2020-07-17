@@ -3,19 +3,28 @@ let contentPane = document.getElementById('contentPane');
 let navButton = document.getElementById('navButton');
 
 function minimizeBar() {
-    sideBar.style.left = '-18%'; // Gives smooth transition effect to move entire div off screen than set hidden
-    contentPane.style.marginLeft = '0px';
-    contentPane.style.paddingLeft = '10%';
-    contentPane.style.paddingRight = '10%'
-    sideBar.style.visibility = 'hidden';
+    if (window.screen.width > 1000){
+        sideBar.style.left = '-18%'; // Gives smooth transition effect to move entire div off screen than set hidden
+        contentPane.style.marginLeft = '0px';
+        contentPane.style.paddingLeft = '10%';
+        contentPane.style.paddingRight = '10%'
+        sideBar.style.visibility = 'hidden';
+    }
+    else{
+        sideBar.style.left = '-100%'
+    }
+    sideBar.style.visibility = 'hidden'
 }
 
 function expandBar() { 
-    sideBar.style.left = '0px' // Setting div to be on screen
-    contentPane.style.marginLeft = '15%'; // Setting margin for content pane
-    contentPane.style.paddingLeft = '2.5%';
-    contentPane.style.paddingRight = '2.5%';
-    sideBar.style.visibility = 'visible'; // Showing sidebar
+    
+    if (window.screen.width > 1000){
+        contentPane.style.marginLeft = '15%'; // Setting margin for content pane
+        contentPane.style.paddingLeft = '2.5%';
+        contentPane.style.paddingRight = '2.5%';
+    }
+    sideBar.style.left = '0px'; // Setting div to be on screen
+    sideBar.style.visibility = 'visible'; // Displaying div
 }
 
 navButton.onclick = () => {
