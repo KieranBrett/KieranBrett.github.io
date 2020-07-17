@@ -8,12 +8,17 @@
   <link rel="stylesheet" href="/assets/stylesheets/mainCss.css">
   <link rel="stylesheet" href="/assets/stylesheets/skeleton.css">
   <link rel="stylesheet" href="/assets/stylesheets/normalize.css">
-
   <title>Landing Page</title>
 </head>
 
 <body style="background-color: #001414;">
-<div class="sideBar">
+<div id="navBar">
+  <button id="navButton"></button>
+  <p>Kieran Brett</p>
+  <a href="mailto:brett.kieran@hotmail.com"><p style="padding-right: 40px;">Contact</p></a> <!-- Padding accounts for the scroll bar -->
+</div>
+
+<div id="sideBar">
   <div id="links">
     <a href="/Projects/Matrix">Matrix</a> <br>
     <a href="/Projects/Matrix2">Matrix 2</a> <br>
@@ -21,7 +26,7 @@
   </div>
 </div>
 
-<div class="content">
+<div id="contentPane">
   <h1 style="font-size: 4em; color: #0AFFFF; font-family: customFont, Arial, Helvetica, sans-serif; text-shadow: 5px 3px #007A7A; padding-left: 20px;">Projects</h1>
   <div id="matrix" class="project">
     <!-- Div for matrix projects  -->
@@ -61,5 +66,6 @@
   </div>
 </div>
 </body>
+<script src="/assets/sideBar.js"></script>
 </html>
 

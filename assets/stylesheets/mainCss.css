@@ -1,16 +1,59 @@
 @font-face { font-family: CustomFont; src: url('/assets/Nersans\ Three.otf');}
 
-.sideBar { 
+#navBar {
+    height: 45px;
+    width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: grey;
+    display: flex;
+    justify-content: space-between;
+    z-index: 4;
+    align-items: center;
+    text-align: center;
+    padding-left: 20px;
+    margin: 0px;
+}
+
+#navBar p {
+    padding-top: 20px;
+    font-weight: bolder;
+    font-size: 23px;
+    color: white;
+    text-shadow: 3px 3px 4px black;
+}
+
+#sideBar { 
     height: 100%;
     width: 260px;
     position: fixed;
-    top: 0;
+    top: 45px;
     left: 0;
     background-color: #5D5D81;
     align-items: center;
     justify-content: center;
     display: flex;
     box-shadow: 0px 0px 10px 5px black;
+    transition: .4s;
+}
+
+#navButton {
+    border: none;
+    background-color: grey;
+    background-image: url('/assets/images/button_icon.png');
+    background-size: 40px 40px;
+    background-repeat: no-repeat;
+    display: inline-block;
+    font-size: 8px;
+    width: 40px;
+}
+
+#contentPane {
+    margin-left: 260px;
+    width: 65%;
+    transition: .4s;
+    padding-top: 50px;
 }
 
 #links {
@@ -34,11 +77,6 @@
     text-decoration: none;
     color: #3B3355;
     text-shadow: 2px 2px white;
-}
-
-.content {
-    margin-left: 260px;
-    width: 65%;
 }
 
 #matrix {
