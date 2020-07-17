@@ -15,6 +15,7 @@ Nav Bar
     align-items: center;
     padding-left: 20px;
     box-shadow: 2px 2px 8px black;
+    text-decoration: none;
 }
 
 #navBar p {

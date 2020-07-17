@@ -6,26 +6,32 @@
     padding-left: 10%;
     padding-right: 10%;
     transition: .6s ease-in-out;
-    padding-top: 20%;
+    padding-top: 50px;
     /* Comment and un comment depending if you want to see and edit content pane size */
-    border-style: solid;
+    /* border-style: solid; */
 }
 
-#welcome {
-    background-color: rgba(255, 255, 255, .5);
+body #scrollDown {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    padding-top: 45%;
+    box-shadow: 3;
+}
+
+#scrollDown {
+    width: 50px;
+}
+
+#welcomeDiv {
+    background-color: rgba(0, 0, 0, .5);
     border-radius: 10px;
     height: 1200px;
     text-align: center;
+    padding: 20px;
 }
 
 #welcome h1 {
     font-size: 100px;
     color: black;
-}
-
-#another {
-    background-color: rgba(255, 0, 0, 1);
-    height: 300px;
-    border-radius: 10px;
-    text-align: center;
 }

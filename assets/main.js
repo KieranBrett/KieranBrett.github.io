@@ -1,5 +1,5 @@
-$('#welcomeThing').click(() => {
+$('#scrollDown').click(() => {
     $(`html, body`).animate({
-        scrollTop: $('#another').offset().top
+        scrollTop: $('#welcomeDiv').offset().top
     }, 2000);
 });
