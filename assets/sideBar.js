@@ -1,5 +1,6 @@
 let sideBar = document.getElementById('sideBar');
 let contentPane = document.getElementById('contentPane');
+let navButton = document.getElementById('navButton');
 
 function minimizeBar() {
     sideBar.style.left = '-270px'; // Gives smooth transition effect to move entire div off screen than set hidden
@@ -13,12 +14,11 @@ function expandBar() {
     sideBar.style.visibility = 'visible'; // Showing sidebar
 }
 
-document.getElementById('navButton').onclick = () => {
+navButton.onclick = () => {
     if (sideBar.style.left == '-270px'){ // If the div is off the screen
         expandBar();                   // Expand it
     }
     else{
         minimizeBar();                  // Minimize It
     }
-    
 }

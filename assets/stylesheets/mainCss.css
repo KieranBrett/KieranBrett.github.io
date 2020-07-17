@@ -6,22 +6,23 @@
     position: fixed;
     top: 0;
     left: 0;
-    background-color: grey;
+    background-color: #e7e7e7;
     display: flex;
     justify-content: space-between;
     z-index: 4;
     align-items: center;
     text-align: center;
     padding-left: 20px;
-    margin: 0px;
+    box-shadow: 2px 2px 8px black;
 }
 
 #navBar p {
     padding-top: 20px;
     font-weight: bolder;
     font-size: 23px;
-    color: white;
-    text-shadow: 3px 3px 4px black;
+    font-family: customFont;
+    color: black;
+    text-shadow: 3px 3px 4px white;
 }
 
 #sideBar { 
@@ -30,22 +31,16 @@
     position: fixed;
     top: 45px;
     left: 0;
-    background-color: #5D5D81;
+    background-color: #e7e7e7;
     align-items: center;
     justify-content: center;
     display: flex;
-    box-shadow: 0px 0px 10px 5px black;
+    box-shadow: 0px 0px 10px black;
     transition: .4s;
 }
 
 #navButton {
-    border: none;
-    background-color: grey;
-    background-image: url('/assets/images/button_icon.png');
-    background-size: 40px 40px;
-    background-repeat: no-repeat;
-    display: inline-block;
-    font-size: 8px;
+    cursor: pointer;
     width: 40px;
 }
 
@@ -80,7 +75,7 @@
 }
 
 #matrix {
-    background-color: #9FB3D1;
+    background-color: #d3d3d3;
 }
 
 #UnnamedGame {
@@ -89,8 +84,8 @@
 
 .project {
     width: 100%;
-    box-shadow: 5px 5px 15px 5px black;
-    background-color: #BFCDE0;
+    box-shadow: 1px 1px 8px black;
+    background-color: #e6e6e6;
     padding: 20px 25px 20px 25px;
     margin: 0px;
 }
