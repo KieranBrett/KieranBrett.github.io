@@ -125,5 +125,6 @@ Content Pane
 @media (max-width : 1000px){
     #sideBar{
         width: 100%;
+        left: -100%;
     }
 }
