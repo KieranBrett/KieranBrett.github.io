@@ -70,8 +70,8 @@ Side Bar
 
 #links a:hover {
     text-decoration: none;
-    color: #3B3355;
-    text-shadow: 2px 2px white;
+    color: black;
+    text-shadow: 2px 2px 8px lime;
 }
 
 /* 
