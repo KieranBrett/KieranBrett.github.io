@@ -1,9 +1,10 @@
-@font-face { font-family: CustomFont; src: url('/assets/Nersans\ Three.otf');}
+@font-face { font-family: CustomFont; src: url('/assets/aBlackLives.otf');}
 
 #navBar {
     height: 45px;
     width: 100%;
     position: fixed;
+    opacity: 85%;
     top: 0;
     left: 0;
     background-color: #e7e7e7;
@@ -17,7 +18,7 @@
 }
 
 #navBar p {
-    padding-top: 20px;
+    padding-top: 26px;
     font-weight: bolder;
     font-size: 23px;
     font-family: customFont;
@@ -36,7 +37,7 @@
     justify-content: center;
     display: flex;
     box-shadow: 0px 0px 10px black;
-    transition: .4s;
+    transition: .4s ease-in-out;
 }
 
 #navButton {
@@ -46,8 +47,8 @@
 
 #contentPane {
     margin-left: 260px;
-    width: 65%;
-    transition: .4s;
+    padding-right: 10%;
+    transition: .4s ease-in-out;
     padding-top: 50px;
 }
 
@@ -79,7 +80,6 @@
 }
 
 #UnnamedGame {
-
 }
 
 .project {
