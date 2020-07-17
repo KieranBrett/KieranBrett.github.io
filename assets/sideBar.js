@@ -1,4 +1,11 @@
-let sideBar = document.getElementById('sideBar');
+// Adding side bar
+document.body.innerHTML += '<div id="navBar"> <img src="assets/images/button_icon.png" id="navButton"> <p id="name" style="font-size: 24px;">Kieran Brett</p> <a href="mailto:brett.kieran@hotmail.com"><p style="padding-right: 40px;">Contact</p></a> <!-- Padding accounts for the scroll bar --> </div>';
+
+document.body.innerHTML += '<div id="sideBar"> <div id="links"> <a href="/Projects/Matrix">Matrix</a> <br> <a href="/Projects/Matrix2">Matrix 2</a> <br> <a href="/Projects/UnnamedGame/">Unnamed Game</a> </div> </div>'
+console.log(document.body.innerHTML)
+
+window.addEventListener('load', function () {
+    let sideBar = document.getElementById('sideBar');
 let contentPane = document.getElementById('contentPane');
 let navButton = document.getElementById('navButton');
 
@@ -35,3 +42,5 @@ navButton.onclick = () => {
         expandBar();                  // Expand it
     }
 }
+  })
+
