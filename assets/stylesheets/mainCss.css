@@ -1,5 +1,8 @@
-@font-face { font-family: CustomFont; src: url('/assets/aBlackLives.otf');}
+@font-face { font-family: CustomFont; src: url('/assets/couture-bld.otf');} /* Font from https://www.dafont.com/couture.font */
 
+/* 
+Nav Bar
+ */
 #navBar {
     height: 45px;
     width: 100%;
@@ -20,12 +23,20 @@
 #navBar p {
     padding-top: 26px;
     font-weight: bolder;
-    font-size: 23px;
+    font-size: 17px;
     font-family: customFont;
     color: black;
     text-shadow: 3px 3px 4px white;
 }
 
+#navButton {
+    cursor: pointer;
+    width: 40px;
+}
+
+/* 
+Side Bar
+ */
 #sideBar { 
     height: 100%;
     width: 260px;
@@ -38,18 +49,6 @@
     display: flex;
     box-shadow: 0px 0px 10px black;
     transition: .4s ease-in-out;
-}
-
-#navButton {
-    cursor: pointer;
-    width: 40px;
-}
-
-#contentPane {
-    margin-left: 260px;
-    padding-right: 10%;
-    transition: .4s ease-in-out;
-    padding-top: 50px;
 }
 
 #links {
@@ -74,6 +73,17 @@
     color: #3B3355;
     text-shadow: 2px 2px white;
 }
+
+/* 
+Content Pane
+ */
+#contentPane {
+    margin-left: 260px;
+    padding-right: 10%;
+    transition: .4s ease-in-out;
+    padding-top: 50px;
+}
+
 
 #matrix {
     background-color: #d3d3d3;
