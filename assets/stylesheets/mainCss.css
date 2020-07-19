@@ -11,26 +11,41 @@
     /* border-style: solid; */
 }
 
-body #scrollDown {
+body { /* Pushes the scroll button down */
+    padding-top: 42%;
+    padding-bottom: 50px;
+}
+
+/* Scroll down icon */
+#scrollDown {
+    width: 50px;
+    cursor: pointer;
     display: block;
     margin-left: auto;
     margin-right: auto;
-    padding-top: 42%;
-    box-shadow: 3;
 }
 
-#scrollDown {
-    width: 50px;
+/* Stylings for all project divs on home screen */
+.project {
+    width: 100%;
+    box-shadow: 1px 1px 8px black;
+    background-color: #e6e6e6;
+    /* padding: 10px; */
+    margin: 0px;
+    border-radius: 3px;
+    /* border-style: solid; */
 }
-
-#welcomeDiv {
-    background-color: rgba(0, 0, 0, .5);
-    border-radius: 10px;
+.project h1 {
+    font-weight: bolder;
+}
+.project p, .project h1 {
+    padding: 15px;
+}
+.project img, .project a {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
     text-align: center;
-    padding: 20px;
-}
-
-#welcome h1 {
-    font-size: 100px;
-    color: black;
+    text-decoration: none;
+    padding-bottom: 5px;
 }

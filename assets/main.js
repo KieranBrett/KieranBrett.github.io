@@ -1,5 +1,5 @@
 $('#scrollDown').click(() => {
     $(`html, body`).animate({
-        scrollTop: $('#welcomeDiv').offset().top
+        scrollTop: $('#contentPane').offset().top
     }, 2000);
 });
