@@ -1,0 +1,23 @@
+{
+  "files": {
+    "main.css": "/kieranbrett.github.io/static/css/main.9d5b29c0.chunk.css",
+    "main.js": "/kieranbrett.github.io/static/js/main.ef110236.chunk.js",
+    "main.js.map": "/kieranbrett.github.io/static/js/main.ef110236.chunk.js.map",
+    "runtime-main.js": "/kieranbrett.github.io/static/js/runtime-main.90ee957c.js",
+    "runtime-main.js.map": "/kieranbrett.github.io/static/js/runtime-main.90ee957c.js.map",
+    "static/js/2.a9a76b9c.chunk.js": "/kieranbrett.github.io/static/js/2.a9a76b9c.chunk.js",
+    "static/js/2.a9a76b9c.chunk.js.map": "/kieranbrett.github.io/static/js/2.a9a76b9c.chunk.js.map",
+    "static/js/3.85f1cafa.chunk.js": "/kieranbrett.github.io/static/js/3.85f1cafa.chunk.js",
+    "static/js/3.85f1cafa.chunk.js.map": "/kieranbrett.github.io/static/js/3.85f1cafa.chunk.js.map",
+    "index.html": "/kieranbrett.github.io/index.html",
+    "static/css/main.9d5b29c0.chunk.css.map": "/kieranbrett.github.io/static/css/main.9d5b29c0.chunk.css.map",
+    "static/js/2.a9a76b9c.chunk.js.LICENSE.txt": "/kieranbrett.github.io/static/js/2.a9a76b9c.chunk.js.LICENSE.txt",
+    "static/media/logo.6ce24c58.svg": "/kieranbrett.github.io/static/media/logo.6ce24c58.svg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.90ee957c.js",
+    "static/js/2.a9a76b9c.chunk.js",
+    "static/css/main.9d5b29c0.chunk.css",
+    "static/js/main.ef110236.chunk.js"
+  ]
+}
