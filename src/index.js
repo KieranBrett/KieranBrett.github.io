@@ -5,30 +5,27 @@ import reportWebVitals from './reportWebVitals';
 import {
   BrowserRouter as Router,
   Switch,
-  Route,
-  Link
+  Route
 } from "react-router-dom";
 
 import Navbar from './Navbar/Navbar.js'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './index.css';
-import Home from './Home/Home';
+import Projects from './view-projects/Projects';
+import Websites from './view-websites/Websites';
 
 ReactDOM.render(
   <React.StrictMode>
     <Router>
       <Navbar />
-
       <div id="contentPane">
         <Switch>
-          <Route path="/projects">
-            <div>
-              <h1>Projects</h1>
-            </div>
+          <Route path="/websites">
+            <Websites />
           </Route>
 
-          <Route path="/">
-            <Home />
+          <Route path="/"> {/* Keep at bottom*/}
+            <Projects />
           </Route>
         </Switch>
       </div>
@@ -41,4 +38,4 @@ ReactDOM.render(
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))
 // or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
+// reportWebVitals();

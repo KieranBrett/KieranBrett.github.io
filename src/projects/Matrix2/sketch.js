@@ -1,8 +1,8 @@
-const TESTSTR = `        THE MATRIX        `
-let defaultStrings = ["Hello", "Tumeke", "Churr Cuzzi", "Bring Back $1 Frozen Cokes", "I think Jacinda is doing a good job", "Whats the weather like?", "Huh",
-  "Creationism", "Eric the God eating penguin", "Snowflake", "Dunedin", "I like cheese", "Whats up?"]
 
-const TRANSPARENCY = 90;
+let defaultStrings = ["Hello", "Tumeke", "Churr Cuzzi", "Bring Back $1 Frozen Cokes", "Whats the weather like?", "Huh",
+  "Creationism", "Christmas", "Dunedin", "I like cheese", "Whats up?", "The Matrix"]
+
+const TRANSPARENCY = 70;
 
 // DEFAULT COLOURS
 const R = 40;
@@ -22,7 +22,6 @@ const STARB = 100;
 // Strings
 const VANISHONPASS = true; // if letters vanish when passing the message
 const STRPAD = 8; // Ammount of blank spaces on either side of string
-const SWEEP = false; // If it rains or just falls once per lane
 const SPAWNRATE = 3;
 
 // Characters
@@ -52,7 +51,7 @@ const STATICB = 100;
 const BORDERR = 255;
 const BORDERG = 255;
 const BORDERB = 255;
-const BORDERWEIGHT = 3;
+const BORDERWEIGHT = 1.5;
 
 function matrix2(p5) {
   let characters = ['ﾊ', 'ﾐ',
@@ -72,76 +71,58 @@ function matrix2(p5) {
     'ﾔ', 'ﾖ', 'ﾙ',
     'ﾚ', 'ﾝ']
 
-  let english = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N',
-    'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z']
-
-  let englishNum = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N',
-    'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', '1', '2', '3',
-    '4', '5', '6', '7', '8', '9', '0']
-
-  let englishNumSymbol = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N',
-    'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', '1', '2', '3',
-    '4', '5', '6', '7', '8', '9', '0', '!', '@', '#', '$', '%', '^', '&', '*',
-    '(', ')', '_', '+', '=', '-', '[', ']', '}', '{', '}', ':', '>', '<', '.',
-    ',', '/', '?', '"', '|', '\\', `~`]
-
-  let collection = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N',
-    'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', '1', '2', '3',
-    '4', '5', '6', '7', '8', '9', '0', '!', '@', '#', '$', '%', '^', '&', '*',
-    '(', ')', '_', '+', '=', '-', '[', ']', '}', '{', '}', ':', '>', '<', '.',
-    ',', '/', '?', '"', '|', '\\', `~`, 'ﾊ', 'ﾐ', 'ﾋ', 'ｳ', 'ｼ', 'ﾅ',
-    'ﾓ', 'ｻ', 'ﾜ', 'ﾂ', 'ｵ', 'ﾘ', 'ｱ', 'ﾎ', 'ﾃ', 'ﾏ', 'ｹ', 'ﾒ',
-    'ｴ', 'ｶ', 'ｷ', 'ﾑ', 'ﾕ', 'ﾗ', 'ｾ', 'ﾈ', 'ｽ', 'ﾀ', 'ﾇ', 'ﾍ',
-    'ｦ', 'ｲ', 'ｸ', 'ｺ', 'ｿ', 'ﾁ', 'ﾄ', 'ﾉ', 'ﾌ', 'ﾔ', 'ﾖ', 'ﾙ', 'ﾚ', 'ﾝ']
-
   let strController;
   let fontSize;
   let letters;
   let goOnce;
 
-  let matrixFont;
+  // let matrixFont;
   let textR;
   let textG;
   let textB;
 
-  let sketchWidth = (p5.windowWidth - (p5.windowWidth * .20)) / 2
+  // SETTING THE CANVAS to WIDTH of the DIV
+  let sketchWidth = document.getElementById('matrix-2').offsetWidth
   let sketchHeight = 500
 
-  let colour;
-  let message;
+
+  let string;
 
   p5.setup = function () {
-    message = localStorage['message']
-    
-    p5.createCanvas(sketchWidth, sketchHeight);
-    p5.frameRate(60);
-
     // Setting up user options
-    // String 
-    let string;
-    if (message != null) {
-      string = message
-      console.log(string)
+    goOnce = false;
+
+    if (localStorage['sweep'] == 'true'){
+      goOnce = true;
     }
-    else {
+
+    // Message
+    if (localStorage['message'] != null){
+      string = localStorage['message']
+    }
+    else{
       string = p5.random(defaultStrings)
     }
 
     // Colour
-    if (colour != null) {
-      textR = hexToRgb(colour).r;
-      textG = hexToRgb(colour).g;
-      textB = hexToRgb(colour).b;
+    let localColour = localStorage['colour'];
+    if (localColour == "#000000"){
+      localColour = null;
+    }
 
-      console.log(`textR: ${textR} textG: ${textG} textB: ${textB}`)
+    if (localColour != null) {
+      textR = hexToRgb(localColour).r;
+      textG = hexToRgb(localColour).g;
+      textB = hexToRgb(localColour).b;
     }
     else {
-      console.log("default")
-
       textR = R;
       textG = G;
       textB = B;
     }
+
+    p5.createCanvas(sketchWidth, sketchHeight);
+    p5.frameRate(30);
 
     p5.textAlign(p5.CENTER);
     p5.stroke(textR - STROKER, textG - STROKEG, textB - STROKEB);
@@ -150,8 +131,8 @@ function matrix2(p5) {
     fontSize = sketchWidth / (string.length + STRPAD);
     strController = new StringController(string);
     letters = [];
-    goOnce = SWEEP;
-    matrixFont = p5.loadFont('WESTM.TTF')
+
+    // matrixFont = p5.loadFont('../Matrix2/WESTM.TTF')
   }
 
   p5.draw = function () {
@@ -163,27 +144,7 @@ function matrix2(p5) {
       letters[i].update();
       p5.pop();
     }
-
-    // Signature
-    p5.push();
-
-    p5.fill(255, 255, 255)
-    p5.noStroke();
-    p5.textSize(12);
-    p5.textAlign(p5.LEFT);
-    p5.text("Made By Kieran Brett", 10, p5.sketchHeight - 10)
-    p5.pop();
   }
-
-  p5.myCustomRedrawAccordingToNewPropsHandler = (props) => {
-    if (props.message) {
-        message = props.message;
-    }
-
-    if (props.colour) {
-      colour = props.colour;
-    }
-}
 
   function hexToRgb(hex) { // Source: https://stackoverflow.com/questions/5623838/rgb-to-hex-and-hex-to-rgb
     var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
@@ -212,7 +173,7 @@ function matrix2(p5) {
       p5.fill(this.r, this.g, this.b)
       p5.stroke(BORDERR, BORDERG, BORDERB)
       p5.strokeWeight(BORDERWEIGHT)
-      p5.textFont(matrixFont)
+      // p5.textFont(matrixFont)
       p5.text(this.letter, this.x, this.y)
 
       if (this.rDes) {
@@ -258,7 +219,6 @@ function matrix2(p5) {
       ////////////////////////////////////
 
       this.strings = [];
-      // console.log(`String Length: ${this.string.length}`)
       p5.textSize(fontSize)
 
       this.generateLanes();
@@ -270,14 +230,6 @@ function matrix2(p5) {
 
     update() {
       this.lanes.update();
-
-      // // Randomly
-      // for (let i = 0; i < charUpdate; i++){ 
-      //   if (this.strings.length > 0){
-      //     this.strings[parseInt(random(0, this.strings.length))].updateCharacters();
-      //   }
-      // }
-
     }
   }
 
@@ -297,28 +249,16 @@ function matrix2(p5) {
         this.lanes[i].update();
       }
 
-      if (goOnce) {
+      if (p5.frameCount % SPAWNRATE == 0) // Keeps spawning strings
+      {
+        let randomLane = parseInt(p5.random(0, this.lanes.length))
 
-        if (p5.frameCount % SPAWNRATE == 0) { // Spawns a string on every lane once
-          let randomLane = parseInt(p5.random(0, this.lanes.length))
-
-          if (this.lanes[randomLane].available) {
-            this.lanes[randomLane].spawnString();
-            this.lanes[randomLane].available = false;
-          }
+        if (this.lanes[randomLane].available) {
+          this.lanes[randomLane].spawnString();
+          this.lanes[randomLane].available = false;
         }
       }
-      else {
-        if (p5.frameCount % SPAWNRATE == 0) // Keeps spawning strings
-        {
-          let randomLane = parseInt(p5.random(0, this.lanes.length))
 
-          if (this.lanes[randomLane].available) {
-            this.lanes[randomLane].spawnString();
-            this.lanes[randomLane].available = false;
-          }
-        }
-      }
       // Randomly updating characters
       for (let i = 0; i < SWITCHCHANCES; i++) {
         if (p5.random(0, 100) < CHANGERATE) {

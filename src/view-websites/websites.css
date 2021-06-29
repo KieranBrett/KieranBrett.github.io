@@ -1,0 +1,14 @@
+
+#intro {
+    text-align: center;
+    padding: 2% 0% 5% 0%;
+}
+
+.no-padding {
+    padding: 0px;
+    margin: 0px;
+}
+
+.placeholder-image {
+    width: 100%;
+}
