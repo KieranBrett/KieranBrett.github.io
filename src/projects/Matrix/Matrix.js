@@ -14,6 +14,10 @@ class Matrix extends React.Component {
     }
 
     matrix() {
+        if (this.state.resized) {
+            console.log("I should reset")
+        }
+
         if (this.state.play) {
             return <P5Wrapper sketch={sketch} />
         }
