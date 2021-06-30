@@ -9,14 +9,12 @@ import './projects.css';
 class Projects extends React.Component {
     constructor(props) {
         super(props)
-
         this.state = {
             resized: false,
             width: window.innerWidth
         }
 
         window.addEventListener('resize', () => {
-
             // Only checking width because height on mobile changes regularly 
             if (window.innerWidth !== this.state.width) {
                 this.setState({
@@ -33,7 +31,10 @@ class Projects extends React.Component {
         </div>
     }
 
-    projects() {
+    projects() { 
+        // Need to slightly change the render so that it can re render the components
+        // Components need to re render so that the p5.js canvases can correctly scale
+        // As they take in the <div> width as a property
         if (this.state.resized) {
             this.setState({
                 resized: false
