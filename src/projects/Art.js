@@ -24,7 +24,8 @@ class Art extends React.Component {
 
     draw = p5 => {
         p5.background(this.props.colour[0], this.props.colour[1], this.props.colour[2]);
-
+        
+        // This is old code, not needed
         p5.circles.forEach(circle => {
             circle.update(p5)
             circle.display(p5)
