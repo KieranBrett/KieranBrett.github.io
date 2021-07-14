@@ -3,6 +3,7 @@ import React from 'react';
 import Matrix2 from '../projects/Matrix2/Matrix2';
 import Matrix from '../projects/Matrix/Matrix';
 import Gravity from '../projects/Gravity/Gravity';
+import Three from '../projects/ThreeJs/Three';
 
 import './projects.css';
 
@@ -43,6 +44,7 @@ class Projects extends React.Component {
                 <Matrix />
                 <Matrix2 />
                 <Gravity />
+                <Three />
             </section>
         }
         else {
@@ -50,6 +52,7 @@ class Projects extends React.Component {
                 <Matrix />
                 <Matrix2 />
                 <Gravity />
+                <Three />
             </div>
         }
     }
