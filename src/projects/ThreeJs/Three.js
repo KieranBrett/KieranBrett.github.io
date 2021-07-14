@@ -10,8 +10,8 @@ function Plane(props) {
     const [ref] = usePlane(() => ({ rotation: [-Math.PI / 2, 0, 0], ...props }))
     return (
         <mesh ref={ref} receiveShadow>
-            <planeBufferGeometry attach="geometry" args={[1009, 1000]} />
-            <shadowMaterial attach="material" color="#171717" />
+            <planeBufferGeometry attach="geometry" args={[10, 10]} />
+            <meshPhysicalMaterial attach="material" color="lightblue" />
         </mesh>
     )
 }
@@ -41,8 +41,10 @@ class Three extends React.Component {
             </div>
 
             <div class="col-sm-6 no-padding">
-                <Canvas shadowMap camera={{ position: [-1, 2, 5], fov: 50 }}>
-                    <color attach="background" args={['lightblue']} />
+                <Canvas shadows={true} shadowMap camera={{ position: [-1, 2, 5], fov: 50 }}>
+                    <OrbitControls />
+                    <Stars />
+
                     <hemisphereLight intensity={0.35} />
                     <spotLight position={[10, 10, 10]} angle={0.3} penumbra={1} intensity={4} castShadow />
                     <Physics>
