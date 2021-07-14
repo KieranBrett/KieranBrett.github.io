@@ -11,7 +11,8 @@ class Matrix2 extends React.Component {
             message: false,
             play: false
         }
-
+        
+        // Local storage is only used for the passing of the variable
         localStorage.clear()
     }
 

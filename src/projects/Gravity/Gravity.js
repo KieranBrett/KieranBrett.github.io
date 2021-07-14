@@ -24,7 +24,7 @@ class Gravity extends React.Component {
     render() {
         return <div class="row project shadow">
             <div class="sketch-text col-sm-6">
-                <h2>Gravity <small class="text-muted">Version 1</small></h2>
+                <h2>Gravity <small class="text-muted">Version Draft</small></h2>
 
                 <p>This is a gravity simulation where you can watch planets crash and burn into the sun!</p>
 
