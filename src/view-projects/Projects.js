@@ -60,7 +60,7 @@ class Projects extends React.Component {
 
     render() {
         return <div id="home">
-            <img src={'/assets/kieran.png'} id="background" />
+            <img src={'/assets/kieran.png'} alt="img of Kieran Brett" id="background" />
 
             {this.intro()}
 
