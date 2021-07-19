@@ -4,6 +4,7 @@ import Matrix2 from '../projects/Matrix2/Matrix2';
 import Matrix from '../projects/Matrix/Matrix';
 import Gravity from '../projects/Gravity/Gravity';
 import Three from '../projects/ThreeJs/Three';
+import Showcase from '../projects/Showcase/Showcase';
 
 import './projects.css';
 
@@ -34,7 +35,7 @@ class Projects extends React.Component {
 
     projects() { 
         // Need to slightly change the render so that it can re render the components
-        // Components need to re render so that the p5.js canvases can correctly scale
+        // Components need to re render so that the canvases can correctly scale
         // As they take in the <div> width as a property
         if (this.state.resized) {
             this.setState({
@@ -44,6 +45,7 @@ class Projects extends React.Component {
                 <Matrix />
                 <Matrix2 />
                 <Gravity />
+                <Showcase />
                 <Three />
             </section>
         }
@@ -52,6 +54,7 @@ class Projects extends React.Component {
                 <Matrix />
                 <Matrix2 />
                 <Gravity />
+                <Showcase />
                 <Three />
             </div>
         }

@@ -1,7 +1,7 @@
 import React from 'react';
 import Sketch from "react-p5";
 
-
+// This was used to figure out how to use P5 and react together
 class Art extends React.Component {
     circles = []
     circleHeight = 10;
