@@ -2,9 +2,8 @@ import React, { useMemo, useState } from 'react';
 
 import { Canvas, useFrame } from "@react-three/fiber";
 import { OrbitControls } from "@react-three/drei";
-import { Physics, usePlane, useBox } from "@react-three/cannon";
 
-import { OBJLoader } from 'three/examples/jsm/loaders/OBJLoader'
+import { Flex, Box } from '@react-three/flex'
 
 import './Showcase.css';
 
@@ -28,20 +27,22 @@ function Floor() {
     )
 }
 
-function Model() {
-    const obj = useMemo(() => new OBJLoader().load('./IronMan.obj'), ['./IronMan.obj'])
-
-    return obj ? <primitive object={obj} /> : null
+function Model(props) {
+    return <mesh receiveShadow castShadow>
+        <boxBufferGeometry attach="geometry" />
+        <meshLambertMaterial attach="material" color={props.color} />
+    </mesh>
 }
+
 
 
 class Showcase extends React.Component {
     render() {
         return <div class="row project shadow">
             <div class="sketch-text col-sm-6">
-                <h2>Item Showcase<small class="text-muted">React-Three-Fiber</small></h2>
+                <h2>Item Showcase <small class="text-muted">React-Three-Fiber</small></h2>
                 <br></br>
-                <p>A small showcase that lets you view an STL file</p>
+                <p>A small showcase features items</p>
             </div>
 
             <div class="col-sm-6 no-padding" id="showcase">
@@ -50,9 +51,25 @@ class Showcase extends React.Component {
                     <OrbitControls />
 
                     <hemisphereLight intensity={1} />
-                    <spotLight position={[0, 2, 35]} angle={0.3} penumbra={1} intensity={1} castShadow />
+                    <spotLight position={[0, 2, 35]} angle={0.3} penumbra={1} intensity={.8} castShadow />
 
-                    <Model />
+                    <Flex justifyContent="center" alignItems="center" flexDirection="row" position={[-.5,.5,0]}>
+                        <Box centerAnchor margin={1}>
+                            <Model color={"red"} />
+                        </Box>
+                        <Box centerAnchor flexGrow={1} margin={1}>
+                            <Model color={"orange"} />
+                        </Box>
+                        <Box centerAnchor flexGrow={1} margin={1}>
+                            <Model color={"yellow"} />
+                        </Box>
+                        <Box centerAnchor flexGrow={1} margin={1}>
+                            <Model color={"green"} />
+                        </Box>
+                        <Box centerAnchor flexGrow={1} margin={1}>
+                            <Model color={"blue"} />
+                        </Box>
+                    </Flex>
 
                     <Floor />
                     <Wall />
