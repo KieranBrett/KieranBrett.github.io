@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 
 import { Canvas, useFrame } from "@react-three/fiber";
 import { OrbitControls } from "@react-three/drei";
@@ -52,8 +52,16 @@ function Model(props) {
 }
 
 function Light(props) {
+    const ref = useRef()
+
+    useFrame(() => {
+        if (ref.current) {
+            console.log("tester")
+        }
+    })
+
     if (props.active) {
-        return <spotLight angle={.2} intensity={2} castShadow />
+        return <spotLight angle={.2} intensity={2} castShadow ref={ref} />
     }
     return null
 }
