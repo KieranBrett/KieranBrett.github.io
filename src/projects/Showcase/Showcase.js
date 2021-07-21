@@ -37,27 +37,31 @@ function Model(props) {
         }
     })
 
-    return <group>
-
-        {() => {
-            console.log("fuck me")
-            if (active) {
-                return <spotLight position={[0, 2, 35]} angle={0.3} intensity={5} castShadow />
-            }
+    return <mesh receiveShadow castShadow ref={ref}
+        onPointerEnter={() => {
+            setActive(true)
         }}
+        onPointerLeave={() => {
+            setActive(false)
+            ref.current.rotation.y = 0
+        }}>
+        <boxBufferGeometry attach="geometry" />
+        <meshLambertMaterial attach="material" color={props.color} />
+        <Light active={active} />
+    </mesh>
+}
 
-        <mesh receiveShadow castShadow ref={ref}
-            onPointerEnter={() => {
-                setActive(true)
-            }}
-            onPointerLeave={() => {
-                setActive(false)
-                ref.current.rotation.y = 0
-            }}>
-            <boxBufferGeometry attach="geometry" />
-            <meshLambertMaterial attach="material" color={props.color} />
-        </mesh>
-    </group>
+function Light(props) {
+    if (props.active) {
+        return <spotLight angle={.2} intensity={2} castShadow />
+    }
+    return null
+}
+
+function ModelBox(props) {
+    return <Box centerAnchor flexGrow={1} margin={1}>
+        <Model color={props.color} />
+    </Box>
 }
 
 
@@ -79,21 +83,10 @@ class Showcase extends React.Component {
                     <spotLight position={[0, 2, 35]} angle={0.3} penumbra={1} intensity={.8} castShadow />
 
                     <Flex justifyContent="center" alignItems="center" flexDirection="row" position={[-.5, .5, 0]}>
-                        <Box centerAnchor margin={1}>
-                            <Model color={"red"} />
-                        </Box>
-                        <Box centerAnchor flexGrow={1} margin={1}>
-                            <Model color={"orange"} />
-                        </Box>
-                        <Box centerAnchor flexGrow={1} margin={1}>
-                            <Model color={"yellow"} />
-                        </Box>
-                        <Box centerAnchor flexGrow={1} margin={1}>
-                            <Model color={"green"} />
-                        </Box>
-                        <Box centerAnchor flexGrow={1} margin={1}>
-                            <Model color={"blue"} />
-                        </Box>
+                        <ModelBox color={'blue'} />
+                        <ModelBox color={'yellow'} />
+                        <ModelBox color={'green'} />
+                        <ModelBox color={'red'} />
                     </Flex>
 
                     <Floor />
