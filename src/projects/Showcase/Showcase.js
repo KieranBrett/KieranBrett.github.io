@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from 'react';
+import React, { useRef, useState } from 'react';
 
 import { Canvas, useFrame } from "@react-three/fiber";
 import { OrbitControls } from "@react-three/drei";
@@ -28,12 +28,37 @@ function Floor() {
 }
 
 function Model(props) {
-    return <mesh receiveShadow castShadow>
-        <boxBufferGeometry attach="geometry" />
-        <meshLambertMaterial attach="material" color={props.color} />
-    </mesh>
-}
+    const [active, setActive] = useState(false)
+    const ref = useRef()
 
+    useFrame((state, delta) => {
+        if (active) {
+            ref.current.rotation.y += 0.01
+        }
+    })
+
+    return <group>
+
+        {() => {
+            console.log("fuck me")
+            if (active) {
+                return <spotLight position={[0, 2, 35]} angle={0.3} intensity={5} castShadow />
+            }
+        }}
+
+        <mesh receiveShadow castShadow ref={ref}
+            onPointerEnter={() => {
+                setActive(true)
+            }}
+            onPointerLeave={() => {
+                setActive(false)
+                ref.current.rotation.y = 0
+            }}>
+            <boxBufferGeometry attach="geometry" />
+            <meshLambertMaterial attach="material" color={props.color} />
+        </mesh>
+    </group>
+}
 
 
 class Showcase extends React.Component {
@@ -53,7 +78,7 @@ class Showcase extends React.Component {
                     <hemisphereLight intensity={1} />
                     <spotLight position={[0, 2, 35]} angle={0.3} penumbra={1} intensity={.8} castShadow />
 
-                    <Flex justifyContent="center" alignItems="center" flexDirection="row" position={[-.5,.5,0]}>
+                    <Flex justifyContent="center" alignItems="center" flexDirection="row" position={[-.5, .5, 0]}>
                         <Box centerAnchor margin={1}>
                             <Model color={"red"} />
                         </Box>
