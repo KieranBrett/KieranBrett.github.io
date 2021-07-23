@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 
 import Matrix2 from '../projects/Matrix2/Matrix2';
 import Matrix from '../projects/Matrix/Matrix';
@@ -7,6 +7,30 @@ import Three from '../projects/ThreeJs/Three';
 import Showcase from '../projects/Showcase/Showcase';
 
 import './projects.css';
+
+import { Canvas, useFrame } from "@react-three/fiber";
+import { OrbitControls, PositionalAudio } from "@react-three/drei";
+import { Flex, Box } from '@react-three/flex'
+
+function Cube() {
+    const ref = useRef();
+    const [active, setActive] = useState()
+
+    return <mesh receiveShadow castShadow ref={ref}
+        onPointerEnter={
+            () => {
+                setActive(true)
+            }
+        }
+        onPointerLeave={
+            () => {
+                setActive(false)
+            }
+        } >
+        <boxBufferGeometry attach="geometry" />
+        <meshLambertMaterial attach="material" color={active ? 'red' : 'blue'} />
+    </mesh>
+}
 
 class Projects extends React.Component {
     constructor(props) {
@@ -27,13 +51,7 @@ class Projects extends React.Component {
         });
     }
 
-    intro() {
-        return <div id="intro">
-            <p>Kieran Brett</p>
-        </div>
-    }
-
-    projects() { 
+    projects() {
         // Need to slightly change the render so that it can re render the components
         // Components need to re render so that the canvases can correctly scale
         // As they take in the <div> width as a property
@@ -41,35 +59,40 @@ class Projects extends React.Component {
             this.setState({
                 resized: false
             })
-            return <section>
+            return <section >
                 <Matrix />
                 <Matrix2 />
                 <Gravity />
                 <Showcase />
-                <Three />
             </section>
-        }
-        else {
-            return <div>
+        } else {
+            return <div >
                 <Matrix />
                 <Matrix2 />
                 <Gravity />
                 <Showcase />
-                <Three />
             </div>
         }
     }
 
 
     render() {
-        return <div id="home">
+        return <div id="home" >
             <img src={'/assets/kieran.png'} alt="img of Kieran Brett" id="background" />
 
-            {this.intro()}
+            <div id="projectCanvas">
+                <Canvas camera={{ position: [0, 0, 5] }} >
+                    <ambientLight />
+                    <OrbitControls />
+                    <Cube />
+                </Canvas>
+            </div>
 
             {this.projects()}
         </div>
     }
+
+    returns a h1 saying hi
 }
 
 export default Projects;
