@@ -11,6 +11,7 @@ import './projects.css';
 import { Canvas, useFrame } from "@react-three/fiber";
 import { OrbitControls, PositionalAudio } from "@react-three/drei";
 import { Flex, Box } from '@react-three/flex'
+import Logo from '../projects/SpinningLogo/Logo';
 
 function Cube() {
     const ref = useRef();
@@ -80,19 +81,19 @@ class Projects extends React.Component {
         return <div id="home" >
             <img src={'/assets/kieran.png'} alt="img of Kieran Brett" id="background" />
 
-            <div id="projectCanvas">
+            {/* <div id="projectCanvas">
                 <Canvas camera={{ position: [0, 0, 5] }} >
                     <ambientLight />
                     <OrbitControls />
                     <Cube />
                 </Canvas>
-            </div>
+            </div> */}
+
+            <Logo />
 
             {this.projects()}
         </div>
     }
-
-    returns a h1 saying hi
 }
 
 export default Projects;
