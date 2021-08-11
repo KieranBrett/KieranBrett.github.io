@@ -23,7 +23,7 @@ ReactDOM.render(
             <Websites />
           </Route>
 
-          <Route path="/"> {/* Keep at bottom*/}
+          <Route path="/"> {/* Keep at bottom  */}
             <Projects />
           </Route>
         </Switch>
