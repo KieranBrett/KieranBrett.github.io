@@ -61,7 +61,7 @@ function Light(props) {
     })
 
     if (props.active) {
-        return <spotLight angle={.2} intensity={2} castShadow ref={ref} />
+        return <spotLight intensity={.4} castShadow ref={ref} penumbra={1}/>
     }
     return null
 }
@@ -92,9 +92,7 @@ class Showcase extends React.Component {
 
                     <Flex justifyContent="center" alignItems="center" flexDirection="row" position={[-.5, .5, 0]}>
                         <ModelBox color={'blue'} />
-                        <ModelBox color={'yellow'} />
-                        <ModelBox color={'green'} />
-                        <ModelBox color={'red'} />
+                        {/* <ModelBox color={'yellow'} /> */}
                     </Flex>
 
                     <Floor />
